@@ -1,4 +1,4 @@
-package com.example.beacon_making;
+package com.example.beacon_making_kotlin;
 
 public class beacon_data {
 

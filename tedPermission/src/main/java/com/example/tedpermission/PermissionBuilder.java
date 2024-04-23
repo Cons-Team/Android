@@ -1,4 +1,4 @@
-package com.gun0912.tedpermission;
+package com.example.tedpermission;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.os.Build;
 
 import androidx.annotation.StringRes;
 
-import com.gun0912.tedpermission.provider.TedPermissionProvider;
-import com.gun0912.tedpermission.util.ObjectUtils;
+import com.example.tedpermission.provider.TedPermissionProvider;
+import com.example.tedpermission.util.ObjectUtils;
 
 
 public abstract class PermissionBuilder<T extends PermissionBuilder> {

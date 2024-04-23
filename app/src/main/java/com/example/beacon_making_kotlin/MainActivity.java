@@ -1,58 +1,32 @@
-package com.example.beacon_making;
+package com.example.beacon_making_kotlin;
 
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import android.app.Service;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermissionUtil;
-import com.gun0912.tedpermission.normal.TedPermission;
+import com.example.tedpermission.PermissionListener;
+import com.example.tedpermission.TedPermissionUtil;
 
-import org.altbeacon.beacon.Beacon;
-import org.altbeacon.beacon.BeaconConsumer;
-import org.altbeacon.beacon.BeaconManager;
-import org.altbeacon.beacon.BeaconParser;
-import org.altbeacon.beacon.MonitorNotifier;
-import org.altbeacon.beacon.RangeNotifier;
-import org.altbeacon.beacon.Region;
-
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
-
-import static java.lang.Thread.sleep;
 
 
 public class MainActivity extends AppCompatActivity {
-
-    protected static final String TAG1 = "::MonitoringActivity::";
-    protected static final String TAG2 = "::RangingActivity::";
-
-    private beacon_data beaconData = new beacon_data();
-    private List<Beacon> beaconList = new ArrayList<>();
-
-    BeaconManager beaconManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +50,19 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.d("ble_stat", "꺼져있거나 블루투스 기능이 없습니다.");
                     Toast.makeText(MainActivity.this, "꺼져있거나 블루투스 기능이 없습니다.", Toast.LENGTH_SHORT).show();
+
                     intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+
                     startActivityForResult(intent, 1);
                 }
 
@@ -104,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
             permission_setting(Manifest.permission.BLUETOOTH); // 블루투스 연결 요청 및 수락, 데이터 전송 등에 필요
             permission_setting(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
-            permission_setting(Manifest.permission.ACCESS_BACKGROUND_LOCATION); // 백그라운드에서 스캔해야 할 경우
+            // permission_setting(Manifest.permission.ACCESS_BACKGROUND_LOCATION); // 백그라운드에서 스캔해야 할 경우
         } else if (Build.VERSION.SDK_INT >= 23) {
 
             permission_setting(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우

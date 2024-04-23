@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TedPermission</string>
+    <string name="app_name" translatable="false">TedPermission</string>
 
 
     <string name="tedpermission_setting">Setting</string>

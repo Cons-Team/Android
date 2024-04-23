@@ -1,4 +1,4 @@
-package com.gun0912.tedpermission;
+package com.example.tedpermission;
 
 import java.util.List;
 

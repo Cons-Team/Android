@@ -1,4 +1,4 @@
-package com.gun0912.tedpermission.provider;
+package com.example.tedpermission.provider;
 
 import android.annotation.SuppressLint;
 import android.content.ContentProvider;

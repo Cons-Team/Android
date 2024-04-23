@@ -1,6 +1,6 @@
-package com.example.beacon_making;
+package com.example.beacon_making_kotlin;
 
-import com.gun0912.tedpermission.PermissionBuilder;
+import com.example.tedpermission.PermissionBuilder;
 
 public class TedPermission {
     public static final String TAG = TedPermission.class.getSimpleName();

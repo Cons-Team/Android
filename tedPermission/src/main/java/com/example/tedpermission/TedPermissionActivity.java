@@ -1,4 +1,4 @@
-package com.gun0912.tedpermission;
+package com.example.tedpermission;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -18,7 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.gun0912.tedpermission.util.ObjectUtils;
+import com.example.tedpermission.util.ObjectUtils;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -140,7 +140,7 @@ public class TedPermissionActivity extends AppCompatActivity {
         final Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, uri);
 
         if (!TextUtils.isEmpty(rationale_message)) {
-            new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert)
+            new AlertDialog.Builder(this, R.style.Theme_Transparent_Permission)
                     .setMessage(rationale_message)
                     .setCancelable(false)
 
@@ -214,7 +214,7 @@ public class TedPermissionActivity extends AppCompatActivity {
 
     private void showRationaleDialog(final List<String> needPermissions) {
 
-        new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert)
+        new AlertDialog.Builder(this, R.style.Theme_Transparent_Permission)
                 .setTitle(rationaleTitle)
                 .setMessage(rationale_message)
                 .setCancelable(false)
@@ -275,7 +275,7 @@ public class TedPermissionActivity extends AppCompatActivity {
             return;
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_Transparent_Permission);
 
         builder.setTitle(denyTitle)
                 .setMessage(denyMessage)
@@ -323,7 +323,7 @@ public class TedPermissionActivity extends AppCompatActivity {
 
     public void showWindowPermissionDenyDialog() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_AppCompat_Light_Dialog_Alert);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.Theme_Transparent_Permission);
         builder.setMessage(denyMessage)
                 .setCancelable(false)
                 .setNegativeButton(deniedCloseButtonText, new DialogInterface.OnClickListener() {

@@ -1,6 +1,7 @@
-package com.example.beacon_making;
+package com.example.beacon_making_kotlin;
 
 import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
+import static java.lang.Thread.sleep;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -10,7 +11,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.IBinder;
@@ -33,10 +33,7 @@ import org.altbeacon.beacon.Region;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.List;
 import java.util.Locale;
-
-import static java.lang.Thread.sleep;
 
 public class BeaconBackgroundService extends Service implements BeaconConsumer {
 
