@@ -1,0 +1,192 @@
+package com.example.beacon_making;
+
+
+import android.Manifest;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+import android.app.Service;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermissionUtil;
+import com.gun0912.tedpermission.normal.TedPermission;
+
+import org.altbeacon.beacon.Beacon;
+import org.altbeacon.beacon.BeaconConsumer;
+import org.altbeacon.beacon.BeaconManager;
+import org.altbeacon.beacon.BeaconParser;
+import org.altbeacon.beacon.MonitorNotifier;
+import org.altbeacon.beacon.RangeNotifier;
+import org.altbeacon.beacon.Region;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
+
+import static java.lang.Thread.sleep;
+
+
+public class MainActivity extends AppCompatActivity {
+
+    protected static final String TAG1 = "::MonitoringActivity::";
+    protected static final String TAG2 = "::RangingActivity::";
+
+    private beacon_data beaconData = new beacon_data();
+    private List<Beacon> beaconList = new ArrayList<>();
+
+    BeaconManager beaconManager;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+
+
+        // layout 폴더에 속한 activity_main.xml파일에 button
+        Button btn = (Button) findViewById(R.id.button);
+        // bluetooth on button click event
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BluetoothAdapter btadapter = BluetoothAdapter.getDefaultAdapter();
+                Intent intent;
+
+                if (btadapter.isEnabled()) {
+                    Log.d("ble_stat", "on_device");
+                    Toast.makeText(MainActivity.this, "on_device", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("ble_stat", "꺼져있거나 블루투스 기능이 없습니다.");
+                    Toast.makeText(MainActivity.this, "꺼져있거나 블루투스 기능이 없습니다.", Toast.LENGTH_SHORT).show();
+                    intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                    startActivityForResult(intent, 1);
+                }
+
+
+            }
+        });
+
+        // 클릭시 Beacon Searching event 실행
+        Button btn2 = (Button) findViewById(R.id.button2);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToPrivacyPolicy(view);
+            }
+        });
+
+
+        Log.d("sdk_ver", "" + Build.VERSION.SDK_INT);
+        if (Build.VERSION.SDK_INT >= 31) {
+
+            permission_setting(Manifest.permission.BLUETOOTH_SCAN); // 스캔 권한
+            permission_setting(Manifest.permission.BLUETOOTH_CONNECT); // 연결 권한
+            permission_setting(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
+        } else if (Build.VERSION.SDK_INT >= 29) {
+
+            permission_setting(Manifest.permission.BLUETOOTH); // 블루투스 연결 요청 및 수락, 데이터 전송 등에 필요
+            permission_setting(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
+            permission_setting(Manifest.permission.ACCESS_BACKGROUND_LOCATION); // 백그라운드에서 스캔해야 할 경우
+        } else if (Build.VERSION.SDK_INT >= 23) {
+
+            permission_setting(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
+        }
+
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+    }
+
+    private void permission_setting(String permission_name) {
+        boolean isAlertBlePermissonGranted = TedPermissionUtil.isGranted(permission_name);
+        Log.d("ted", permission_name + ": " + isAlertBlePermissonGranted);
+
+
+        PermissionListener permissionlistener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPermissionDenied(List<String> deniedPermissions) {
+                Toast.makeText(MainActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+
+        };
+
+        TedPermission.create()
+                .setPermissionListener(permissionlistener)
+                .setRationaleMessage("we need permission for read contact, find your location and system alert window")
+                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setGotoSettingButtonText("setting")
+                .setPermissions(permission_name)
+                .check();
+    }
+
+// http 통신을 이용해 db와 연동하는 곳
+// 데이터를 post하는 코드인것 같다
+//    private void createPost(){
+//        Call<beaconData> call = jsonPlaceHolderApi.createPost(beaconData);
+//
+//        call.enqueue(new Callback<beaconData>() {
+//            @Override
+//            public void onResponse(Call<beaconData> call, Response<beaconData> response) {
+//                if (!response.isSuccessful()){
+//                    Log.e("connection problem : ", "error code : " + response.code());
+//                    return;
+//                }
+//
+//                beaconData responsebeaconData = response.body();
+//                Log.d("connected : ", response.body().toString());
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<beaconData> call, Throwable t) {
+//                Log.e("connect failed.",t.getMessage());
+//            }
+//        });
+//    }
+
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
+
+    public void goToPrivacyPolicy(View view){
+        SharedPreferences userDataGetter = getSharedPreferences("userdata", MODE_PRIVATE);
+        String userName = userDataGetter.getString("userName","");
+
+        Intent intent;
+
+        intent = new Intent(this, activeBluetooth.class);
+
+        startActivity(intent);
+    }
+
+}
