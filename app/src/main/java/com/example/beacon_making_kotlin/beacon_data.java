@@ -11,6 +11,7 @@ public class beacon_data {
 
     public void beacondata(){
 
+        // Beacon Data
         this.UUID = "NULL";
         this.Major = "NULL";
         this.Minor = "NULL";
