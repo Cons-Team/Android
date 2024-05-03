@@ -22,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tedpermission.PermissionListener;
 import com.example.tedpermission.TedPermissionUtil;
+import com.unity3d.player.UnityPlayerActivity;
 
 import java.util.List;
 
@@ -80,6 +81,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        Button unity = (Button) findViewById(R.id.unity);
+        unity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, UnityPlayerActivity.class));
+
+            }
+        });
+
+
         Log.d("sdk_ver", "" + Build.VERSION.SDK_INT);
         if (Build.VERSION.SDK_INT >= 31) {
 
@@ -96,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             permission_setting(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
         }
 
+        permission_setting(Manifest.permission.CAMERA);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

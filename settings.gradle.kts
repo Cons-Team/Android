@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "beacon_making_kotlin"
 include(":app")
 include(":tedPermission")
+include(":unityLibrary")
+include(":unityLibrary:xrmanifest.androidlib")

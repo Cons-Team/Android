@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.beacon_making_kotlin"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -54,7 +54,7 @@ dependencies {
     // module
     implementation(project(":tedPermission"))
     implementation(files("libs/minewBeaconScan.jar"))
-    implementation("org.altbeacon:android-beacon-library:2.20.5")
+    implementation("org.altbeacon:android-beacon-library:2.20.6")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
+    implementation(project(":unityLibrary"))
 
     testImplementation(libs.junit)
 

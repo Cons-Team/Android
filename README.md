@@ -35,6 +35,12 @@
 ### -> new Module Dependency -> unityLibrary 선택 
 
 
+## 폰에서 unity 실행이 안될때
+### res -> values -> strings.xml에 한 줄 추가
+#### <string name="game_view_content_description" translatable="false">Game View</string>
+
+
 ## unityStreamingAssets오류 발생시
 ### gradle.properties 파일에 한줄 추가
 #### unityStreamingAssets=.unity3d, google-services-desktop.json, google-services.json, GoogleService-Info.plist
+

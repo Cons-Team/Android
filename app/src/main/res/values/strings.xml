@@ -3,4 +3,6 @@
     <string name="bluetooth_on" translatable="false">bluetooth_on</string>
     <string name="find_beacon" translatable="false">find_beacon</string>
     <string name="button" translatable="false">Button</string>
+    <string name="unity" translatable="false">unity</string>
+    <string name="game_view_content_description" translatable="false">Game View</string>
 </resources>

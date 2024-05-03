@@ -32,11 +32,17 @@
 
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <!-- 블루투스 클래식 버전 사용시 필요 권한, 블루투스 연결 기능이 없는 경우 기기의 사용자에게 앱을 숨김 -->
     <uses-feature android:name="android.hardware.bluetooth" android:required="true"/>
 
     <!-- 저전력 블루투스 사용시 필요 권한, 저전력 블루투스 연결 기능이 없는 경우 기기의 사용자에게 앱을 숨김 -->
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
