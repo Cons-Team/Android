@@ -1,0 +1,9 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.UnityTechnologies.XR.Manifest" > <!-- <application> -->
+4    <!-- <activity android:name="com.unity3d.player.UnityPlayerActivity"> -->
+5    <!-- </activity> -->
+6    <!-- </application> -->
+7    <uses-sdk android:minSdkVersion="1" />
+8
+9</manifest>
