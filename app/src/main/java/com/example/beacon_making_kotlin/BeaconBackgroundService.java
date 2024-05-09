@@ -32,7 +32,9 @@ import org.altbeacon.beacon.Region;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 
 public class BeaconBackgroundService extends Service implements BeaconConsumer {
@@ -81,13 +83,23 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }
-                Log.d("beacon_count", beacons.size() + "개");
-                Toast.makeText(BeaconBackgroundService.this, "beacon_count : " + beacons.size() + "개", Toast.LENGTH_SHORT).show();
+//                Log.d("beacon_count", beacons.size() + "개");
+//                Toast.makeText(BeaconBackgroundService.this, "beacon_count : " + beacons.size() + "개", Toast.LENGTH_SHORT).show();
 
-
+                String test = "";
                 beaconData = new beacon_data[beacons.size()];
-                for(int i = 0; i <beacons.size(); i++){
+                List<Beacon> beaconList = new ArrayList<>(beacons);
+                if (beacons.size() > 0) {
+                    beaconList.clear();
+                    for (Beacon beacon : beacons) {
+                        beaconList.add(beacon);
+                    }
+                }
+
+                for(int i = 0; i <beaconList.size(); i++){
                     beaconData[i] = new beacon_data();
+                    test += beaconList.get(i).getBluetoothName().toString() + " / ";
+                    beaconData[i].setName(beacons.iterator().next().getBluetoothName().toString());
                     beaconData[i].setUUID(beacons.iterator().next().getId1().toString());
                     beaconData[i].setMajor(beacons.iterator().next().getId2().toString());
                     beaconData[i].setMinor(beacons.iterator().next().getId3().toString());
@@ -100,13 +112,18 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                     Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
 
-                     Log.d(TAG2, ":::::This :: U U I D :: of beacon   :  "+ beaconData[i].getUUID() + ":::::");
-                     Log.d(TAG2, ":::::This :: M a j o r :: of beacon   :  "+ beaconData[i].getMajor() + ":::::");
-                     Log.d(TAG2, ":::::This :: M i n o r :: of beacon   :  "+ beaconData[i].getMinor() + ":::::");
-                     Log.d(TAG2, ":::::This :: D I S T A N C E :: of beacon   :  "+ beaconData[i].getDistance() + ":::::");
-                     Log.d(TAG2, ":::::This :: R S S I :: of beacon   :  "+ beaconData[i].getRssi() + ":::::");
+
+//                    Log.d(TAG2, ":::::This :: N A M E :: of beacon   :  "+ beaconData[i].getName() + ":::::");
+//                     Log.d(TAG2, ":::::This :: U U I D :: of beacon   :  "+ beaconData[i].getUUID() + ":::::");
+//                     Log.d(TAG2, ":::::This :: M a j o r :: of beacon   :  "+ beaconData[i].getMajor() + ":::::");
+//                     Log.d(TAG2, ":::::This :: M i n o r :: of beacon   :  "+ beaconData[i].getMinor() + ":::::");
+//                     Log.d(TAG2, ":::::This :: D I S T A N C E :: of beacon   :  "+ beaconData[i].getDistance() + ":::::");
+//                     Log.d(TAG2, ":::::This :: R S S I :: of beacon   :  "+ beaconData[i].getRssi() + ":::::");
                 }
+                Toast.makeText(BeaconBackgroundService.this, "beacon_name : " + test, Toast.LENGTH_SHORT).show();
+
             }
+
         });
         try {
             beaconManager.startRangingBeaconsInRegion(new Region("test", null, null, null));

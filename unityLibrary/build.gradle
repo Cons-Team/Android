@@ -17,7 +17,7 @@ dependencies {
 
 android {
     namespace "com.unity3d.player"
-    ndkPath "C:\\Users\\wn981\\AppData\\Local\\Android\\Sdk\\ndk\\25.1.8937393"
+    ndkPath "C:\\Users\\UmChaewon\\AppData\\Local\\Android\\Sdk\\ndk\\25.1.8937393"
 
     compileSdkVersion 34
     buildToolsVersion '34.0.0'

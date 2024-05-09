@@ -2,6 +2,7 @@ package com.example.beacon_making_kotlin;
 
 public class beacon_data {
 
+    private String Name;
     private String UUID;
     private String Major;
     private String Minor;
@@ -11,12 +12,17 @@ public class beacon_data {
 
     public void beacondata(){
 
+        this.Name = "NULL";
         this.UUID = "NULL";
         this.Major = "NULL";
         this.Minor = "NULL";
         this.timeData = "NULL";
         this.Distance = "NULL";
         this.Rssi = "NULL";
+    }
+
+    public String getName() {
+        return Name;
     }
 
     public String getUUID() {
@@ -44,6 +50,10 @@ public class beacon_data {
     }
 
 
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
     public void setUUID(String UUID) {
         this.UUID = UUID;
     }
@@ -65,4 +75,5 @@ public class beacon_data {
     }
 
     public void setRssi(String rssi) { this.Rssi = rssi; }
+
 }
