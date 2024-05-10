@@ -180,9 +180,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences userDataGetter = getSharedPreferences("userdata", MODE_PRIVATE);
         String userName = userDataGetter.getString("userName","");
 
-        Intent intent;
-
-        intent = new Intent(this, activeBluetooth.class);
+        Intent intent = new Intent(this, activeBluetooth.class);
 
         startActivity(intent);
     }

@@ -39,7 +39,7 @@
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="#000000"
-                android:textSize="30sp" />
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/test2"
@@ -48,7 +48,7 @@
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="#000000"
-                android:textSize="30sp" />
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/test3"
@@ -57,7 +57,7 @@
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="#000000"
-                android:textSize="30sp" />
+                android:textSize="10sp" />
         </LinearLayout>
     </ScrollView>
 
