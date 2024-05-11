@@ -7,10 +7,6 @@ dependencies {
     implementation files("libs/ARPresto.aar")
     implementation files("libs/UnityARCore.aar")
     implementation files("libs/unityandroidpermissions.aar")
-    //implementation(name: 'arcore_client', ext:'aar')
-//    implementation(name: 'ARPresto', ext:'aar')
-//    implementation(name: 'UnityARCore', ext:'aar')
-//    implementation(name: 'unityandroidpermissions', ext:'aar')
     implementation project('xrmanifest.androidlib')
 
 }
@@ -31,12 +27,11 @@ android {
         minSdkVersion 26
         targetSdkVersion 34
         ndk {
-            //noinspection ChromeOsAbiSupport
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
         versionCode 1
         versionName '1.0'
-        consumerProguardFiles 'proguard-unity.txt'
+        consumerProguardFiles 'proguard-unity.txt', 'proguard-user.txt'
     }
 
     lintOptions {
@@ -95,10 +90,10 @@ def BuildIl2Cpp(String workingDir, String configuration, String architecture, St
 }
 
 android {
-    tasks.register('BuildIl2CppTask') {
+    task BuildIl2CppTask {
         doLast {
-            BuildIl2Cpp(projectDir.toString().replaceAll('\\\\', '/'), 'Release', 'armv7', 'armeabi-v7a', [] as String[])
-            BuildIl2Cpp(projectDir.toString().replaceAll('\\\\', '/'), 'Release', 'arm64', 'arm64-v8a', [] as String[])
+              BuildIl2Cpp(projectDir.toString().replaceAll('\\\\', '/'), 'Release', 'armv7', 'armeabi-v7a', [  ] as String[]);
+              BuildIl2Cpp(projectDir.toString().replaceAll('\\\\', '/'), 'Release', 'arm64', 'arm64-v8a', [  ] as String[]);
         }
     }
     afterEvaluate {

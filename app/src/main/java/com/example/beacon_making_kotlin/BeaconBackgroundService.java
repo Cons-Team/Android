@@ -1,7 +1,6 @@
 package com.example.beacon_making_kotlin;
 
 import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
-import static java.lang.Thread.sleep;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -14,7 +13,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.IBinder;
-import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -26,14 +24,18 @@ import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
 import org.altbeacon.beacon.BeaconParser;
+import org.altbeacon.beacon.Identifier;
 import org.altbeacon.beacon.MonitorNotifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public class BeaconBackgroundService extends Service implements BeaconConsumer {
 
@@ -42,13 +44,17 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     protected static final String TAG2 = "::RangingActivity::";
     private BeaconManager beaconManager;
 
+    boolean scan_check = false;
+
     //for HTTP request
     private final String BASEURL = "https://gpbl.lemondouble.com";
-
+    private Identifier uuid = new Identifier(Identifier.fromUuid(UUID.fromString("fda50693-a4e2-4fb1-afcf-c6eb07647825")));
+    private Identifier major = new Identifier(Identifier.fromInt(11111));
+    private Identifier minor = new Identifier(Identifier.fromInt(1000));
     public static beacon_data[] beaconData;
 
     @Override
-    public void onBeaconServiceConnect(){
+    public void onBeaconServiceConnect() {
 
         beaconManager.removeAllRangeNotifiers();
 
@@ -74,45 +80,50 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
         });
 
         beaconManager.addRangeNotifier(new RangeNotifier() {
+
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
-                try{
-                    sleep(5000);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }
-                Log.d("beacon_count", beacons.size() + "개");
-                Toast.makeText(BeaconBackgroundService.this, "beacon_count : " + beacons.size() + "개", Toast.LENGTH_SHORT).show();
-
-
+                String test = "";
                 beaconData = new beacon_data[beacons.size()];
-                for(int i = 0; i <beacons.size(); i++){
-                    beaconData[i] = new beacon_data();
-                    beaconData[i].setUUID(beacons.iterator().next().getId1().toString());
-                    beaconData[i].setMajor(beacons.iterator().next().getId2().toString());
-                    beaconData[i].setMinor(beacons.iterator().next().getId3().toString());
-                    beaconData[i].setDistance(String.valueOf(beacons.iterator().next().getDistance()));
-                    beaconData[i].setRssi(String.valueOf(beacons.iterator().next().getRssi()));
-
-
-                    //Toast.makeText(BeaconBackgroundService.this, "distance : " + beaconData[i].getDistance() + "\nrssi : " + beaconData[i].getRssi(), Toast.LENGTH_SHORT).show();
-
-                    Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
-
-                     Log.d(TAG2, ":::::This :: U U I D :: of beacon   :  "+ beaconData[i].getUUID() + ":::::");
-                     Log.d(TAG2, ":::::This :: M a j o r :: of beacon   :  "+ beaconData[i].getMajor() + ":::::");
-                     Log.d(TAG2, ":::::This :: M i n o r :: of beacon   :  "+ beaconData[i].getMinor() + ":::::");
-                     Log.d(TAG2, ":::::This :: D I S T A N C E :: of beacon   :  "+ beaconData[i].getDistance() + ":::::");
-                     Log.d(TAG2, ":::::This :: R S S I :: of beacon   :  "+ beaconData[i].getRssi() + ":::::");
+                List<Beacon> beaconList = new ArrayList<>(beacons);
+                if (beacons.size() > 0) {
+                    beaconList.clear();
+                    for (Beacon beacon : beacons) {
+                        beaconList.add(beacon);
+                    }
                 }
+
+                Log.d("beacon_count", beacons.size() + "개");
+                //Toast.makeText(BeaconBackgroundService.this, "beacon_count : " + beacons.size() + "개", Toast.LENGTH_SHORT).show();
+
+                for (int i = 0; i < beaconList.size(); i++) {
+                    beaconData[i] = new beacon_data();
+                    beaconData[i].setName(beaconList.get(i).getBluetoothName().toString());
+                    beaconData[i].setUUID(beaconList.get(i).getId1().toString());
+                    beaconData[i].setMajor(beaconList.get(i).getId2().toString());
+                    beaconData[i].setMinor(beaconList.get(i).getId3().toString());
+                    beaconData[i].setDistance(String.valueOf(beaconList.get(i).getDistance()));
+                    beaconData[i].setRssi(String.valueOf(beaconList.get(i).getRssi()));
+
+                    //Toast.makeText(BeaconBackgroundService.this, "name : " + beaconData[i].getName() +
+                            //"\nrssi : " + beaconData[i].getRssi(), Toast.LENGTH_SHORT).show();
+                }
+//                if (beaconList.size() == 2 || beaconList.size() == 3) {
+//                    beaconManager.unbindInternal(BeaconBackgroundService.this);
+//                }
+
+                Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
+
+//                    Log.d(TAG2, ":::::This :: U U I D :: of beacon   :  " + beaconData[i].getUUID() + ":::::");
+//                    Log.d(TAG2, ":::::This :: M a j o r :: of beacon   :  " + beaconData[i].getMajor() + ":::::");
+//                    Log.d(TAG2, ":::::This :: M i n o r :: of beacon   :  " + beaconData[i].getMinor() + ":::::");
+//                    Log.d(TAG2, ":::::This :: D I S T A N C E :: of beacon   :  " + beaconData[i].getDistance() + ":::::");
+//                    Log.d(TAG2, ":::::This :: R S S I :: of beacon   :  " + beaconData[i].getRssi() + ":::::");
+
             }
         });
-        try {
-            beaconManager.startRangingBeaconsInRegion(new Region("test", null, null, null));
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
@@ -128,23 +139,35 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Covid-check-program")
+                .setContentTitle("station-program")
                 .setContentText("automatic check program running in background...")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pendingIntent)
                 .build();
 
         startForeground(1,notification);
-
+        scan_check = !scan_check;
         //running data
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){}
 
-        beaconManager = BeaconManager.getInstanceForApplication(this);
-        beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
+        if(scan_check) {
+            Toast.makeText(BeaconBackgroundService.this, "scan_on", Toast.LENGTH_SHORT).show();
 
-        //binding BeaconService to Android Activity or service
-        beaconManager.bind(this);
+            beaconManager = BeaconManager.getInstanceForApplication(this);
+            beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
 
+            // 비콘 탐색 주기 2초
+            beaconManager.setForegroundScanPeriod(2000);
+
+            //binding BeaconService to Android Activity or service
+            beaconManager.startRangingBeacons(new Region("test", uuid, null, null));
+            beaconManager.bindInternal(this);
+
+        }
+        else{
+            Toast.makeText(BeaconBackgroundService.this, "scan_off", Toast.LENGTH_SHORT).show();
+            beaconManager.unbindInternal(BeaconBackgroundService.this);
+        }
         //for http request
 
         return START_STICKY;
@@ -153,7 +176,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     @Override
     public void onDestroy(){
         super.onDestroy();
-        beaconManager.unbind(this);
+        beaconManager.unbindInternal(this);
     }
 
     @Nullable

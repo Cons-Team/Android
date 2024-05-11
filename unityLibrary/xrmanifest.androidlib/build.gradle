@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+apply plugin: 'android-library'
 
 dependencies {
     implementation fileTree(dir: 'bin', include: ['*.jar'])
@@ -18,8 +18,7 @@ android {
     }
 
     compileSdkVersion 34
-    buildToolsVersion '32.0.0'
-
+    buildToolsVersion '34.0.0'
     defaultConfig {
         targetSdkVersion 34
     }

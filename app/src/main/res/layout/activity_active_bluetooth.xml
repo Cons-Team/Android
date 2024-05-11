@@ -7,15 +7,15 @@
     tools:context=".activeBluetooth"
     android:background="@color/gray">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/imageView3"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:contentDescription="just an background image"-->
-<!--        android:scaleType="centerCrop"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/scrollView4"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:srcCompat="@drawable/bluetooth_page" />-->
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imageView3"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:contentDescription="just an background image"-->
+    <!--        android:scaleType="centerCrop"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/scrollView4"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:srcCompat="@drawable/bluetooth_page" />-->
 
     <ScrollView
 
@@ -38,8 +38,9 @@
                 android:layout_height="94dp"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="#000000"
-                android:textSize="30sp" />
+                android:text="test1"
+                android:textColor="#FFFFFFFF"
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/test2"
@@ -47,8 +48,9 @@
                 android:layout_height="94dp"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="#000000"
-                android:textSize="30sp" />
+                android:text="test2"
+                android:textColor="#FFFFFFFF"
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/test3"
@@ -56,18 +58,29 @@
                 android:layout_height="94dp"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="#000000"
-                android:textSize="30sp" />
+                android:text="test3"
+                android:textColor="#FFFFFFFF"
+                android:textSize="10sp" />
         </LinearLayout>
     </ScrollView>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/text_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button"
+        android:text="text_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/scrollView4"
+        app:layout_constraintStart_toStartOf="@+id/beacon_button"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
+
+    <Button
+        android:id="@+id/beacon_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="beacon_Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/text_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
 </androidx.constraintlayout.widget.ConstraintLayout>
