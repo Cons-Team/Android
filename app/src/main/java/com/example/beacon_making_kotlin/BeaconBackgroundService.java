@@ -53,6 +53,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     private Identifier minor = new Identifier(Identifier.fromInt(1000));
     public static beacon_data[] beaconData;
 
+
     @Override
     public void onBeaconServiceConnect() {
 
@@ -86,11 +87,9 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                 String test = "";
                 beaconData = new beacon_data[beacons.size()];
                 List<Beacon> beaconList = new ArrayList<>(beacons);
-                if (beacons.size() > 0) {
+                if (!beacons.isEmpty()) {
                     beaconList.clear();
-                    for (Beacon beacon : beacons) {
-                        beaconList.add(beacon);
-                    }
+                    beaconList.addAll(beacons);
                 }
 
                 Log.d("beacon_count", beacons.size() + "개");
@@ -98,7 +97,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
 
                 for (int i = 0; i < beaconList.size(); i++) {
                     beaconData[i] = new beacon_data();
-                    beaconData[i].setName(beaconList.get(i).getBluetoothName().toString());
+                    beaconData[i].setName(beaconList.get(i).getBluetoothName());
                     beaconData[i].setUUID(beaconList.get(i).getId1().toString());
                     beaconData[i].setMajor(beaconList.get(i).getId2().toString());
                     beaconData[i].setMinor(beaconList.get(i).getId3().toString());
@@ -108,18 +107,16 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                     //Toast.makeText(BeaconBackgroundService.this, "name : " + beaconData[i].getName() +
                             //"\nrssi : " + beaconData[i].getRssi(), Toast.LENGTH_SHORT).show();
                 }
-//                if (beaconList.size() == 2 || beaconList.size() == 3) {
-//                    beaconManager.unbindInternal(BeaconBackgroundService.this);
-//                }
+
+                // 비콘 2개 이상 탐색시 좌표 계산
+                if (beaconList.size() >= 2) {
+                    //beaconManager.unbindInternal(BeaconBackgroundService.this);
+                    //beaconManager.stopRangingBeacons(new Region("test", uuid, null, null));
+
+                }
 
                 Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
-
-//                    Log.d(TAG2, ":::::This :: U U I D :: of beacon   :  " + beaconData[i].getUUID() + ":::::");
-//                    Log.d(TAG2, ":::::This :: M a j o r :: of beacon   :  " + beaconData[i].getMajor() + ":::::");
-//                    Log.d(TAG2, ":::::This :: M i n o r :: of beacon   :  " + beaconData[i].getMinor() + ":::::");
-//                    Log.d(TAG2, ":::::This :: D I S T A N C E :: of beacon   :  " + beaconData[i].getDistance() + ":::::");
-//                    Log.d(TAG2, ":::::This :: R S S I :: of beacon   :  " + beaconData[i].getRssi() + ":::::");
 
             }
         });
@@ -149,7 +146,8 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
         scan_check = !scan_check;
         //running data
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){}
-
+        
+        // 탐색 시작 코드
         if(scan_check) {
             Toast.makeText(BeaconBackgroundService.this, "scan_on", Toast.LENGTH_SHORT).show();
 
@@ -164,9 +162,13 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
             beaconManager.bindInternal(this);
 
         }
+        // 탐색 종료 코드
         else{
-            Toast.makeText(BeaconBackgroundService.this, "scan_off", Toast.LENGTH_SHORT).show();
             beaconManager.unbindInternal(BeaconBackgroundService.this);
+            beaconManager.stopRangingBeacons(new Region("test", uuid, null, null));
+
+            Toast.makeText(BeaconBackgroundService.this, "scan_off", Toast.LENGTH_SHORT).show();
+
         }
         //for http request
 
@@ -177,6 +179,9 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     public void onDestroy(){
         super.onDestroy();
         beaconManager.unbindInternal(this);
+        beaconManager.stopRangingBeacons(new Region("test", uuid, null, null));
+
+        Toast.makeText(BeaconBackgroundService.this, "scan_off", Toast.LENGTH_SHORT).show();
     }
 
     @Nullable

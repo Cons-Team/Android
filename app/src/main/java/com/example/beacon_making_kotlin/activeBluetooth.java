@@ -13,7 +13,13 @@ import androidx.core.content.ContextCompat;
 
 public class activeBluetooth extends AppCompatActivity {
 
+    public TextView beacon_count;
+    public TextView test1;
+    public TextView test2;
+    public TextView test3;
 
+    public Button text_btn;
+    public Button beacon_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +27,14 @@ public class activeBluetooth extends AppCompatActivity {
         try {
 //            Toast.makeText(activeBluetooth.this, "data_size : " + beaconData.length, Toast.LENGTH_SHORT).show();
 
-            TextView test1 = (TextView) findViewById(R.id.test1);
-            TextView test2 = (TextView) findViewById(R.id.test2);
-            TextView test3 = (TextView) findViewById(R.id.test3);
+            beacon_count = (TextView) findViewById(R.id.beacon_count);
+            test1 = (TextView) findViewById(R.id.test1);
+            test2 = (TextView) findViewById(R.id.test2);
+            test3 = (TextView) findViewById(R.id.test3);
 
-            Button text_btn = (Button) findViewById(R.id.text_button);
-            Button beacon_btn = (Button) findViewById(R.id.beacon_button);
+            text_btn = (Button) findViewById(R.id.text_button);
+            beacon_btn = (Button) findViewById(R.id.beacon_button);
+
 
             text_btn.setOnClickListener(new View.OnClickListener() {
                 @SuppressLint("SetTextI18n")
@@ -34,19 +42,27 @@ public class activeBluetooth extends AppCompatActivity {
                 public void onClick(View view) {
                     beacon_data[] beaconData = BeaconBackgroundService.beaconData;
                     if (beaconData != null) {
+                        beacon_count.setText("beacon count : " + beaconData.length + "개");
                         if (beaconData.length > 2) {
                             test3.setText("Name : " + beaconData[2].getName() +
                                     "\nDistance : " + beaconData[2].getDistance() +
                                     "\nRssi : " + beaconData[2].getRssi());
                         }
                         if (beaconData.length > 1) {
-                            test2.setText("Name : " + beaconData[1].getName() + "\nDistance : " + beaconData[1].getDistance() + "\nRssi : " + beaconData[1].getRssi());
+                            test2.setText("Name : " + beaconData[1].getName() +
+                                    "\nDistance : " + beaconData[1].getDistance() +
+                                    "\nRssi : " + beaconData[1].getRssi());
                         }
                         if (beaconData.length > 0) {
-                            test1.setText("Name : " + beaconData[0].getName() + "\nDistance : " + beaconData[0].getDistance() + "\nRssi : " + beaconData[0].getRssi());
+                            test1.setText("Name : " + beaconData[0].getName() +
+                                    "\nDistance : " + beaconData[0].getDistance() +
+                                    "\nRssi : " + beaconData[0].getRssi());
                         }
                     }
 
+                    else{
+                        beacon_count.setText("beacon count : 0개");
+                    }
                 }
             });
 

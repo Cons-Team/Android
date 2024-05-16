@@ -83,4 +83,14 @@
         app:layout_constraintEnd_toStartOf="@+id/text_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
+
+    <TextView
+        android:id="@+id/beacon_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="beacon_count : "
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
