@@ -51,8 +51,9 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     private Identifier uuid = new Identifier(Identifier.fromUuid(UUID.fromString("fda50693-a4e2-4fb1-afcf-c6eb07647825")));
     private Identifier major = new Identifier(Identifier.fromInt(11111));
     private Identifier minor = new Identifier(Identifier.fromInt(1000));
-    public static beacon_data[] beaconData;
+    public static BeaconData[] beaconData;
 
+    public static String coordinate;
 
     @Override
     public void onBeaconServiceConnect() {
@@ -85,7 +86,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
                 String test = "";
-                beaconData = new beacon_data[beacons.size()];
+                beaconData = new BeaconData[beacons.size()];
                 List<Beacon> beaconList = new ArrayList<>(beacons);
                 if (!beacons.isEmpty()) {
                     beaconList.clear();
@@ -96,7 +97,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                 //Toast.makeText(BeaconBackgroundService.this, "beacon_count : " + beacons.size() + "개", Toast.LENGTH_SHORT).show();
 
                 for (int i = 0; i < beaconList.size(); i++) {
-                    beaconData[i] = new beacon_data();
+                    beaconData[i] = new BeaconData();
                     beaconData[i].setName(beaconList.get(i).getBluetoothName());
                     beaconData[i].setUUID(beaconList.get(i).getId1().toString());
                     beaconData[i].setMajor(beaconList.get(i).getId2().toString());
@@ -112,6 +113,10 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                 if (beaconList.size() >= 2) {
                     //beaconManager.unbindInternal(BeaconBackgroundService.this);
                     //beaconManager.stopRangingBeacons(new Region("test", uuid, null, null));
+
+                    // 좌표 계산 및 유니티로 보낼 좌표
+                    DistanceCalculator distanceCalculator = new DistanceCalculator();
+                    coordinate = distanceCalculator.distance(beaconData);
 
                 }
 

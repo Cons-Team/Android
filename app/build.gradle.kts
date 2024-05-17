@@ -54,7 +54,7 @@ dependencies {
     // module
     implementation(project(":tedPermission"))
     implementation(files("libs/minewBeaconScan.jar"))
-    implementation("org.altbeacon:android-beacon-library:2.20.6")
+    implementation(libs.android.beacon.library)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation(project(":unityLibrary"))
+    implementation(libs.lombok)
 
     testImplementation(libs.junit)
 

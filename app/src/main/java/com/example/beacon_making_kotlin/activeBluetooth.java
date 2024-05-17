@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 public class activeBluetooth extends AppCompatActivity {
 
     public TextView beacon_count;
+    public TextView beacon_coordinate;
     public TextView test1;
     public TextView test2;
     public TextView test3;
@@ -28,6 +29,8 @@ public class activeBluetooth extends AppCompatActivity {
 //            Toast.makeText(activeBluetooth.this, "data_size : " + beaconData.length, Toast.LENGTH_SHORT).show();
 
             beacon_count = (TextView) findViewById(R.id.beacon_count);
+            beacon_coordinate = (TextView) findViewById(R.id.coordinate);
+
             test1 = (TextView) findViewById(R.id.test1);
             test2 = (TextView) findViewById(R.id.test2);
             test3 = (TextView) findViewById(R.id.test3);
@@ -40,9 +43,12 @@ public class activeBluetooth extends AppCompatActivity {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onClick(View view) {
-                    beacon_data[] beaconData = BeaconBackgroundService.beaconData;
+                    BeaconData[] beaconData = BeaconBackgroundService.beaconData;
+                    String coordinate = BeaconBackgroundService.coordinate;
+
                     if (beaconData != null) {
                         beacon_count.setText("beacon count : " + beaconData.length + "개");
+                        beacon_coordinate.setText(coordinate);
                         if (beaconData.length > 2) {
                             test3.setText("Name : " + beaconData[2].getName() +
                                     "\nDistance : " + beaconData[2].getDistance() +
@@ -62,6 +68,7 @@ public class activeBluetooth extends AppCompatActivity {
 
                     else{
                         beacon_count.setText("beacon count : 0개");
+                        beacon_coordinate.setText("xyz : 0, 0, 0");
                     }
                 }
             });

@@ -1,6 +1,6 @@
 package com.example.beacon_making_kotlin;
 
-public class beacon_data {
+public class BeaconData{
 
     private String Name;
     private String UUID;
@@ -10,15 +10,15 @@ public class beacon_data {
     private String Distance;
     private String Rssi;
 
-    public void beacondata(){
+    public BeaconData(){
 
-        this.Name = "NULL";
-        this.UUID = "NULL";
-        this.Major = "NULL";
-        this.Minor = "NULL";
-        this.timeData = "NULL";
-        this.Distance = "NULL";
-        this.Rssi = "NULL";
+        this.Name = "Null";
+        this.UUID = "Null";
+        this.Major = "Null";
+        this.Minor = "Null";
+        this.timeData = "Null";
+        this.Distance = "Null";
+        this.Rssi = "Null";
     }
 
     public String getName() {
@@ -74,6 +74,8 @@ public class beacon_data {
         this.Distance = distance;
     }
 
-    public void setRssi(String rssi) { this.Rssi = rssi; }
+    public void setRssi(String rssi) {
+        this.Rssi = rssi;
+    }
 
 }
