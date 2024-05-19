@@ -14,8 +14,11 @@
     ### implementation은 아래와 같이 수정
     #### implementation(name: 'arcore_client', ext:'aar') -> implementation files("libs/arcore_client.aar")
     
-    ### namespace 추가
-    #### android { namespace "com.unity3d.player"
+    ### build.gradle에 namespace 추가
+    #### unity Library
+    ##### android { namespace "com.unity3d.player"
+    #### xrmanifest
+    ##### android { namespace "com.UnityTechnologies.XR.Manifest"
     
     ### compileOptions에서 JavaVersion 수정 
     #### JavaVersion.VERSION_11 -> JavaVersion.VERSION_1_8
