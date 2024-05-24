@@ -66,8 +66,17 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
-    implementation(project(":unityLibrary"))
-    implementation(libs.lombok)
+
+    implementation(libs.retrofit2.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+
+    compileOnly(libs.lombok)
+    annotationProcessor(libs.lombok)
+//    implementation(project(":unityLibrary"))
 
     testImplementation(libs.junit)
 

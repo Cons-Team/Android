@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+unityLibrary/
+/app/src/main/java/com/example/beacon_making_kotlin/pathfinding/service/
+app/src/main/java/com/example/beacon_making_kotlin/pathfinding/service/

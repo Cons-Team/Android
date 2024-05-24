@@ -20,25 +20,34 @@
     <!-- 스캔 권한, 연결 권한, 백그라운드에서 서칭 권한 선언 -->
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-<!--    <uses-permission android:name="Manifest.permission.ACCESS_BACKGROUND_LOCATION" />-->
+    <!--    <uses-permission android:name="Manifest.permission.ACCESS_BACKGROUND_LOCATION" />-->
 
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- 안드로이드 14부터 ForegroundService를 이용해야 한다 -->
     <!-- ForegroundService에는 여러가지 타입이 있으며 적절한 타입을 같이 선언하여 사용해야 한다 -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
 
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Retrofit 권한 설정 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <!-- 블루투스 클래식 버전 사용시 필요 권한, 블루투스 연결 기능이 없는 경우 기기의 사용자에게 앱을 숨김 -->
-    <uses-feature android:name="android.hardware.bluetooth" android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="true" />
 
     <!-- 저전력 블루투스 사용시 필요 권한, 저전력 블루투스 연결 기능이 없는 경우 기기의 사용자에게 앱을 숨김 -->
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -46,28 +55,36 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true">
 
 
         <service
-            android:name=".BeaconBackgroundService"
-            android:foregroundServiceType="connectedDevice"
+            android:name=".beaconfind.BeaconBackgroundService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice" />
 
-        <activity android:name=".activeBluetooth"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
-        <activity
-            android:name=".MainActivity"
+        <activity android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".beaconfind.ActiveBluetooth"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <activity
+            android:name=".pathfinding.PathFindingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
         </activity>
 
     </application>

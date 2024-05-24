@@ -1,31 +1,17 @@
 package com.example.beacon_making_kotlin;
 
-
-import android.Manifest;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.tedpermission.PermissionListener;
-import com.example.tedpermission.TedPermissionUtil;
-import com.unity3d.player.UnityPlayerActivity;
-
-import java.util.List;
-
+import com.example.beacon_making_kotlin.pathfinding.PathFindingActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,157 +20,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-
-        // layout 폴더에 속한 activity_main.xml파일에 button
-        Button btn = (Button) findViewById(R.id.button);
-        // bluetooth on button click event
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BluetoothAdapter btadapter = BluetoothAdapter.getDefaultAdapter();
-                Intent intent;
-
-                if (btadapter.isEnabled()) {
-                    Log.d("ble_stat", "on_device");
-                    Toast.makeText(MainActivity.this, "on_device", Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.d("ble_stat", "꺼져있거나 블루투스 기능이 없습니다.");
-                    Toast.makeText(MainActivity.this, "꺼져있거나 블루투스 기능이 없습니다.", Toast.LENGTH_SHORT).show();
-
-                    intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                    if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return;
-                    }
-
-                    startActivityForResult(intent, 1);
-                }
-
-
-            }
-        });
-
-        // 클릭시 Beacon Searching event 실행
-        Button btn2 = (Button) findViewById(R.id.button2);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToPrivacyPolicy(view);
-            }
-        });
-
-
-        Button unity = (Button) findViewById(R.id.unity);
-        unity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, UnityPlayerActivity.class));
-
-            }
-        });
-
-
-        Log.d("sdk_ver", "" + Build.VERSION.SDK_INT);
-        if (Build.VERSION.SDK_INT >= 31) {
-
-            permission_setting(Manifest.permission.BLUETOOTH_SCAN); // 스캔 권한
-            permission_setting(Manifest.permission.BLUETOOTH_CONNECT); // 연결 권한
-            permission_setting(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
-        } else if (Build.VERSION.SDK_INT >= 29) {
-
-            permission_setting(Manifest.permission.BLUETOOTH); // 블루투스 연결 요청 및 수락, 데이터 전송 등에 필요
-            permission_setting(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
-            // permission_setting(Manifest.permission.ACCESS_BACKGROUND_LOCATION); // 백그라운드에서 스캔해야 할 경우
-        } else if (Build.VERSION.SDK_INT >= 23) {
-
-            permission_setting(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
-        }
-
-        permission_setting(Manifest.permission.CAMERA);
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-    }
+        Button pathFinding = (Button) findViewById(R.id.pathfinding);
 
-    private void permission_setting(String permission_name) {
-        boolean isAlertBlePermissonGranted = TedPermissionUtil.isGranted(permission_name);
-        Log.d("ted", permission_name + ": " + isAlertBlePermissonGranted);
-
-
-        PermissionListener permissionlistener = new PermissionListener() {
+        pathFinding.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPermissionGranted() {
-                Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PathFindingActivity.class);
+                startActivity(intent);
             }
-
-            @Override
-            public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(MainActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
-            }
-
-
-        };
-
-        TedPermission.create()
-                .setPermissionListener(permissionlistener)
-                .setRationaleMessage("we need permission for read contact, find your location and system alert window")
-                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
-                .setGotoSettingButtonText("setting")
-                .setPermissions(permission_name)
-                .check();
+        });
     }
-
-// http 통신을 이용해 db와 연동하는 곳
-// 데이터를 post하는 코드인것 같다
-//    private void createPost(){
-//        Call<beaconData> call = jsonPlaceHolderApi.createPost(beaconData);
-//
-//        call.enqueue(new Callback<beaconData>() {
-//            @Override
-//            public void onResponse(Call<beaconData> call, Response<beaconData> response) {
-//                if (!response.isSuccessful()){
-//                    Log.e("connection problem : ", "error code : " + response.code());
-//                    return;
-//                }
-//
-//                beaconData responsebeaconData = response.body();
-//                Log.d("connected : ", response.body().toString());
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<beaconData> call, Throwable t) {
-//                Log.e("connect failed.",t.getMessage());
-//            }
-//        });
-//    }
-
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        super.onPointerCaptureChanged(hasCapture);
-    }
-
-    public void goToPrivacyPolicy(View view){
-        SharedPreferences userDataGetter = getSharedPreferences("userdata", MODE_PRIVATE);
-        String userName = userDataGetter.getString("userName","");
-
-        Intent intent;
-
-        intent = new Intent(this, activeBluetooth.class);
-
-        startActivity(intent);
-    }
-
 }

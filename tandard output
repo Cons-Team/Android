@@ -1,0 +1,93 @@
+[33mcommit 66c4e35e66006e1618a0fd24144be764ed7f6f01[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mAdd_Retrofit_Service[m[33m)[m
+Author: heavenring <anstn0104@naver.com>
+Date:   Tue May 21 23:23:18 2024 +0900
+
+    retrofit 적용 Web Server연동 테스트 필요
+
+[33mcommit c3b251baabbb77b6cd5d5117135ebcb731ab829a[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: heavenring <54017527+heavenring@users.noreply.github.com>
+Date:   Sun May 19 11:59:33 2024 +0900
+
+    Update README.md
+
+[33mcommit 65f6ba80fbff23aa3aef6b3c30e80a8bbf63c2ee[m
+Author: heavenring <anstn0104@naver.com>
+Date:   Fri May 17 16:03:31 2024 +0900
+
+    coordinate 기능 추가
+
+[33mcommit 524d2b2af5cee780a319725e3cb35f16c1a206ce[m
+Author: heavenring <anstn0104@naver.com>
+Date:   Thu May 16 17:29:17 2024 +0900
+
+    beacon searching complete
+
+[33mcommit 6a3d0cbb35b4672255cbd5b2fb3e950cdb2f1a9d[m
+Author: heavenring <anstn0104@naver.com>
+Date:   Sat May 11 19:05:59 2024 +0900
+
+    20240511 beacon Searching
+
+[33mcommit 816b349bf4142cbfa0f3b3851ab86179cc94650a[m
+Author: heavenring <anstn0104@naver.com>
+Date:   Fri May 3 18:57:23 2024 +0900
+
+    Unity Connect Success
+
+[33mcommit b71c6d9f7d0d94d3d12507277a4c96f135c9620a[m
+Author: heavenring <54017527+heavenring@users.noreply.github.com>
+Date:   Fri May 3 17:52:36 2024 +0900
+
+    README.md
+
+[33mcommit 44d1bba258608afd57528d3f2fb3eaed92df485f[m
+Author: heavenring <anstn0104@naver.com>
+Date:   Fri May 3 17:19:01 2024 +0900
+
+    Unity Connect Success
+
+[33mcommit 3d6fd19820c43eba13e9827d0614a7c13849f542[m
+Merge: 1d09895 21d1a5d
+Author: heavenring <anstn0104@naver.com>
+Date:   Wed May 1 17:41:14 2024 +0900
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 1d098951255671ab209777402bc0e97cb388e135[m
+Author: heavenring <anstn0104@naver.com>
+Date:   Wed May 1 17:34:15 2024 +0900
+
+    connecting test
+
+[33mcommit 21d1a5dfedbbee2ab1dfd248f0e2ae6f2f3bce97[m
+Merge: 3cba4f6 cfd3b92
+Author: Baby0327 <167307819+Baby0327@users.noreply.github.com>
+Date:   Wed May 1 17:33:38 2024 +0900
+
+    Merge pull request #2 from Cons-Team/Baby0327
+    
+    test
+
+[33mcommit cfd3b92b66c2f925514be6e3f6a8326e3e0fc8ec[m
+Author: 엄채원 <chaewon550@gmail.com>
+Date:   Wed May 1 17:31:34 2024 +0900
+
+    test
+
+[33mcommit 3cba4f633d74e0a54f928ff0c46f2379096f7722[m
+Author: 엄채원 <chaewon550@gmail.com>
+Date:   Wed May 1 17:11:04 2024 +0900
+
+    test
+
+[33mcommit 31f3124730dff2a8cf33584141413e7e7ad51f70[m
+Author: heavenring <anstn0104@naver.com>
+Date:   Tue Apr 23 20:30:21 2024 +0900
+
+    all_file_recommit
+
+[33mcommit 8acedb49e6d72e4f1f664de15717111dca2b14cc[m
+Author: heavenring <anstn0104@naver.com>
+Date:   Tue Apr 23 20:19:52 2024 +0900
+
+    kotiln migration

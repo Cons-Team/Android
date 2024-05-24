@@ -47,13 +47,22 @@
     ### gradle.properties 파일에 한줄 추가
     #### unityStreamingAssets=.unity3d, google-services-desktop.json, google-services.json, GoogleService-Info.plist
 
+# Retrofit 파일 주의사항(ver.20240525)
+    ## pathfinging 하위 폴더로 service폴더 추가
+    ### service 폴더는 구글 드라이브에 있음
+
 
 # beaconmanager 변경사항
     ## bind -> bindInternal
     ## unbind -> unbindInternal
     ## startRangingBeaconsInRegion -> startRangingBeacons
 
-# 전체 변경 및 추가사항
+# 전체 변경 및 추가사항(ver.20240525)
     ## beacon 탐색 버튼 추가 (클릭시 탐색 활성화, 재 클릭시 비활성화)
     ## text 갱신 버튼 변경 (beacon탐색 기능 삭제)
     ## beacon 탐색 주기 설정 (2초)
+    ## ---------------------20240525--------------------------
+    ## 기능별 폴더로 묶음
+    ### beaconfind -> Beacon 탐색 부분 모음
+    ### pathfinding -> 경로 탐색 기능 모음
+    ## Retrofit 기능 추가

@@ -1,4 +1,4 @@
-package com.example.beacon_making_kotlin;
+package com.example.beacon_making_kotlin.beaconfind;
 
 import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 
@@ -20,6 +20,9 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.beacon_making_kotlin.R;
+import com.example.beacon_making_kotlin.pathfinding.DistanceCalculator;
+
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
@@ -39,6 +42,8 @@ import java.util.UUID;
 
 public class BeaconBackgroundService extends Service implements BeaconConsumer {
 
+    private final DistanceCalculator distanceCalculator = new DistanceCalculator();
+
     public static final String CHANNEL_ID = "BeaconBackgroundServiceChannel";
     protected static final String TAG1 = "::MonitoringActivity::";
     protected static final String TAG2 = "::RangingActivity::";
@@ -46,11 +51,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
 
     boolean scan_check = false;
 
-    //for HTTP request
-    private final String BASEURL = "https://gpbl.lemondouble.com";
     private Identifier uuid = new Identifier(Identifier.fromUuid(UUID.fromString("fda50693-a4e2-4fb1-afcf-c6eb07647825")));
-    private Identifier major = new Identifier(Identifier.fromInt(11111));
-    private Identifier minor = new Identifier(Identifier.fromInt(1000));
     public static BeaconData[] beaconData;
 
     public static String coordinate;
@@ -102,7 +103,6 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                     beaconData[i].setUUID(beaconList.get(i).getId1().toString());
                     beaconData[i].setMajor(beaconList.get(i).getId2().toString());
                     beaconData[i].setMinor(beaconList.get(i).getId3().toString());
-                    beaconData[i].setDistance(String.valueOf(beaconList.get(i).getDistance()));
                     beaconData[i].setRssi(String.valueOf(beaconList.get(i).getRssi()));
 
                     //Toast.makeText(BeaconBackgroundService.this, "name : " + beaconData[i].getName() +
@@ -115,7 +115,6 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                     //beaconManager.stopRangingBeacons(new Region("test", uuid, null, null));
 
                     // 좌표 계산 및 유니티로 보낼 좌표
-                    DistanceCalculator distanceCalculator = new DistanceCalculator();
                     coordinate = distanceCalculator.distance(beaconData);
 
                 }
@@ -137,7 +136,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         createNotificationChannel();
-        Intent notificationIntent = new Intent(this,activeBluetooth.class);
+        Intent notificationIntent = new Intent(this, ActiveBluetooth.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)

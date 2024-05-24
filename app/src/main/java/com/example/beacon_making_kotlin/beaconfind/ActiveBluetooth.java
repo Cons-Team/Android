@@ -1,4 +1,4 @@
-package com.example.beacon_making_kotlin;
+package com.example.beacon_making_kotlin.beaconfind;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,7 +11,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-public class activeBluetooth extends AppCompatActivity {
+import com.example.beacon_making_kotlin.R;
+
+public class ActiveBluetooth extends AppCompatActivity {
 
     public TextView beacon_count;
     public TextView beacon_coordinate;
@@ -51,17 +53,14 @@ public class activeBluetooth extends AppCompatActivity {
                         beacon_coordinate.setText(coordinate);
                         if (beaconData.length > 2) {
                             test3.setText("Name : " + beaconData[2].getName() +
-                                    "\nDistance : " + beaconData[2].getDistance() +
                                     "\nRssi : " + beaconData[2].getRssi());
                         }
                         if (beaconData.length > 1) {
                             test2.setText("Name : " + beaconData[1].getName() +
-                                    "\nDistance : " + beaconData[1].getDistance() +
                                     "\nRssi : " + beaconData[1].getRssi());
                         }
                         if (beaconData.length > 0) {
                             test1.setText("Name : " + beaconData[0].getName() +
-                                    "\nDistance : " + beaconData[0].getDistance() +
                                     "\nRssi : " + beaconData[0].getRssi());
                         }
                     }
@@ -76,8 +75,8 @@ public class activeBluetooth extends AppCompatActivity {
             beacon_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent serviceIntent = new Intent(activeBluetooth.this, BeaconBackgroundService.class);
-                    ContextCompat.startForegroundService(activeBluetooth.this, serviceIntent);
+                    Intent serviceIntent = new Intent(ActiveBluetooth.this, BeaconBackgroundService.class);
+                    ContextCompat.startForegroundService(ActiveBluetooth.this, serviceIntent);
                 }
             });
 
