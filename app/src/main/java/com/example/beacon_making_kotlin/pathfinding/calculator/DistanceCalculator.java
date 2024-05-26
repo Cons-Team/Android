@@ -1,4 +1,4 @@
-package com.example.beacon_making_kotlin.pathfinding;
+package com.example.beacon_making_kotlin.pathfinding.calculator;
 
 import static java.lang.Math.pow;
 

@@ -21,7 +21,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.beacon_making_kotlin.R;
-import com.example.beacon_making_kotlin.pathfinding.DistanceCalculator;
+import com.example.beacon_making_kotlin.pathfinding.calculator.DistanceCalculator;
+import com.example.beacon_making_kotlin.pathfinding.calculator.FloorCalculator;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
@@ -43,6 +44,7 @@ import java.util.UUID;
 public class BeaconBackgroundService extends Service implements BeaconConsumer {
 
     private final DistanceCalculator distanceCalculator = new DistanceCalculator();
+    private final FloorCalculator floorCalculator = new FloorCalculator();
 
     public static final String CHANNEL_ID = "BeaconBackgroundServiceChannel";
     protected static final String TAG1 = "::MonitoringActivity::";
@@ -55,6 +57,8 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     public static BeaconData[] beaconData;
 
     public static String coordinate;
+    public static String floor;
+
 
     @Override
     public void onBeaconServiceConnect() {
@@ -117,6 +121,8 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                     // 좌표 계산 및 유니티로 보낼 좌표
                     coordinate = distanceCalculator.distance(beaconData);
 
+                    // 층 계산
+                    floor = floorCalculator.floorCalculator(beaconData[0]);
                 }
 
                 Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
