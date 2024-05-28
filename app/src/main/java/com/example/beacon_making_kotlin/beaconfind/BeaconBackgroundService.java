@@ -36,7 +36,9 @@ import org.altbeacon.beacon.Region;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -113,6 +115,13 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                             //"\nrssi : " + beaconData[i].getRssi(), Toast.LENGTH_SHORT).show();
                 }
 
+                Arrays.sort(beaconData, new Comparator<BeaconData>() {
+                    @Override
+                    public int compare(BeaconData o1, BeaconData o2) {
+                        return o1.getRssi().compareTo(o2.getRssi());
+                    }
+                });
+
                 // 비콘 2개 이상 탐색시 좌표 계산
                 if (beaconList.size() >= 2) {
                     //beaconManager.unbindInternal(BeaconBackgroundService.this);
@@ -122,7 +131,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                     coordinate = distanceCalculator.distance(beaconData);
 
                     // 층 계산
-                    floor = floorCalculator.floorCalculator(beaconData[0]);
+                   // floor = floorCalculator.floorCalculator(beaconData[0]);
                 }
 
                 Timestamp timeStamp = new Timestamp(System.currentTimeMillis());

@@ -17,9 +17,7 @@ public class ActiveBluetooth extends AppCompatActivity {
 
     public TextView beacon_count;
     public TextView beacon_coordinate;
-    public TextView test1;
-    public TextView test2;
-    public TextView test3;
+    TextView[] test;
 
     public Button text_btn;
     public Button beacon_btn;
@@ -33,9 +31,7 @@ public class ActiveBluetooth extends AppCompatActivity {
             beacon_count = (TextView) findViewById(R.id.beacon_count);
             beacon_coordinate = (TextView) findViewById(R.id.coordinate);
 
-            test1 = (TextView) findViewById(R.id.test1);
-            test2 = (TextView) findViewById(R.id.test2);
-            test3 = (TextView) findViewById(R.id.test3);
+            TextView[] test = {(TextView) findViewById(R.id.test1), (TextView) findViewById(R.id.test2), (TextView) findViewById(R.id.test3), (TextView) findViewById(R.id.test4), (TextView) findViewById(R.id.test5)};
 
             text_btn = (Button) findViewById(R.id.text_button);
             beacon_btn = (Button) findViewById(R.id.beacon_button);
@@ -51,18 +47,16 @@ public class ActiveBluetooth extends AppCompatActivity {
                     if (beaconData != null) {
                         beacon_count.setText("beacon count : " + beaconData.length + "개");
                         beacon_coordinate.setText(coordinate);
-                        if (beaconData.length > 2) {
-                            test3.setText("Name : " + beaconData[2].getName() +
-                                    "\nRssi : " + beaconData[2].getRssi());
+
+                        for(int i = 0; i < beaconData.length; i++){
+                            test[i].setText("Name : " + beaconData[i].getName() +
+                                    "\nRssi : " + beaconData[i].getRssi());
                         }
-                        if (beaconData.length > 1) {
-                            test2.setText("Name : " + beaconData[1].getName() +
-                                    "\nRssi : " + beaconData[1].getRssi());
+                        for(int i = beaconData.length; i < 5; i++){
+                            test[i].setText("Name : None" +
+                                    "\nRssi : None");
                         }
-                        if (beaconData.length > 0) {
-                            test1.setText("Name : " + beaconData[0].getName() +
-                                    "\nRssi : " + beaconData[0].getRssi());
-                        }
+
                     }
 
                     else{
