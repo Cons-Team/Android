@@ -2,9 +2,11 @@ package com.example.beacon_making_kotlin.pathfinding.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class BeaconDto {
