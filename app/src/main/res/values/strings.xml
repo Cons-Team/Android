@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">beacon_making_kotlin</string>
+    <string name="app_name" translatable="false">다님길</string>
     <string name="bluetooth_on" translatable="false">bluetooth_on</string>
     <string name="find_beacon" translatable="false">find_beacon</string>
     <string name="button" translatable="false">Button</string>
