@@ -136,11 +136,11 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                     Log.d("floor", floor);
                     if(floor.charAt(0) == 'B'){
                         String[] coor = coordinate.split(",");
-                        coordinate = coor[0] + "," + -7.71 * Integer.parseInt(floor.substring(1, floor.length() - 1)) + "," + coor[2];
+                        coordinate = coor[0] + "," + -7.71 * Integer.parseInt(floor.substring(1, 2)) + "," + coor[2];
                     }
                     else{
                         String[] coor = coordinate.split(",");
-                        coordinate = coor[0] + "," + 7.71 * (Integer.parseInt(floor.substring(0, floor.length() - 1)) - 1) + "," + coor[2];
+                        coordinate = coor[0] + "," + 7.71 * (Integer.parseInt(floor.substring(0, 1)) - 1) + "," + coor[2];
                     }
                 }
 
@@ -183,8 +183,8 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
             beaconManager = BeaconManager.getInstanceForApplication(this);
             beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
 
-            // 비콘 탐색 주기 2초
-            beaconManager.setForegroundScanPeriod(2000);
+            // 비콘 탐색 주기 3초
+            beaconManager.setForegroundScanPeriod(3000);
 
             //binding BeaconService to Android Activity or service
             beaconManager.startRangingBeacons(new Region("test", uuid, null, null));

@@ -76,7 +76,7 @@ dependencies {
 
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
-//    implementation(project(":unityLibrary"))
+    implementation(project(":unityLibrary"))
 
     testImplementation(libs.junit)
 
