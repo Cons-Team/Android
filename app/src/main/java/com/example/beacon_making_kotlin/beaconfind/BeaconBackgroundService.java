@@ -131,7 +131,17 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                     coordinate = distanceCalculator.distance(beaconData);
 
                     // 층 계산
-                   // floor = floorCalculator.floorCalculator(beaconData[0]);
+                    floor = floorCalculator.floorCalculator(beaconData[0]);
+
+                    Log.d("floor", floor);
+                    if(floor.charAt(0) == 'B'){
+                        String[] coor = coordinate.split(",");
+                        coordinate = coor[0] + "," + -7.71 * Integer.parseInt(floor.substring(1, floor.length() - 1)) + "," + coor[2];
+                    }
+                    else{
+                        String[] coor = coordinate.split(",");
+                        coordinate = coor[0] + "," + 7.71 * (Integer.parseInt(floor.substring(0, floor.length() - 1)) - 1) + "," + coor[2];
+                    }
                 }
 
                 Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
