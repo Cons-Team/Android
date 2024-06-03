@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#00000000"
+    android:backgroundTint="#000000"
     tools:context=".MainActivity">
 
     <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="@+id/menuBtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,18 +29,19 @@
             android:id="@+id/searchText"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:ems="10"
             android:inputType="text"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/searchBtn"
             android:layout_width="45dp"
             android:layout_height="45dp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="@+id/searchText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/searchText"
@@ -150,6 +151,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="40dp"
         android:onClick="onClick"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu_image" />
@@ -161,6 +163,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="#6A72FE"
+        android:scaleType="centerCrop"
         android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -173,6 +176,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="#6A72FE"
+        android:scaleType="centerCrop"
         android:visibility="gone"
         android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -188,11 +192,5 @@
         tools:layout_editor_absoluteX="70dp"
         tools:layout_editor_absoluteY="256dp" />
 
-<!--    <Button-->
-<!--        android:id="@+id/pathfinding"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="PathFinding"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>
