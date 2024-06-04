@@ -31,6 +31,8 @@ import java.util.List;
 
 public class PathFindingActivity extends AppCompatActivity {
 
+    int LAUNCH_SECOND_ACTIVITY = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,7 @@ public class PathFindingActivity extends AppCompatActivity {
             }
         });
 
+
         // 클릭시 Beacon Searching event 실행
         Button btn2 = (Button) findViewById(R.id.button2);
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -83,11 +86,14 @@ public class PathFindingActivity extends AppCompatActivity {
         });
 
 
+        // Unity로 넘어가는 부분
         Button unity = (Button) findViewById(R.id.unity);
         unity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(MainActivity.this, UnityPlayerActivity.class));
+//                Intent intent = new Intent(PathFindingActivity.this, UnityPlayerActivity.class);
+//                intent.putExtra("result", "80.0,1.52,0.0");
+//                startActivityForResult(intent, LAUNCH_SECOND_ACTIVITY);
 
             }
         });
@@ -117,6 +123,21 @@ public class PathFindingActivity extends AppCompatActivity {
             return insets;
         });
 
+    }
+
+
+    // Unity로 부터 값 받아오는 부분
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        try {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (requestCode == LAUNCH_SECOND_ACTIVITY && resultCode == RESULT_OK) {
+                String value = data.getStringExtra("result");
+                Toast.makeText(PathFindingActivity.this, value, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception ex){
+            Toast.makeText(PathFindingActivity.this, ex.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     // 권한 부여 함수
