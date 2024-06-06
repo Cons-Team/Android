@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.beacon_making_kotlin.R;
 
+/** 결과값 테스트용 파일 */
 public class ActiveBluetooth extends AppCompatActivity {
 
     public TextView beacon_count;

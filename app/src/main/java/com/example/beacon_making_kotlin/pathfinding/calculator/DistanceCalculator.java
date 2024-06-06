@@ -25,8 +25,10 @@ public class DistanceCalculator {
 
 
         double x1, x2, y1, y2, answerX, answerY;
+        int a = -50; // 1m당 RSSI 신호값
+        double n = 2; // 손실지수 (2 ~ 4)
 
-        x1 = x2 = y1 = y2 = answerX = answerY = 0d;
+        x1 = x2 = y1 = y2 = answerX = answerY = 0;
 
         if(beaconDto.size() >= 2){
             // 삼각 측량
@@ -47,29 +49,35 @@ public class DistanceCalculator {
             // 각 비콘 으로 부터 사용자 까지의 거리 계산
             double distanceA, distanceB;
 
-            distanceA = pow(10, (double) (-50 - Integer.parseInt(beaconDto.get(0).second.getRssi())) / (10 * 4));
-            distanceB = pow(10, (double) (-50 - Integer.parseInt(beaconDto.get(1).second.getRssi())) / (10 * 4));
+            distanceA = pow(10, (double) (a - Integer.parseInt(beaconDto.get(0).second.getRssi())) / (10 * n));
+            distanceB = pow(10, (double) (a - Integer.parseInt(beaconDto.get(1).second.getRssi())) / (10 * n));
 
-            if(x1 == x2)
-                answerY = (distanceB * (y2 - y1)) / (distanceA + distanceB);
-            else
-                answerX = (distanceB * (x2 - x1)) / (distanceA + distanceB);
+            RetrofitInstance.beaconDto.clear();
+
+
+            // 좌표 반환
+
+            if(x1 == x2) {
+                answerY = (distanceA * (y2 - y1)) / (distanceA + distanceB);
+                Log.d("반환 좌표", x1 + "," + (y1 + answerY));
+                return x1 + "," + (y1 + answerY);
+            }else {
+                answerX = (distanceA * (x2 - x1)) / (distanceA + distanceB);
+                Log.d("반환 좌표", (x1 + answerX) + "," + y1);
+                return (x1 + answerX) + "," + y1;
+            }
 
 //            Log.d("x좌표 거리 비율", "" + answerX);
 //            Log.d("y좌표 거리 비율", "" + answerY);
 
-            RetrofitInstance.beaconDto.clear();
+
         }
         else{
             // 삼변 측량
+            return "0, 0, 0";
         }
 
-        //Log.d("반환 좌표", answerX + ", 0, " + answerY);
 
-        if(x1 == x2)
-            return x1 + ", 0, " + (y1 + answerY);
-        else
-            return (x1 + answerX) + ", 0, " + y1;
     }
 }
 

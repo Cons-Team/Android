@@ -28,13 +28,15 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
-import com.example.beacon_making_kotlin.pathfinding.PathFindingActivity;
+import com.example.beacon_making_kotlin.beaconfind.BeaconBackgroundService;
+import com.unity3d.player.UnityPlayerActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
     SubsamplingScaleImageView metro_map;
     Bitmap bitmap;
     Bitmap resized;
+
+    int LAUNCH_SECOND_ACTIVITY = 1;
+    public static Boolean beaconFindCheck = false;
 
     @SuppressLint({"ClickableViewAccessibility", "UseCompatLoadingForDrawables"})
     @Override
@@ -481,8 +486,20 @@ public class MainActivity extends AppCompatActivity {
 
         //Navigation Button - Unity
         if(view.getId() == R.id.navigationBtnRight || view.getId() == R.id.navigationBtnLeft){
-            Intent intent = new Intent(MainActivity.this, PathFindingActivity.class);
-            startActivity(intent);
+            // Beacon Serching 하는동안 로딩창 돌아갈 부분
+
+            // Beacon Searching
+            Intent serviceIntent = new Intent(MainActivity.this, BeaconBackgroundService.class);
+            ContextCompat.startForegroundService(MainActivity.this, serviceIntent);
+
+            // 비콘 탐색 성공 시 BeaconBackground.java 에서 변수 값을 true로 변환
+            if(beaconFindCheck) {
+                String coordinate = BeaconBackgroundService.coordinate;
+
+                Intent intent = new Intent(MainActivity.this, UnityPlayerActivity.class);
+                intent.putExtra("result", coordinate);
+                startActivityForResult(intent, LAUNCH_SECOND_ACTIVITY);
+            }
         }
     }
 
