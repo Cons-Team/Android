@@ -3,6 +3,7 @@ package com.example.beacon_making_kotlin.pathfinding;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.beaconfind.ActiveBluetooth;
+import com.unity3d.player.UnityPlayerActivity;
 
 
 public class PathFindingActivity extends AppCompatActivity {
@@ -25,29 +27,13 @@ public class PathFindingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_path_finding);
 
 
-
-        // 클릭시 Beacon Searching event 실행
-        Button btn2 = (Button) findViewById(R.id.button2);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToPrivacyPolicy(view);
-            }
-        });
-
-
         // Unity로 넘어가는 부분
-        Button unity = (Button) findViewById(R.id.unity);
-        unity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(PathFindingActivity.this, UnityPlayerActivity.class);
-//                intent.putExtra("result", "80.0,1.52,0.0");
-//                startActivityForResult(intent, LAUNCH_SECOND_ACTIVITY);
+        String coordinate = getIntent().getStringExtra("result");
+        Log.d("PathFindingActivity getCoordinate", coordinate);
 
-            }
-        });
-
+        Intent intent = new Intent(PathFindingActivity.this, UnityPlayerActivity.class);
+        intent.putExtra("result", coordinate);
+        startActivityForResult(intent, LAUNCH_SECOND_ACTIVITY);
 
     }
 

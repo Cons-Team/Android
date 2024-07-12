@@ -2,8 +2,11 @@ package com.example.beacon_making_kotlin.beaconfind;
 
 import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -22,8 +25,10 @@ import androidx.core.content.ContextCompat;
 
 import com.example.beacon_making_kotlin.MainActivity;
 import com.example.beacon_making_kotlin.R;
+import com.example.beacon_making_kotlin.pathfinding.PathFindingActivity;
 import com.example.beacon_making_kotlin.pathfinding.calculator.DistanceCalculator;
 import com.example.beacon_making_kotlin.pathfinding.calculator.FloorCalculator;
+import com.unity3d.player.UnityPlayerActivity;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
@@ -56,6 +61,9 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     public static String coordinate;
     public static String floor;
     private int roopCount = 0;
+
+
+    LoadingDialog loadingDialog;
 
     @Override
     public void onBeaconServiceConnect() {
@@ -98,7 +106,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
 
 
                 roopCount++;
-                roopCheck(beaconList);
+                roopCheck();
 
 
             }
@@ -108,18 +116,18 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
 
 
     /** beacon Connection Check */
-    public void roopCheck(List<Beacon> beaconList){
+    public void roopCheck(){
         if(roopCount < 5){
             if(beaconData.length >= 2){
                 roopCount = 4;
             }
             else if(roopCount == 4){
-                beaconUnBind(false);
+                beaconUnBind();
             }
         }
         else{
             // 비콘 2개 이상 탐색시 좌표 계산
-            if (beaconList.size() >= 2) {
+            if (beaconData.length >= 2) {
                 // 좌표 계산 및 유니티로 보낼 좌표
                 coor.add(distanceCalculator.distance(beaconData));
             }
@@ -139,18 +147,21 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
             roopCount = 0;
             coor.clear();
 
-            beaconUnBind(true);
+            beaconUnBind();
+
+            Intent intent = new Intent(BeaconBackgroundService.this, PathFindingActivity.class);
+            intent.putExtra("result", coordinate);
+            startActivity(intent);
 
         }
     }
 
 
     /** Beacon UnBind */
-    public void beaconUnBind(boolean result){
+    public void beaconUnBind(){
         beaconManager.unbindInternal(BeaconBackgroundService.this);
         beaconManager.stopRangingBeacons(new Region("test", uuid, null, null));
-
-        MainActivity.beaconFindCheck = result;
+        loadingDialog.dismiss_loading_dialog();
     }
 
 
@@ -171,11 +182,14 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     @Override
     public void onCreate(){
         super.onCreate();
+        loadingDialog = new LoadingDialog(this);
     }
 
     @SuppressLint("FOREGROUND_SERVICE_CONNECTED_DEVICE")
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
+        loadingDialog.show();
+
         createNotificationChannel();
         Intent notificationIntent = new Intent(this, ActiveBluetooth.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
