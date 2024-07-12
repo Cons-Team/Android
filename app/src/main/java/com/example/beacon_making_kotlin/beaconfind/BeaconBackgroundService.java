@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.beacon_making_kotlin.MainActivity;
 import com.example.beacon_making_kotlin.R;
+import com.example.beacon_making_kotlin.pathfinding.PathFindingActivity;
 import com.example.beacon_making_kotlin.pathfinding.calculator.DistanceCalculator;
 import com.example.beacon_making_kotlin.pathfinding.calculator.FloorCalculator;
 
@@ -141,10 +142,12 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
             coor.clear();
 
             beaconUnBind();
-            Toast.makeText(BeaconBackgroundService.this, "loading dismiss success", Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(BeaconBackgroundService.this, PathFindingActivity.class);
-//            intent.putExtra("result", coordinate);
-//            startActivity(intent);
+//            Toast.makeText(BeaconBackgroundService.this, "loading dismiss success", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(BeaconBackgroundService.this, PathFindingActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("result", "10.0, 10.0, 10.0");
+            startActivity(intent);
 
         }
     }
@@ -218,8 +221,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     @Override
     public void onDestroy(){
         super.onDestroy();
-        beaconManager.unbindInternal(this);
-        beaconManager.stopRangingBeacons(new Region("test", uuid, null, null));
+        beaconUnBind();
 
         Toast.makeText(BeaconBackgroundService.this, "scan_off", Toast.LENGTH_SHORT).show();
     }

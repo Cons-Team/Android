@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -29,6 +28,7 @@ public class PathFindingActivity extends AppCompatActivity {
 
         // Unity로 넘어가는 부분
         String coordinate = getIntent().getStringExtra("result");
+        Toast.makeText(PathFindingActivity.this, "coordinate sending : " + coordinate, Toast.LENGTH_SHORT).show();
         Log.d("PathFindingActivity getCoordinate", coordinate);
 
         Intent intent = new Intent(PathFindingActivity.this, UnityPlayerActivity.class);

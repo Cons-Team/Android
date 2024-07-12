@@ -69,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static LoadingDialog loadingDialog;
 
-    int LAUNCH_SECOND_ACTIVITY = 1;
-    public static Boolean beaconFindCheck = false;
 
     @SuppressLint({"ClickableViewAccessibility", "UseCompatLoadingForDrawables"})
     @Override
@@ -314,15 +312,7 @@ public class MainActivity extends AppCompatActivity {
 
         loadingDialog = new LoadingDialog(this);
 
-//        Button pathFinding = (Button) findViewById(R.id.pathfinding);
-//
-//        pathFinding.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, PathFindingActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -491,6 +481,7 @@ public class MainActivity extends AppCompatActivity {
         //Navigation Button - Unity
         if(view.getId() == R.id.navigationBtnRight || view.getId() == R.id.navigationBtnLeft){
             loadingDialog.show();
+
             // Beacon Searching
             Intent serviceIntent = new Intent(MainActivity.this, BeaconBackgroundService.class);
             ContextCompat.startForegroundService(MainActivity.this, serviceIntent);
