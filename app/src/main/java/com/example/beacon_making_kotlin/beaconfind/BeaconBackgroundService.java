@@ -58,7 +58,9 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     public static String floor;
     private int roopCount = 0;
 
+    // loading Dialog
     LoadingDialog loadingDialog = MainActivity.loadingDialog;
+
     @Override
     public void onBeaconServiceConnect() {
 
@@ -116,7 +118,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                 roopCount = 4;
             }
             else if(roopCount == 4){
-                //beaconUnBind();
+                beaconUnBind();
             }
         }
         else{
@@ -129,14 +131,14 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
 
         if(roopCount == 10){
 
-//            double[] num = new double[2];
-//            for(int i = 0; i < coor.size(); i++){
-//                String[] str = coor.get(i).split(",");
-//                num[0] += Double.parseDouble(str[0]);
-//                num[1] += Double.parseDouble(str[1]);
-//            }
-//
-//            coordinateAddFloor(num);
+            double[] num = new double[2];
+            for(int i = 0; i < coor.size(); i++){
+                String[] str = coor.get(i).split(",");
+                num[0] += Double.parseDouble(str[0]);
+                num[1] += Double.parseDouble(str[1]);
+            }
+
+            coordinateAddFloor(num);
 
             roopCount = 0;
             coor.clear();
@@ -146,7 +148,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
 
             Intent intent = new Intent(BeaconBackgroundService.this, PathFindingActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("result", "10.0, 10.0, 10.0");
+            intent.putExtra("result", coordinate);
             startActivity(intent);
 
         }
