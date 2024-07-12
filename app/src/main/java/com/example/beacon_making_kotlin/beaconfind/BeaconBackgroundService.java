@@ -2,11 +2,8 @@ package com.example.beacon_making_kotlin.beaconfind;
 
 import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -25,10 +22,8 @@ import androidx.core.content.ContextCompat;
 
 import com.example.beacon_making_kotlin.MainActivity;
 import com.example.beacon_making_kotlin.R;
-import com.example.beacon_making_kotlin.pathfinding.PathFindingActivity;
 import com.example.beacon_making_kotlin.pathfinding.calculator.DistanceCalculator;
 import com.example.beacon_making_kotlin.pathfinding.calculator.FloorCalculator;
-import com.unity3d.player.UnityPlayerActivity;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
@@ -62,9 +57,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     public static String floor;
     private int roopCount = 0;
 
-
-    LoadingDialog loadingDialog;
-
+    LoadingDialog loadingDialog = MainActivity.loadingDialog;
     @Override
     public void onBeaconServiceConnect() {
 
@@ -122,7 +115,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                 roopCount = 4;
             }
             else if(roopCount == 4){
-                beaconUnBind();
+                //beaconUnBind();
             }
         }
         else{
@@ -135,23 +128,23 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
 
         if(roopCount == 10){
 
-            double[] num = new double[2];
-            for(int i = 0; i < coor.size(); i++){
-                String[] str = coor.get(i).split(",");
-                num[0] += Double.parseDouble(str[0]);
-                num[1] += Double.parseDouble(str[1]);
-            }
-
-            coordinateAddFloor(num);
+//            double[] num = new double[2];
+//            for(int i = 0; i < coor.size(); i++){
+//                String[] str = coor.get(i).split(",");
+//                num[0] += Double.parseDouble(str[0]);
+//                num[1] += Double.parseDouble(str[1]);
+//            }
+//
+//            coordinateAddFloor(num);
 
             roopCount = 0;
             coor.clear();
 
             beaconUnBind();
-
-            Intent intent = new Intent(BeaconBackgroundService.this, PathFindingActivity.class);
-            intent.putExtra("result", coordinate);
-            startActivity(intent);
+            Toast.makeText(BeaconBackgroundService.this, "loading dismiss success", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(BeaconBackgroundService.this, PathFindingActivity.class);
+//            intent.putExtra("result", coordinate);
+//            startActivity(intent);
 
         }
     }
@@ -182,13 +175,12 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     @Override
     public void onCreate(){
         super.onCreate();
-        loadingDialog = new LoadingDialog(this);
+
     }
 
     @SuppressLint("FOREGROUND_SERVICE_CONNECTED_DEVICE")
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        loadingDialog.show();
 
         createNotificationChannel();
         Intent notificationIntent = new Intent(this, ActiveBluetooth.class);
