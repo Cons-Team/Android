@@ -89,7 +89,10 @@
     ### beaconfind -> Beacon 탐색 부분 모음
     ### pathfinding -> 경로 탐색 기능 모음
     ## Retrofit 기능 추가
-    
+    ## ---------------------20240713(밀린 업뎃)--------------------------
+    ## beacon 탐색 주기 변경 (1초)
+    ## 비콘 탐색시 로딩 기능 추가
+    ### 탐색 성공 시 PathFindingActivity를 통해 UnityActivity 실행 (좌표 전송)
 
 
 
