@@ -28,13 +28,13 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
+import com.example.beacon_making_kotlin.beaconfind.LoadingDialog;
 import com.example.beacon_making_kotlin.beaconfind.BeaconBackgroundService;
 import com.unity3d.player.UnityPlayerActivity;
 
@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     SubsamplingScaleImageView metro_map;
     Bitmap bitmap;
     Bitmap resized;
+
+    LoadingDialog loadingDialog;
 
     int LAUNCH_SECOND_ACTIVITY = 1;
     public static Boolean beaconFindCheck = false;
@@ -310,6 +312,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        loadingDialog = new LoadingDialog(this);
+
 //        Button pathFinding = (Button) findViewById(R.id.pathfinding);
 //
 //        pathFinding.setOnClickListener(new View.OnClickListener() {
@@ -487,6 +491,7 @@ public class MainActivity extends AppCompatActivity {
         //Navigation Button - Unity
         if(view.getId() == R.id.navigationBtnRight || view.getId() == R.id.navigationBtnLeft){
             // Beacon Serching 하는동안 로딩창 돌아갈 부분
+            loadingDialog.show();
 
             // Beacon Searching
             Intent serviceIntent = new Intent(MainActivity.this, BeaconBackgroundService.class);
