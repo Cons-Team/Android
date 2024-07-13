@@ -1,8 +1,6 @@
 package com.example.beacon_making_kotlin;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -17,16 +15,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.tedpermission.PermissionListener;
 import com.example.tedpermission.TedPermissionUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SplashActivity extends AppCompatActivity {
+
     @SuppressLint("UseCompatLoadingForDrawables")
-    protected void onCreate(Bundle savedInstance){
+    protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.splash);
 
@@ -36,11 +36,10 @@ public class SplashActivity extends AppCompatActivity {
         BitmapDrawable bitmap;
         ImageView splashImage = (ImageView) findViewById(R.id.splashImage);
 
-        if(preferces.getString("theme", "Day").equals("Day")){
+        if (preferces.getString("theme", "Day").equals("Day")) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             bitmap = (BitmapDrawable) res.getDrawable(R.drawable.splashimage, null);
-        }
-        else{
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             bitmap = (BitmapDrawable) res.getDrawable(R.drawable.splashimage_night, null);
         }
@@ -49,50 +48,30 @@ public class SplashActivity extends AppCompatActivity {
 
         // Permission Request
         Log.d("sdk_ver", "" + Build.VERSION.SDK_INT);
+        ArrayList<String> requestList = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= 31) {
 
-            permission_setting(android.Manifest.permission.BLUETOOTH_SCAN); // 스캔 권한
-            permission_setting(android.Manifest.permission.BLUETOOTH_CONNECT); // 연결 권한
-            permission_setting(android.Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
+            requestList.add(android.Manifest.permission.BLUETOOTH_SCAN); // 스캔 권한
+            requestList.add(android.Manifest.permission.BLUETOOTH_CONNECT); // 연결 권한
+            requestList.add(android.Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
+
         } else if (Build.VERSION.SDK_INT >= 29) {
 
-            permission_setting(android.Manifest.permission.BLUETOOTH); // 블루투스 연결 요청 및 수락, 데이터 전송 등에 필요
-            permission_setting(android.Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
-            // permission_setting(Manifest.permission.ACCESS_BACKGROUND_LOCATION); // 백그라운드에서 스캔해야 할 경우
+            requestList.add(android.Manifest.permission.BLUETOOTH); // 블루투스 연결 요청 및 수락, 데이터 전송 등에 필요
+            requestList.add(android.Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
+            requestList.add(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION); // 백그라운드에서 스캔해야 할 경우
+
         } else if (Build.VERSION.SDK_INT >= 23) {
 
-            permission_setting(android.Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
+            requestList.add(android.Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
         }
 
-        permission_setting(Manifest.permission.CAMERA);
+        requestList.add(android.Manifest.permission.CAMERA);
 
-        // bluetooth connect check
-        BluetoothAdapter btadapter = BluetoothAdapter.getDefaultAdapter();
-        Intent intent;
-
-        if (btadapter.isEnabled()) {
-            Log.d("ble_stat", "on_device");
-            // Toast.makeText(PathFindingActivity.this, "on_device", Toast.LENGTH_SHORT).show();
-        } else {
-            Log.d("ble_stat", "꺼져있거나 블루투스 기능이 없습니다.");
-            // Toast.makeText(PathFindingActivity.this, "꺼져있거나 블루투스 기능이 없습니다.", Toast.LENGTH_SHORT).show();
-
-            if (ActivityCompat.checkSelfPermission(SplashActivity.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-
-            startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE), 1);
+        for(int i = 0 ; i < requestList.size(); i++){
+            permission_setting(requestList.get(i), requestList);
         }
 
-        Handler hd = new Handler();
-        hd.postDelayed(new SplashHandler(), 2000);
     }
 
     private class SplashHandler implements Runnable{
@@ -102,9 +81,26 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    private void permissionCheck(ArrayList<String> requestList){
+        boolean check = false;
+        for(String permissionName : requestList){
+            if(ContextCompat.checkSelfPermission(SplashActivity.this, permissionName) == PackageManager.PERMISSION_GRANTED){
+                check = true;
+            }
+            else{
+                check = false;
+                break;
+            }
+        }
+
+        if(check){
+            Handler hd = new Handler();
+            hd.postDelayed(new SplashHandler(), 2000);
+        }
+    }
 
     /** 권한 부여 함수 */
-    private void permission_setting(String permission_name) {
+    private void permission_setting(String permission_name, ArrayList<String> requestList) {
         boolean isAlertBlePermissonGranted = TedPermissionUtil.isGranted(permission_name);
         Log.d("ted", permission_name + ": " + isAlertBlePermissonGranted);
 
@@ -113,6 +109,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onPermissionGranted() {
                 Toast.makeText(SplashActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                permissionCheck(requestList);
             }
 
             @Override
@@ -130,6 +127,7 @@ public class SplashActivity extends AppCompatActivity {
                 .setGotoSettingButtonText("setting")
                 .setPermissions(permission_name)
                 .check();
+
     }
 
 }

@@ -1,7 +1,9 @@
 package com.example.beacon_making_kotlin;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -480,12 +483,34 @@ public class MainActivity extends AppCompatActivity {
 
         //Navigation Button - Unity
         if(view.getId() == R.id.navigationBtnRight || view.getId() == R.id.navigationBtnLeft){
-            loadingDialog.show();
+            if(bluetoothStateCheck()){
+                loadingDialog.show();
 
-            // Beacon Searching
-            Intent serviceIntent = new Intent(MainActivity.this, BeaconBackgroundService.class);
-            ContextCompat.startForegroundService(MainActivity.this, serviceIntent);
+                // Beacon Searching
+                Intent serviceIntent = new Intent(MainActivity.this, BeaconBackgroundService.class);
+                ContextCompat.startForegroundService(MainActivity.this, serviceIntent);
+            }
+        }
+    }
 
+    /** bluetooth state check */
+    private boolean bluetoothStateCheck(){
+        BluetoothAdapter btadapter = BluetoothAdapter.getDefaultAdapter();
+
+        if (btadapter.isEnabled()) {
+            Log.d("ble_stat", "on_device");
+            Toast.makeText(MainActivity.this, "on_device", Toast.LENGTH_SHORT).show();
+
+            return true;
+        } else {
+            Log.d("ble_stat", "꺼져있거나 블루투스 기능이 없습니다.");
+            Toast.makeText(MainActivity.this, "꺼져있거나 블루투스 기능이 없습니다.", Toast.LENGTH_SHORT).show();
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+                startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE), 1);
+            }
+
+            return false;
         }
     }
 
