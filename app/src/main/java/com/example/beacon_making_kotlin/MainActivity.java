@@ -26,7 +26,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -499,12 +498,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (btadapter.isEnabled()) {
             Log.d("ble_stat", "on_device");
-            Toast.makeText(MainActivity.this, "on_device", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "on_device", Toast.LENGTH_SHORT).show();
 
             return true;
         } else {
             Log.d("ble_stat", "꺼져있거나 블루투스 기능이 없습니다.");
-            Toast.makeText(MainActivity.this, "꺼져있거나 블루투스 기능이 없습니다.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "꺼져있거나 블루투스 기능이 없습니다.", Toast.LENGTH_SHORT).show();
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
                 startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE), 1);
