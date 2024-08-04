@@ -80,6 +80,10 @@
     ## startRangingBeaconsInRegion -> startRangingBeacons
 
 
+# Application이 2개 설치되는 오류 해결
+    ## unityLibrary 모듈의 AndroidManifest.xml 파일에서 intent-filter 구문 삭제
+
+
 # 전체 변경 및 추가사항(ver.20240525)
     ## beacon 탐색 버튼 추가 (클릭시 탐색 활성화, 재 클릭시 비활성화)
     ## text 갱신 버튼 변경 (beacon탐색 기능 삭제)
