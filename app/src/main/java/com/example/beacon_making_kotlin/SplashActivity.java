@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
 import com.example.tedpermission.PermissionListener;
-import com.example.tedpermission.TedPermissionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,9 +67,8 @@ public class SplashActivity extends AppCompatActivity {
 
         requestList.add(android.Manifest.permission.CAMERA);
 
-        for(int i = 0 ; i < requestList.size(); i++){
-            permission_setting(requestList.get(i), requestList);
-        }
+        permissionRequest(requestList);
+
 
     }
 
@@ -100,33 +98,36 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     /** 권한 부여 함수 */
-    private void permission_setting(String permission_name, ArrayList<String> requestList) {
-        boolean isAlertBlePermissonGranted = TedPermissionUtil.isGranted(permission_name);
-        Log.d("ted", permission_name + ": " + isAlertBlePermissonGranted);
+    private void permissionRequest(ArrayList<String> requestList) {
 
 
-        PermissionListener permissionlistener = new PermissionListener() {
-            @Override
-            public void onPermissionGranted() {
-                Toast.makeText(SplashActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
-                permissionCheck(requestList);
+            String[] permissionList = new String[requestList.size()];
+            for(int i = 0; i < requestList.size(); i++){
+                permissionList[i] = requestList.get(i);
             }
 
-            @Override
-            public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(SplashActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
-            }
+            PermissionListener permissionlistener = new PermissionListener() {
+                @Override
+                public void onPermissionGranted() {
+                    Toast.makeText(SplashActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                    Log.d("permissionCheck", "로그가 몇번 출력 되는지 확인 필요 All Granted");
+                    permissionCheck(requestList);
+                }
+
+                @Override
+                public void onPermissionDenied(List<String> deniedPermissions) {
+                    Toast.makeText(SplashActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+                }
 
 
-        };
+            };
 
-        TedPermission.create()
-                .setPermissionListener(permissionlistener)
-                .setRationaleMessage("we need permission for read contact, find your location and system alert window")
-                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
-                .setGotoSettingButtonText("setting")
-                .setPermissions(permission_name)
-                .check();
+            TedPermission.create()
+                    .setPermissionListener(permissionlistener)
+                    .setDeniedMessage("해당 권한은 필수 권한 입니다. setting 버튼을 통해 권한을 부여해주세요.")
+                    .setGotoSettingButtonText("setting")
+                    .setPermissions(permissionList)
+                    .check();
 
     }
 
