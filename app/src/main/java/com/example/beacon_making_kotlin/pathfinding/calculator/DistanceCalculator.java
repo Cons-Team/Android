@@ -9,6 +9,8 @@ import com.example.beacon_making_kotlin.beaconfind.BeaconData;
 import com.example.beacon_making_kotlin.pathfinding.dto.BeaconDto;
 import com.example.beacon_making_kotlin.pathfinding.service.RetrofitInstance;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -22,6 +24,15 @@ public class DistanceCalculator {
         }
 
         List<Pair<String, BeaconDto>> beaconDto = RetrofitInstance.beaconDto;
+
+        Collections.sort(beaconDto, new Comparator<Pair<String, BeaconDto>>() {
+            @Override
+            public int compare(Pair<String, BeaconDto> p1, Pair<String, BeaconDto> p2) {
+                // rssi 값을 기준으로 비교
+                return Integer.compare(p2.second.getRssi(), p1.second.getRssi());
+            }
+        });
+
 
         int a = -50; // 1m당 RSSI 신호값
         double n = 2; // 손실지수 (2 ~ 4)
@@ -49,8 +60,8 @@ public class DistanceCalculator {
                 // 각 비콘 으로 부터 사용자 까지의 거리 계산
                 double distanceA, distanceB;
 
-                distanceA = pow(10, (double) (a - Integer.parseInt(beaconDto.get(0).second.getRssi())) / (10 * n));
-                distanceB = pow(10, (double) (a - Integer.parseInt(beaconDto.get(1).second.getRssi())) / (10 * n));
+                distanceA = pow(10, (double) (a - beaconDto.get(0).second.getRssi()) / (10 * n));
+                distanceB = pow(10, (double) (a - beaconDto.get(1).second.getRssi()) / (10 * n));
 
                 RetrofitInstance.beaconDto.clear();
 
@@ -83,20 +94,25 @@ public class DistanceCalculator {
                 Log.d("beacon_name : " + beaconDto.get(2).first, "GetY : " + beaconDto.get(2).second.getY());
                 Log.d("beacon_name : " + beaconDto.get(2).first, "GetRssi : " + beaconDto.get(2).second.getRssi());
 
+
+
                 double x1, y1, d1;
                 x1 = beaconDto.get(0).second.getX();
                 y1 = beaconDto.get(0).second.getY();
-                d1 = pow(10, (double) (a - Integer.parseInt(beaconDto.get(0).second.getRssi())) / (10 * n));
+                d1 = pow(10, (double) (a - beaconDto.get(0).second.getRssi()) / (10 * n));
+                Log.d("beaconDistance D1", d1 + "");
 
                 double x2, y2, d2;
                 x2 = beaconDto.get(1).second.getX();
                 y2 = beaconDto.get(1).second.getY();
-                d2 = pow(10, (double) (a - Integer.parseInt(beaconDto.get(1).second.getRssi())) / (10 * n));
+                d2 = pow(10, (double) (a - beaconDto.get(1).second.getRssi()) / (10 * n));
+                Log.d("beaconDistance D2", d2 + "");
 
                 double x3, y3, d3;
                 x3 = beaconDto.get(2).second.getX();
                 y3 = beaconDto.get(2).second.getY();
-                d3 = pow(10, (double) (a - Integer.parseInt(beaconDto.get(2).second.getRssi())) / (10 * n));
+                d3 = pow(10, (double) (a - beaconDto.get(2).second.getRssi()) / (10 * n));
+                Log.d("beaconDistance D3", d3 + "");
 
 
                 double S = (pow(x3, 2) - pow(x2, 2) + pow(y3, 2) - pow(y2, 2) + pow(d2, 2) - pow(d3, 2)) / 2.0;

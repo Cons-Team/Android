@@ -35,9 +35,7 @@ import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -87,18 +85,11 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                     beaconData[i].setUUID(beaconList.get(i).getId1().toString());
                     beaconData[i].setMajor(beaconList.get(i).getId2().toString());
                     beaconData[i].setMinor(beaconList.get(i).getId3().toString());
-                    beaconData[i].setRssi(String.valueOf(beaconList.get(i).getRssi()));
+                    beaconData[i].setRssi(beaconList.get(i).getRssi());
                     Log.d("beaconFindName", beaconData[i].getName());
                     //Toast.makeText(BeaconBackgroundService.this, "name : " + beaconData[i].getName() +
                     //"\nrssi : " + beaconData[i].getRssi(), Toast.LENGTH_SHORT).show();
                 }
-
-                Arrays.sort(beaconData, new Comparator<BeaconData>() {
-                    @Override
-                    public int compare(BeaconData o1, BeaconData o2) {
-                        return o1.getRssi().compareTo(o2.getRssi());
-                    }
-                });
 
 
                 roopCount++;
@@ -210,7 +201,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
 
         // 비콘 탐색 주기 1초
-        beaconManager.setForegroundScanPeriod(1000);
+        beaconManager.setForegroundScanPeriod(10000);
 
         //binding BeaconService to Android Activity or service
         beaconManager.startRangingBeacons(new Region("test", uuid, null, null));

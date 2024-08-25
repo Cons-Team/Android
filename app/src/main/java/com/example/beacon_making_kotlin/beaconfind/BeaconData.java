@@ -13,5 +13,5 @@ public class BeaconData{
     private String UUID;
     private String Major;
     private String Minor;
-    private String Rssi;
+    private int Rssi;
 }

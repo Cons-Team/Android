@@ -16,7 +16,7 @@ import lombok.Setter;
 public class BeaconDto {
     private int x;
     private int y;
-    private String rssi;
+    private int rssi;
 
     @NonNull
     @Override
