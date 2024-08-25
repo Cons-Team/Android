@@ -88,7 +88,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                     beaconData[i].setMajor(beaconList.get(i).getId2().toString());
                     beaconData[i].setMinor(beaconList.get(i).getId3().toString());
                     beaconData[i].setRssi(String.valueOf(beaconList.get(i).getRssi()));
-
+                    Log.d("beaconFindName", beaconData[i].getName());
                     //Toast.makeText(BeaconBackgroundService.this, "name : " + beaconData[i].getName() +
                     //"\nrssi : " + beaconData[i].getRssi(), Toast.LENGTH_SHORT).show();
                 }
