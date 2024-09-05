@@ -17,12 +17,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
+import com.example.beacon_making_kotlin.db.database.ConsDatabase;
+import com.example.beacon_making_kotlin.db.database.ResetData;
+import com.example.beacon_making_kotlin.db.helper.DatabaseHelper;
 import com.example.tedpermission.PermissionListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 public class SplashActivity extends AppCompatActivity {
+
+    private ConsDatabase db;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     protected void onCreate(Bundle savedInstance) {
@@ -67,8 +73,15 @@ public class SplashActivity extends AppCompatActivity {
 
         requestList.add(android.Manifest.permission.CAMERA);
 
-        permissionRequest(requestList);
+        // DB
+        DatabaseHelper.deleteDatabase(this, "cons_database");
 
+        db = ConsDatabase.getDatabase(this);
+
+        ResetData resetData = new ResetData(this);
+        resetData.populateDatabaseIfEmpty(this);
+
+        permissionRequest(requestList);
 
     }
 

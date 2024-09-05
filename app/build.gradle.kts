@@ -73,10 +73,12 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.material)
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
 
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
-    implementation(project(":unityLibrary"))
+//    implementation(project(":unityLibrary"))
 
     testImplementation(libs.junit)
 
