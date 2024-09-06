@@ -1,5 +1,7 @@
 package com.example.beacon_making_kotlin.db.api;
 
+import static com.example.beacon_making_kotlin.db.apiKey.serviceKey.service_key;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,7 +16,7 @@ import java.text.ParseException;
 
 public class TimetableAPI {
 
-    private static String serviceKey = "";
+    private static String serviceKey = service_key;
 
     public static String loadTimetableData(String subwayStationId, String dailyTypeCode, String upDownTypeCode) throws IOException, ParseException {
 

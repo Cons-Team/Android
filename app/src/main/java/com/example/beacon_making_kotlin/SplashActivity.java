@@ -24,7 +24,6 @@ import com.example.tedpermission.PermissionListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -51,6 +50,15 @@ public class SplashActivity extends AppCompatActivity {
 
         splashImage.setImageDrawable(bitmap);
 
+
+        // DB
+        DatabaseHelper.deleteDatabase(this, "cons_database");
+
+        db = ConsDatabase.getDatabase(this);
+
+        ResetData resetData = new ResetData(this);
+        resetData.populateDatabaseIfEmpty(this);
+
         // Permission Request
         Log.d("sdk_ver", "" + Build.VERSION.SDK_INT);
         ArrayList<String> requestList = new ArrayList<>();
@@ -72,14 +80,6 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         requestList.add(android.Manifest.permission.CAMERA);
-
-        // DB
-        DatabaseHelper.deleteDatabase(this, "cons_database");
-
-        db = ConsDatabase.getDatabase(this);
-
-        ResetData resetData = new ResetData(this);
-        resetData.populateDatabaseIfEmpty(this);
 
         permissionRequest(requestList);
 
