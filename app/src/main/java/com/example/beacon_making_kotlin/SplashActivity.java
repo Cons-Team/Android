@@ -1,5 +1,6 @@
 package com.example.beacon_making_kotlin;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,7 +20,6 @@ import androidx.core.content.ContextCompat;
 
 import com.example.beacon_making_kotlin.db.database.ConsDatabase;
 import com.example.beacon_making_kotlin.db.database.ResetData;
-import com.example.beacon_making_kotlin.db.helper.DatabaseHelper;
 import com.example.tedpermission.PermissionListener;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
         // DB
-        DatabaseHelper.deleteDatabase(this, "cons_database");
+        // DatabaseHelper.deleteDatabase(this, "cons_database");
 
         db = ConsDatabase.getDatabase(this);
 
@@ -78,8 +78,14 @@ public class SplashActivity extends AppCompatActivity {
 
             requestList.add(android.Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
         }
-
+        
+        // 카메라 사용 권한
         requestList.add(android.Manifest.permission.CAMERA);
+        
+        // 문자 전송 권한
+        requestList.add(Manifest.permission.SEND_SMS);
+        requestList.add(Manifest.permission.RECEIVE_SMS);
+        requestList.add(Manifest.permission.READ_PHONE_STATE);
 
         permissionRequest(requestList);
 

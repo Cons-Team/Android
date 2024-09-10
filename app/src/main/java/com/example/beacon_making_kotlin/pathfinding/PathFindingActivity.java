@@ -1,7 +1,10 @@
 package com.example.beacon_making_kotlin.pathfinding;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.beaconfind.ActiveBluetooth;
@@ -18,6 +23,8 @@ import com.example.beacon_making_kotlin.beaconfind.ActiveBluetooth;
 public class PathFindingActivity extends AppCompatActivity {
 
     int LAUNCH_SECOND_ACTIVITY = 1;
+    int SEND_REQUEST_CODE = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +51,33 @@ public class PathFindingActivity extends AppCompatActivity {
         try {
             super.onActivityResult(requestCode, resultCode, data);
             if (requestCode == LAUNCH_SECOND_ACTIVITY && resultCode == RESULT_OK) {
-                String value = data.getStringExtra("result");
-                Toast.makeText(PathFindingActivity.this, value, Toast.LENGTH_SHORT).show();
+//                String value = data.getStringExtra("result");
+//                Toast.makeText(PathFindingActivity.this, value, Toast.LENGTH_SHORT).show();
+
+                String telNum = data.getStringExtra("phone_num");
+                Log.d("receive_phone_num", telNum + "");
+
+
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
+                        Toast.makeText(this, "권한이 필요합니다", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                    intent.setData(Uri.parse("smsto:" + telNum)); // 문자 보낼 번호
+                    intent.putExtra("sms_body", "Hello World"); // 문자의 내용
+                    startActivity(intent);
+                }
+
+
             }
         } catch (Exception ex){
             Toast.makeText(PathFindingActivity.this, ex.toString(), Toast.LENGTH_SHORT).show();
         }
-    }
 
+
+
+    }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
