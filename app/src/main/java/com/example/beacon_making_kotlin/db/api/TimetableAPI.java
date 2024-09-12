@@ -75,7 +75,7 @@ public class TimetableAPI {
                 String endStationName = item.optString("endSubwayStationNm", "N/A");
 
                 if (i > 0) {
-                    resultBuilder.append("/");
+                    resultBuilder.append("@");
                 }
                 resultBuilder.append(depTime).append("-").append(endStationName);
             }

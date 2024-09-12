@@ -10,8 +10,10 @@ import com.example.beacon_making_kotlin.db.dao.*;
 import com.example.beacon_making_kotlin.db.entity.*;
 
 
-@Database(entities = {Station.class, Info.class, Timetable.class, Favorite.class}, version = 1)
+@Database(entities = {Coordinate.class, Station.class, Info.class, Timetable.class, Favorite.class}, version = 1)
 public abstract class ConsDatabase extends RoomDatabase {
+
+    public abstract CoordinateDao coordinateDao();
     public abstract StationDao stationDao();
     public abstract InfoDao infoDao();
     public abstract TimetableDao timetableDao();

@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.beacon_making_kotlin.db.database.ConsDatabase;
 import com.example.beacon_making_kotlin.db.database.ResetData;
+import com.example.beacon_making_kotlin.db.helper.DatabaseHelper;
 import com.example.tedpermission.PermissionListener;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
         // DB
-        // DatabaseHelper.deleteDatabase(this, "cons_database");
+        DatabaseHelper.deleteDatabase(this, "cons_database");
 
         db = ConsDatabase.getDatabase(this);
 
