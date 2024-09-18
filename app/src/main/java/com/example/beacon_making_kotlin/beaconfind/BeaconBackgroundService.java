@@ -21,6 +21,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.beacon_making_kotlin.MainActivity;
+import com.example.beacon_making_kotlin.MetroMap.Metro_map_fragment;
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.pathfinding.PathFindingActivity;
 import com.example.beacon_making_kotlin.pathfinding.calculator.DistanceCalculator;
@@ -57,7 +58,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     private int roopCount = 0;
 
     // loading Dialog
-    LoadingDialog loadingDialog = MainActivity.loadingDialog;
+    LoadingDialog loadingDialog = Metro_map_fragment.loadingDialog;
 
     @Override
     public void onBeaconServiceConnect() {

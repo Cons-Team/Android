@@ -37,28 +37,20 @@ public class SplashActivity extends AppCompatActivity {
 
         SharedPreferences preferces = getSharedPreferences("Setting", 0);
 
-        Resources res = getResources();
-        BitmapDrawable bitmap;
-        ImageView splashImage = (ImageView) findViewById(R.id.splashImage);
-
         if (preferces.getString("theme", "Day").equals("Day")) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            bitmap = (BitmapDrawable) res.getDrawable(R.drawable.splashimage, null);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            bitmap = (BitmapDrawable) res.getDrawable(R.drawable.splashimage_night, null);
         }
-
-        splashImage.setImageDrawable(bitmap);
 
 
         // DB
-        DatabaseHelper.deleteDatabase(this, "cons_database");
-
-        db = ConsDatabase.getDatabase(this);
-
-        ResetData resetData = new ResetData(this);
-        resetData.populateDatabaseIfEmpty(this);
+//        DatabaseHelper.deleteDatabase(this, "cons_database");
+//
+//        db = ConsDatabase.getDatabase(this);
+//
+//        ResetData resetData = new ResetData(this);
+//        resetData.populateDatabaseIfEmpty(this);
 
         // Permission Request
         Log.d("sdk_ver", "" + Build.VERSION.SDK_INT);

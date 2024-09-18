@@ -15,6 +15,7 @@
             android:id="@+id/tempBtn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/fontColor"
             android:text="비콘 연동 성공"
             app:layout_constraintStart_toStartOf="@+id/loadingImage"
             tools:layout_editor_absoluteY="258dp" />
@@ -24,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onClick"
+            android:textColor="@color/fontColor"
             android:text="연동 실패"
             app:layout_constraintBottom_toBottomOf="@+id/tempBtn1"
             app:layout_constraintEnd_toEndOf="@+id/loadingImage"

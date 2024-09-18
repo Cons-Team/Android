@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">다님길</string>
     <string name="bluetooth_on" translatable="false">bluetooth_on</string>
@@ -7,12 +8,11 @@
     <string name="game_view_content_description" translatable="false">Game View</string>
 
     <!--menu_String-->
-    <string name="fontSize" translatable="false">폰트 변경</string>
-    <string name="hand_mode" translatable="false">모드 변경</string>
-    <string name="menu_theme" translatable="false">야간 모드</string>
-    <string name="lostAndFind" translatable="false">유실물</string>
-
+    <string name="lostAndFind">유실물</string>
+    <string name="hand_mode">모드 변경</string>
+    <string name="fontSize">폰트 변경</string>
     <string name="fontSizeSmall" translatable="false">작은 사이즈</string>
     <string name="fontSizeNormal" translatable="false">보통 사이즈</string>
     <string name="fontSizeBig" translatable="false">큰 사이즈</string>
+    <string name="menu_theme">주간 모드</string>
 </resources>

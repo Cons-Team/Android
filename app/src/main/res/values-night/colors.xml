@@ -9,9 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#787878</color>
 
-    <color name="bgColor">#FFFFFF</color>
-    <color name="fontColor">#000000</color>
-    <color name="IconColor">#000000</color>
-
+    <color name="bgColor">#000000</color>
+    <color name="fontColor">#ffffff</color>
+    <color name="IconColor">#ffffff</color>
     <color name="defaultColor">#6A72FF</color>
 </resources>
