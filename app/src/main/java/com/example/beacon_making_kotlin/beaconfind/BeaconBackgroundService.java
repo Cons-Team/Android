@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.beacon_making_kotlin.MainActivity;
 import com.example.beacon_making_kotlin.MetroMap.Metro_map_fragment;
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.pathfinding.PathFindingActivity;
@@ -60,6 +59,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
     // loading Dialog
     LoadingDialog loadingDialog = Metro_map_fragment.loadingDialog;
 
+
     @Override
     public void onBeaconServiceConnect() {
 
@@ -92,11 +92,8 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
                     //"\nrssi : " + beaconData[i].getRssi(), Toast.LENGTH_SHORT).show();
                 }
 
-
                 roopCount++;
                 roopCheck();
-
-
             }
         });
 
@@ -169,11 +166,13 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
         }
     }
 
+
     @Override
     public void onCreate(){
         super.onCreate();
 
     }
+
 
     @SuppressLint("FOREGROUND_SERVICE_CONNECTED_DEVICE")
     @Override
@@ -212,6 +211,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
         return START_STICKY;
     }
 
+
     @Override
     public void onDestroy(){
         super.onDestroy();
@@ -220,11 +220,13 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
         Toast.makeText(BeaconBackgroundService.this, "scan_off", Toast.LENGTH_SHORT).show();
     }
 
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
+
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= 26) {

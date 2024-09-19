@@ -1,5 +1,7 @@
 package com.example.beacon_making_kotlin.pathfinding.calculator;
 
+import static java.lang.Double.NEGATIVE_INFINITY;
+import static java.lang.Double.POSITIVE_INFINITY;
 import static java.lang.Math.pow;
 
 import android.util.Log;
@@ -114,16 +116,20 @@ public class DistanceCalculator {
                 d3 = pow(10, (double) (a - beaconDto.get(2).second.getRssi()) / (10 * n));
                 Log.d("beaconDistance D3", d3 + "");
 
-
                 double S = (pow(x3, 2) - pow(x2, 2) + pow(y3, 2) - pow(y2, 2) + pow(d2, 2) - pow(d3, 2)) / 2.0;
                 double T = (pow(x1, 2) - pow(x2, 2) + pow(y1, 2) - pow(y2, 2) + pow(d2, 2) - pow(d1, 2)) / 2.0;
-
 
                 double y = ((T * (x2 - x3)) - (S * (x2 - x1))) / (((y1 - y2) * (x2 - x3)) - ((y3 - y2) * (x2 - x1)));
                 double x = ((y * (y1 - y2)) - T) / (x2 - x1);
 
+                String returnCoordinate;
+                if(Double.isNaN(x) || Double.isNaN(y) || x == POSITIVE_INFINITY || y == POSITIVE_INFINITY || x == NEGATIVE_INFINITY || y == NEGATIVE_INFINITY){
+                    returnCoordinate = "0,0,0";
+                }
+                else{
+                    returnCoordinate = x + "," + y + "," + 0;
+                }
 
-                String returnCoordinate = x + "," + y + "," + 0;
                 Log.d("삼변 반환 좌표", returnCoordinate);
 
                 return returnCoordinate;
