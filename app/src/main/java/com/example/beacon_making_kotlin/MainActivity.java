@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         preferces = getSharedPreferences("Setting", 0);
-
         metro_map_fragment = new Metro_map_fragment();
 
         //FragmentManager
