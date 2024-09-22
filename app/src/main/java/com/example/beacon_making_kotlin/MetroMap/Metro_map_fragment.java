@@ -59,7 +59,7 @@ public class Metro_map_fragment extends Fragment {
         testBtn = (Button) view.findViewById(R.id.testButton);
 
         Resources res = getResources();
-        bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.metro_map);
+        bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.metro_map2);
         resized = Bitmap.createScaledBitmap(bitmap, 5000, 5000, true);
         metro_map = (SubsamplingScaleImageView) view.findViewById(R.id.metro_map);
         metro_map.setImage(ImageSource.bitmap(resized));

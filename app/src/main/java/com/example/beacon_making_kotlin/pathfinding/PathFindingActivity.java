@@ -64,18 +64,13 @@ public class PathFindingActivity extends AppCompatActivity {
                     }
                 } else {
                     SmsManager sms_manager = SmsManager.getDefault();
-                    sms_manager.sendTextMessage("+82" + phone_num, null, "hello_world", null, null);
-                    Log.d("sending_test", "success");
+                    sms_manager.sendTextMessage("+82" + phone_num, null, "도움이 요청되었습니다. ", null, null);
+                    Log.d("sending_text", "success");
                 }
-
-
             }
         } catch (Exception ex){
             Toast.makeText(PathFindingActivity.this, ex.toString(), Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
 
     @Override
