@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.beaconfind.ActiveBluetooth;
-import com.unity3d.player.UnityPlayerActivity;
+//import com.unity3d.player.UnityPlayerActivity;
 //import com.unity3d.player.UnityPlayerActivity;
 
 
@@ -38,9 +38,9 @@ public class PathFindingActivity extends AppCompatActivity {
 //        Toast.makeText(PathFindingActivity.this, "coordinate sending : " + coordinate, Toast.LENGTH_SHORT).show();
         Log.d("PathFindingActivity getCoordinate", coordinate);
 
-        Intent intent = new Intent(PathFindingActivity.this, UnityPlayerActivity.class);
-        intent.putExtra("result", coordinate);
-        startActivityForResult(intent, LAUNCH_SECOND_ACTIVITY);
+//        Intent intent = new Intent(PathFindingActivity.this, UnityPlayerActivity.class);
+//        intent.putExtra("result", coordinate);
+//        startActivityForResult(intent, LAUNCH_SECOND_ACTIVITY);
 
     }
 

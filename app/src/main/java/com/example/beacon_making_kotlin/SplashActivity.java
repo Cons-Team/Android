@@ -45,12 +45,12 @@ public class SplashActivity extends AppCompatActivity {
 
 
         // DB
-//        DatabaseHelper.deleteDatabase(this, "cons_database");
-//
-//        db = ConsDatabase.getDatabase(this);
-//
-//        ResetData resetData = new ResetData(this);
-//        resetData.populateDatabaseIfEmpty(this);
+        DatabaseHelper.deleteDatabase(this, "cons_database");
+
+        db = ConsDatabase.getDatabase(this);
+
+        ResetData resetData = new ResetData(this);
+        resetData.populateDatabaseIfEmpty(this);
 
         // Permission Request
         Log.d("sdk_ver", "" + Build.VERSION.SDK_INT);
