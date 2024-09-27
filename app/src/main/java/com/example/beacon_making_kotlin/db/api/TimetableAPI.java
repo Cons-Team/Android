@@ -1,6 +1,7 @@
 package com.example.beacon_making_kotlin.db.api;
 
-import static com.example.beacon_making_kotlin.db.apiKey.serviceKey.service_key;
+import static com.example.beacon_making_kotlin.db.apiKey.serviceKey.timetable_key;
+import static com.example.beacon_making_kotlin.db.apiKey.serviceKey.timetable_key;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +17,7 @@ import java.text.ParseException;
 
 public class TimetableAPI {
 
-    private static String serviceKey = service_key;
+    private static String serviceKey = timetable_key;
 
     public static String loadTimetableData(String subwayStationId, String dailyTypeCode, String upDownTypeCode) throws IOException, ParseException {
 
@@ -51,8 +52,6 @@ public class TimetableAPI {
         rd.close();
         conn.disconnect();
 
-//        Log.d("!!!!!!", sb.toString());
-
         return parsing(sb.toString());
     }
 
@@ -60,7 +59,6 @@ public class TimetableAPI {
         StringBuilder resultBuilder = new StringBuilder();
 
         try {
-            // Parse JSON data
             JSONObject jsonObject1 = new JSONObject(text);
             JSONObject jsonObject2 = jsonObject1.getJSONObject("response");
             JSONObject jsonObject3 = jsonObject2.getJSONObject("body");
@@ -68,7 +66,6 @@ public class TimetableAPI {
 
             JSONArray jsonArray = jsonObject4.getJSONArray("item");
 
-            // Process each item in the array
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject item = jsonArray.getJSONObject(i);
                 String depTime = item.optString("arrTime", "N/A");

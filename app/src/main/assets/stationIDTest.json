@@ -1,0 +1,154 @@
+{
+"station":[
+ {
+  "stationID": "MTRKR1P177",
+  "stationName": "신창",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P176",
+  "stationName": "온양온천",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P174",
+  "stationName": "배방",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1p173",
+  "stationName": "탕정",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P172",
+  "stationName": "아산",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P171",
+  "stationName": "쌍용",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P170",
+  "stationName": "봉명",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P169",
+  "stationName": "천안",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P168",
+  "stationName": "두정",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P167",
+  "stationName": "직산",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P166",
+  "stationName": "성환",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P165",
+  "stationName": "평택",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P164",
+  "stationName": "평택지제",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P163",
+  "stationName": "서정리",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P162",
+  "stationName": "송탄",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P161",
+  "stationName": "진위",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P160",
+  "stationName": "오산",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P159",
+  "stationName": "오산대",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P158",
+  "stationName": "세마",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P157",
+  "stationName": "병점",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P157-2",
+  "stationName": "서동탄",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR11715",
+  "stationName": "세류",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P155",
+  "stationName": "수원",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P154",
+  "stationName": "화서",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR10153",
+  "stationName": "성균관대",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P152",
+  "stationName": "의왕",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P151",
+  "stationName": "당정",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P150",
+  "stationName": "군포",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P149",
+  "stationName": "금정",
+  "line": "1호선"
+ },
+ {
+  "stationID": "MTRKR1P148",
+  "stationName": "명학",
+  "line": "1호선"
+ }
+]
+}

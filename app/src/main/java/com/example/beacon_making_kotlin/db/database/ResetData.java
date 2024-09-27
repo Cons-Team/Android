@@ -79,7 +79,7 @@ public class ResetData {
     }
 
     private void stationReset(Context context){
-        String jsonString2 = JsonHelper.loadJSONFromAsset(context, "stationID.json");
+        String jsonString2 = JsonHelper.loadJSONFromAsset(context, "stationIDTest.json");
         if (jsonString2 != null) {
             try {
                 JSONObject jsonObject = new JSONObject(jsonString2);
@@ -105,6 +105,9 @@ public class ResetData {
                     Log.d("station data", "station " + i);
                 }
                 Log.d("station end", "station end");
+                Info info = new Info("MTRKR1P157", "경기도 화성시 떡전골로 97", "031-234-7788");
+                infoDao.insertInfo(info);
+                Log.d("info end", "info end");
             } catch (JSONException | IOException | ParseException e) {
                 e.printStackTrace();
             }
