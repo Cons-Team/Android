@@ -21,6 +21,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -76,7 +77,8 @@ public class Metro_map_fragment extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
 
                 if(event.getAction() == MotionEvent.ACTION_UP){
-
+                    ConstraintLayout include = (ConstraintLayout) view.findViewById(R.id.include);
+                    include.setVisibility(View.VISIBLE);
                 }
 
                 if(event.getAction() == MotionEvent.ACTION_MOVE){

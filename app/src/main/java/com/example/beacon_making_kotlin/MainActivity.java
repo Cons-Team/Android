@@ -164,9 +164,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         settingMenus.add(item);
 
         //hand mode
-        item = new SettingMenuGroup(getResources().getString(R.string.hand_mode), this.getResources().getDrawable(R.drawable.icon_left_hand, null));
-        item.child.add("왼손 모드");
-        item.child.add("오른손 모드");
+        if(preferces.getString("mode", "오른손 모드").equals("오른손 모드")){
+            item = new SettingMenuGroup(getResources().getString(R.string.hand_mode_left), this.getResources().getDrawable(R.drawable.icon_left_hand, null));
+        }
+        else {
+            item = new SettingMenuGroup(getResources().getString(R.string.hand_mode_right), this.getResources().getDrawable(R.drawable.icon_right_hand, null));
+        }
         settingMenus.add(item);
 
         //Theme
@@ -196,6 +199,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     return true;
                 }
 
+                if(groupName.equals(getResources().getString(R.string.hand_mode_right)) || groupName.equals(getResources().getString(R.string.hand_mode_left))){
+                    editor.putString("mode", groupName);
+                    metro_map_fragment.navBtnChange(groupName);
+                    editor.commit();
+                    setSettingMenu();
+                    return true;
+                }
+
                 return false;
             }
         });
@@ -209,13 +220,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(settingMenus.get(groupPosition).groupName.equals(getResources().getString(R.string.fontSize))){
                     editor.putString("fontSize", child);
                     reStartApp();
-                }
-
-                if(settingMenus.get(groupPosition).groupName.equals(getResources().getString(R.string.hand_mode))){
-                    editor.putString("mode", child);
-                    metro_map_fragment.navBtnChange(child);
-                    setSettingMenu();
-                    settingMenuList.expandGroup(groupPosition);
                 }
                 editor.commit();
 
