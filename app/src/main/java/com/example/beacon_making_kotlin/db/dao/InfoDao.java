@@ -13,7 +13,7 @@ public interface InfoDao {
     @Insert
     void insertInfo(Info info);
 
-    @Query("SELECT * FROM info")
-    List<Info> getAllInfos();
+    @Query("SELECT * FROM info where stationID = :id")
+    List<Info> getInfo(String id);
 
 }

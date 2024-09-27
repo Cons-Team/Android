@@ -17,5 +17,8 @@ public interface StationDao {
     @Query("SELECT * FROM station")
     List<Station> getAllStations();
 
+    @Query("SELECT stationID FROM station where stationName = :name")
+    List<String> getStationID(String name);
+
 }
 
