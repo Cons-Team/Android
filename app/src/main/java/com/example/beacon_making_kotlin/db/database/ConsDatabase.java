@@ -33,5 +33,4 @@ public abstract class ConsDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
-
 }

@@ -16,4 +16,7 @@ public interface CoordinateDao {
 
     @Query("SELECT * FROM coordinate")
     List<Coordinate> getAllCoordinates();
+
+    @Query("SELECT name FROM coordinate WHERE :x >= x1 AND :x <= x2 AND :y >= y1 AND :y <= y2")
+    List<String> getStationName(int x, int y);
 }

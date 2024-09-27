@@ -79,7 +79,7 @@ public class ResetData {
     }
 
     private void stationReset(Context context){
-        String jsonString2 = JsonHelper.loadJSONFromAsset(context, "stationID.json");
+        String jsonString2 = JsonHelper.loadJSONFromAsset(context, "stationIDTest.json");
         if (jsonString2 != null) {
             try {
                 JSONObject jsonObject = new JSONObject(jsonString2);
