@@ -67,10 +67,6 @@ public class SettingMenuAdapter extends BaseExpandableListAdapter {
         String fontSize = preferences.getString("fontSize", "보통 사이즈");
         String mode = preferences.getString("mode", "오른손 모드");
 
-        Log.v("TextCheck1", fontSize);
-        Log.v("TextCheck2", childText);
-        Log.v("???", " ");
-
         if(childText.equals(fontSize) || childText.equals(mode)){
             childSelected.setVisibility(View.VISIBLE);
         }

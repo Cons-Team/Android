@@ -185,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 SharedPreferences.Editor editor = preferces.edit();
 
                 if(groupName.equals(getResources().getString(R.string.menu_theme))) {
-                    drawerLayout.closeDrawer(GravityCompat.START);
                     if (getResources().getString(R.string.menu_theme).equals("야간 모드")){
                         editor.putString("theme", "Night");
                     }
@@ -204,22 +203,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         settingMenuList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-
                 String child = settingMenus.get(groupPosition).child.get(childPosition);
                 SharedPreferences.Editor editor = preferces.edit();
 
                 if(settingMenus.get(groupPosition).groupName.equals(getResources().getString(R.string.fontSize))){
                     editor.putString("fontSize", child);
+                    reStartApp();
                 }
 
                 if(settingMenus.get(groupPosition).groupName.equals(getResources().getString(R.string.hand_mode))){
                     editor.putString("mode", child);
                     metro_map_fragment.navBtnChange(child);
+                    setSettingMenu();
+                    settingMenuList.expandGroup(groupPosition);
                 }
                 editor.commit();
-                reStartApp();
 
                 return true;
             }
