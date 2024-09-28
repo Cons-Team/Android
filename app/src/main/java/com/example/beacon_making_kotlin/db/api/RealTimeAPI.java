@@ -2,15 +2,12 @@ package com.example.beacon_making_kotlin.db.api;
 
 import static com.example.beacon_making_kotlin.db.apiKey.serviceKey.realTime_key;
 import static com.example.tedpermission.provider.TedPermissionProvider.context;
-
-import android.util.Log;
-
 import com.example.beacon_making_kotlin.db.helper.JsonHelper;
 
+import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -25,7 +22,7 @@ public class RealTimeAPI {
     private static String serviceKey = realTime_key;
     public static Vector<Vector<String>> loadRealTimeData(String subwayStationName) throws IOException, ParseException{
         StringBuilder urlBuilder = new StringBuilder("http://swopenAPI.seoul.go.kr/api/subway"); /*URL*/
-        urlBuilder.append("/" +  URLEncoder.encode(realTime_key,"UTF-8") ); /*인증키*/
+        urlBuilder.append("/" +  URLEncoder.encode(serviceKey,"UTF-8") ); /*인증키*/
         urlBuilder.append("/" +  URLEncoder.encode("json","UTF-8") ); /*요청파일타입 (xml,xmlf,xls,json)*/
         urlBuilder.append("/" + URLEncoder.encode("realtimeStationArrival","UTF-8")); /*서비스명 (대소문자 구분 필수입니다.)*/
         urlBuilder.append("/" + URLEncoder.encode("1","UTF-8")); /*요청시작위치*/

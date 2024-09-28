@@ -1,11 +1,10 @@
 package com.example.beacon_making_kotlin.db.dao;
 
+import com.example.beacon_making_kotlin.db.entity.Timetable;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-
-import com.example.beacon_making_kotlin.db.entity.Timetable;
-
 import java.util.List;
 
 @Dao

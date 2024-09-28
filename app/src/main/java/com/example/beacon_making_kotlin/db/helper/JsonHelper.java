@@ -2,7 +2,6 @@ package com.example.beacon_making_kotlin.db.helper;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-
 import java.io.IOException;
 import java.io.InputStream;
 

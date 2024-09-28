@@ -1,12 +1,10 @@
 package com.example.beacon_making_kotlin.db.dao;
 
+import com.example.beacon_making_kotlin.db.entity.Favorite;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Room;
-
-import com.example.beacon_making_kotlin.db.entity.Favorite;
-
 import java.util.List;
 
 @Dao
