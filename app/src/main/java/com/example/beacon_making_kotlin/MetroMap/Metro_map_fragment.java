@@ -21,6 +21,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -30,11 +31,21 @@ import com.example.beacon_making_kotlin.MainActivity;
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.beaconfind.BeaconBackgroundService;
 import com.example.beacon_making_kotlin.beaconfind.LoadingDialog;
+import com.example.beacon_making_kotlin.db.dao.CoordinateDao;
+import com.example.beacon_making_kotlin.db.dao.CoordinateDao_Impl;
+import com.example.beacon_making_kotlin.db.entity.Coordinate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Metro_map_fragment extends Fragment {
+
+    //View
+    Metro_time_view metro_time_view;
 
     //ImageView
     SubsamplingScaleImageView metro_map;
@@ -52,6 +63,13 @@ public class Metro_map_fragment extends Fragment {
     @SuppressLint({"ClickableViewAccessibility", "UseCompatLoadingForDrawables"})
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.metro_map_fragment, container, false);
+
+        metro_time_view = new Metro_time_view(view);
+        try {
+            metro_time_view.setting();
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
 
         preferces = requireActivity().getSharedPreferences("theme", 0);
 
@@ -76,7 +94,15 @@ public class Metro_map_fragment extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
 
                 if(event.getAction() == MotionEvent.ACTION_UP){
-
+                    int x = (int)event.getX();
+                    int y = (int)event.getY();
+                    ConstraintLayout include = (ConstraintLayout) view.findViewById(R.id.include);
+                    include.setVisibility(View.VISIBLE);
+                    try {
+                        metro_time_view.setting();
+                    } catch (IOException | ParseException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
 
                 if(event.getAction() == MotionEvent.ACTION_MOVE){
@@ -159,5 +185,4 @@ public class Metro_map_fragment extends Fragment {
         
         editor.commit();
     }
-
 }

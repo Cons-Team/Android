@@ -8,7 +8,8 @@
 
     <!--menu_String-->
     <string name="fontSize" translatable="false">폰트 변경</string>
-    <string name="hand_mode" translatable="false">모드 변경</string>
+    <string name="hand_mode_left" translatable="false">왼손 모드</string>
+    <string name="hand_mode_right" translatable="false">오른손 모드</string>
     <string name="menu_theme" translatable="false">야간 모드</string>
     <string name="lostAndFind" translatable="false">유실물</string>
 

@@ -9,7 +9,8 @@
 
     <!--menu_String-->
     <string name="lostAndFind">유실물</string>
-    <string name="hand_mode">모드 변경</string>
+    <string name="hand_mode_left" translatable="false">왼손 모드</string>
+    <string name="hand_mode_right" translatable="false">오른손 모드</string>
     <string name="fontSize">폰트 변경</string>
     <string name="fontSizeSmall" translatable="false">작은 사이즈</string>
     <string name="fontSizeNormal" translatable="false">보통 사이즈</string>
