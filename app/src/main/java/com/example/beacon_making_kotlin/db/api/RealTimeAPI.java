@@ -62,7 +62,6 @@ public class RealTimeAPI {
 
         try {
             JSONObject jsonObject1 = new JSONObject(text);
-//            JSONObject jsonObject2 = jsonObject1.getJSONObject("realtimeStationArrival");
             JSONArray jsonArray = jsonObject1.getJSONArray("realtimeArrivalList");
 
             for (int i = 0; i < jsonArray.length(); i++) {
