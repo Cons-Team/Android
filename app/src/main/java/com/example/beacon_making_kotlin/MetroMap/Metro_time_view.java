@@ -80,6 +80,9 @@ public class Metro_time_view {
         Log.v("realTimeListValue", "" + realTime.size());
         for(int i = 0; i < realTime.size(); i++){
             String lineInfo = realTime.get(0).get(0) + "1호선";
+            Log.v("realTimeListValue", "" + realTime.get(i).get(1));
+            Log.v("realTimeListValue", "" + realTime.get(i).get(2));
+            Log.v("realTimeListValue", "" + realTime.get(i).get(3));
             if(metroHash.containsKey(lineInfo) && !realTime.get(i).get(2).equals("N/A") && !realTime.get(i).get(1).equals("N/A")){
                 if(Integer.parseInt(realTime.get(i).get(2)) < Integer.parseInt(realTime.get(i).get(1)) && metroHash.get(lineInfo).getMetro_name_right().isEmpty()){
                     String[] tempTrain = realTime.get(i).get(6).split(" - ");
@@ -133,27 +136,27 @@ public class Metro_time_view {
     @SuppressLint("SetTextI18n")
     static void settingView(int value) {
         stationName.setText("" + Metro_time_view.test);
-        Metro_time_info temp = Metro_time_view.metroHash.get("1호선");
-        stationName.setText(temp.getMetro_name());
-        leftStation.setText(temp.getMetro_name_left());
-        if(temp.getBtrainSttus_left().equals("급행")){
-            String tempTime = temp.getDestination_left() + " " + temp.getTime_left() + "(" + temp.getBtrainSttus_left() + ")";
-            leftStationTime.setText(tempTime);
-        }
-        else{
-            String tempTime = temp.getDestination_left() + " " + temp.getTime_left();
-            leftStationTime.setText(tempTime);
-        }
-
-        rightStation.setText(temp.getMetro_name_right());
-        if(temp.getBtrainSttus_left().equals("급행")){
-            String tempTime = temp.getDestination_right() + " " + temp.getTime_right() + "(" + temp.getBtrainSttus_right() + ")";
-            rightStationTime.setText(tempTime);
-        }
-        else{
-            String tempTime = temp.getDestination_right() + " " + temp.getTime_right();
-            rightStationTime.setText(tempTime);
-        }
+//        Metro_time_info temp = Metro_time_view.metroHash.get("1호선");
+//        stationName.setText(temp.getMetro_name());
+//        leftStation.setText(temp.getMetro_name_left());
+//        if(temp.getBtrainSttus_left().equals("급행")){
+//            String tempTime = temp.getDestination_left() + " " + temp.getTime_left() + "(" + temp.getBtrainSttus_left() + ")";
+//            leftStationTime.setText(tempTime);
+//        }
+//        else{
+//            String tempTime = temp.getDestination_left() + " " + temp.getTime_left();
+//            leftStationTime.setText(tempTime);
+//        }
+//
+//        rightStation.setText(temp.getMetro_name_right());
+//        if(temp.getBtrainSttus_right().equals("급행")){
+//            String tempTime = temp.getDestination_right() + " " + temp.getTime_right() + "(" + temp.getBtrainSttus_right() + ")";
+//            rightStationTime.setText(tempTime);
+//        }
+//        else{
+//            String tempTime = temp.getDestination_right() + " " + temp.getTime_right();
+//            rightStationTime.setText(tempTime);
+//        }
     }
 
 
