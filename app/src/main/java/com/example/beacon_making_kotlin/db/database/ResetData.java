@@ -1,17 +1,15 @@
 package com.example.beacon_making_kotlin.db.database;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.example.beacon_making_kotlin.db.api.TimetableAPI;
 import com.example.beacon_making_kotlin.db.dao.*;
 import com.example.beacon_making_kotlin.db.entity.*;
 import com.example.beacon_making_kotlin.db.helper.JsonHelper;
 
+import android.content.Context;
+import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.concurrent.ExecutorService;

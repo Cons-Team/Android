@@ -1,12 +1,11 @@
 package com.example.beacon_making_kotlin.db.dao;
 
+import com.example.beacon_making_kotlin.db.entity.Station;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-
-import com.example.beacon_making_kotlin.db.entity.Station;
-
 import java.util.List;
 
 @Dao

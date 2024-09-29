@@ -1,12 +1,10 @@
 package com.example.beacon_making_kotlin.db.api;
 
 import static com.example.beacon_making_kotlin.db.apiKey.serviceKey.timetable_key;
-import static com.example.beacon_making_kotlin.db.apiKey.serviceKey.timetable_key;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

@@ -1,14 +1,12 @@
 package com.example.beacon_making_kotlin.db.database;
 
-import android.content.Context;
-
-import androidx.room.Database;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-
 import com.example.beacon_making_kotlin.db.dao.*;
 import com.example.beacon_making_kotlin.db.entity.*;
 
+import android.content.Context;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
 @Database(entities = {Coordinate.class, Station.class, Info.class, Timetable.class, Favorite.class}, version = 1)
 public abstract class ConsDatabase extends RoomDatabase {
