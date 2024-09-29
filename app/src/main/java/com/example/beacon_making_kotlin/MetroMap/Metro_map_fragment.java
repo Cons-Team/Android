@@ -3,6 +3,7 @@ package com.example.beacon_making_kotlin.MetroMap;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -54,10 +55,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Metro_map_fragment extends Fragment {
 
     //View
     Metro_time_view metro_time_view;
+
+    private ConsDatabase db;
+    List<String> coordinationList;
+    Context mContext;
 
     MainHandler handler = new MainHandler();
 
@@ -78,34 +86,38 @@ public class Metro_map_fragment extends Fragment {
     @SuppressLint({"ClickableViewAccessibility", "UseCompatLoadingForDrawables"})
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.metro_map_fragment, container, false);
+        db = ConsDatabase.getDatabase(getContext());
 
         metro_time_view = new Metro_time_view(view);
         include = (ConstraintLayout) view.findViewById(R.id.include);
 
         preferces = requireActivity().getSharedPreferences("theme", 0);
+        mContext = requireContext().getApplicationContext();
 
-        Resources res = getResources();
         bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.metro_map2);
         resized = Bitmap.createScaledBitmap(bitmap, 5000, 5000, true);
         metro_map = (SubsamplingScaleImageView) view.findViewById(R.id.metro_map);
         metro_map.setImage(ImageSource.bitmap(resized));
 
-        int x = resized.getHeight();
-        int y = resized.getWidth();
-        Log.v("size", "size : "+ x + "," + y);
-
-        int x2 = metro_map.getSHeight();
-        int y2 = metro_map.getSWidth();
-        Log.v("size", "size : "+ x2 + "," + y2);
-
         metro_map.setMaxScale(2.0f);
-
         metro_map.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN){
-                    int x = (int)event.getX();
-                    int y = (int)event.getY();
+                    class SelectCoordination implements Runnable{
+                        int x;
+                        int y;
+                        @Override
+                        public void run() {
+                            List<String> coordinationList = ConsDatabase.getDatabase(mContext).coordinateDao().getStationName(x, y);
+                        }
+                    }
+
+                    SelectCoordination insertRunnable = new SelectCoordination();
+                    insertRunnable.x = (int)event.getX();
+                    insertRunnable.y = (int)event.getRawY();
+                    Thread t = new Thread(insertRunnable);
+                    t.start();
 
                     BackgroundThread thread = new BackgroundThread();
                     thread.start();
