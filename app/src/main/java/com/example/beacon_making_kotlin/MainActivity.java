@@ -55,9 +55,11 @@ import com.example.beacon_making_kotlin.Menu.SettingMenuGroup;
 import com.example.beacon_making_kotlin.MetroMap.Metro_map_fragment;
 import com.example.beacon_making_kotlin.beaconfind.BeaconBackgroundService;
 import com.example.beacon_making_kotlin.beaconfind.LoadingDialog;
+import com.example.beacon_making_kotlin.db.database.ConsDatabase;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -91,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
 
         preferces = getSharedPreferences("Setting", 0);
         metro_map_fragment = new Metro_map_fragment();

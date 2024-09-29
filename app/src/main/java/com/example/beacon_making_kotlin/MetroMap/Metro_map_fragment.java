@@ -11,6 +11,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,6 +26,9 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.room.DatabaseConfiguration;
+import androidx.room.InvalidationTracker;
+import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
@@ -31,14 +36,21 @@ import com.example.beacon_making_kotlin.MainActivity;
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.beaconfind.BeaconBackgroundService;
 import com.example.beacon_making_kotlin.beaconfind.LoadingDialog;
+import com.example.beacon_making_kotlin.db.api.RealTimeAPI;
 import com.example.beacon_making_kotlin.db.dao.CoordinateDao;
 import com.example.beacon_making_kotlin.db.dao.CoordinateDao_Impl;
+import com.example.beacon_making_kotlin.db.dao.FavoriteDao;
+import com.example.beacon_making_kotlin.db.dao.InfoDao;
+import com.example.beacon_making_kotlin.db.dao.StationDao;
+import com.example.beacon_making_kotlin.db.dao.TimetableDao;
+import com.example.beacon_making_kotlin.db.database.ConsDatabase;
 import com.example.beacon_making_kotlin.db.entity.Coordinate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,6 +58,8 @@ public class Metro_map_fragment extends Fragment {
 
     //View
     Metro_time_view metro_time_view;
+
+    MainHandler handler = new MainHandler();
 
     //ImageView
     SubsamplingScaleImageView metro_map;
@@ -59,17 +73,14 @@ public class Metro_map_fragment extends Fragment {
     FloatingActionButton nav_btn_right;
 
     SharedPreferences preferces;
+    ConstraintLayout include;
 
     @SuppressLint({"ClickableViewAccessibility", "UseCompatLoadingForDrawables"})
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.metro_map_fragment, container, false);
 
         metro_time_view = new Metro_time_view(view);
-        try {
-            metro_time_view.setting();
-        } catch (IOException | ParseException e) {
-            throw new RuntimeException(e);
-        }
+        include = (ConstraintLayout) view.findViewById(R.id.include);
 
         preferces = requireActivity().getSharedPreferences("theme", 0);
 
@@ -92,17 +103,19 @@ public class Metro_map_fragment extends Fragment {
         metro_map.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    int x = (int)event.getX();
+                    int y = (int)event.getY();
+
+                    BackgroundThread thread = new BackgroundThread();
+                    thread.start();
+                }
 
                 if(event.getAction() == MotionEvent.ACTION_UP){
                     int x = (int)event.getX();
                     int y = (int)event.getY();
-                    ConstraintLayout include = (ConstraintLayout) view.findViewById(R.id.include);
                     include.setVisibility(View.VISIBLE);
-                    try {
-                        metro_time_view.setting();
-                    } catch (IOException | ParseException e) {
-                        throw new RuntimeException(e);
-                    }
+
                 }
 
                 if(event.getAction() == MotionEvent.ACTION_MOVE){
@@ -171,7 +184,7 @@ public class Metro_map_fragment extends Fragment {
 
     public void navBtnChange(String mode){
         SharedPreferences.Editor editor = preferces.edit();
-        
+
         if(mode.equals("왼손 모드")){
             editor.putString("hand", "왼손 모드");
             nav_btn_left.setVisibility(View.VISIBLE);
@@ -182,7 +195,33 @@ public class Metro_map_fragment extends Fragment {
             nav_btn_right.setVisibility(View.VISIBLE);
             nav_btn_left.setVisibility(View.GONE);
         }
-        
+
         editor.commit();
+    }
+
+    public class BackgroundThread extends Thread{
+        public void run(){
+            HashMap<String, Metro_time_info> map;
+            try {
+                 map = Metro_time_view.insertInfo(RealTimeAPI.loadRealTimeData("수원"));
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
+            }
+
+            Message msg = handler.obtainMessage();
+            Bundle bundle = new Bundle();
+            bundle.putInt("value", map.keySet().size());
+            msg.setData(bundle);
+            handler.sendMessage(msg);
+        }
+    }
+
+    class MainHandler extends Handler {
+        @Override
+        public void handleMessage(@NonNull Message msg){
+            super.handleMessage(msg);
+            Bundle bundle = msg.getData();
+            Metro_time_view.settingView(bundle.getInt("value"));
+        }
     }
 }
