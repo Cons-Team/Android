@@ -89,6 +89,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    //Add library
+    // Add library
     implementation(libs.subsampling.scale.image.view)
+
+    // MMS Image Sending library
+    implementation(libs.picasso)
 }

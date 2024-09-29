@@ -54,6 +54,7 @@ public class PathFindingActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);

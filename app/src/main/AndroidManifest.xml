@@ -83,7 +83,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity> <!-- <activity android:name=".MainActivity" -->
+        <activity android:name=".MainActivity" /> <!-- <activity android:name=".MainActivity" -->
         <!-- android:exported="true" -->
         <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar"> -->
         <!-- <intent-filter> -->
@@ -96,7 +96,20 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".pathfinding.PathFindingActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <!-- MMS Image Sending Provider -->
+        <provider
+            android:authorities="${applicationId}.provider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                tools:replace="android:resource"
+                android:resource="@xml/path" />
+        </provider>
+
     </application>
 
 </manifest>
