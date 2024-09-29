@@ -4,14 +4,12 @@ package com.example.beacon_making_kotlin.pathfinding;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beacon_making_kotlin.R;
-import com.example.beacon_making_kotlin.beaconfind.ActiveBluetooth;
 import com.unity3d.player.UnityPlayerActivity;
 //import com.unity3d.player.UnityPlayerActivity;
 //import com.unity3d.player.UnityPlayerActivity;
@@ -59,14 +57,6 @@ public class PathFindingActivity extends AppCompatActivity {
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
-    }
-
-    public void goToPrivacyPolicy(View view){
-
-        Intent intent;
-        intent = new Intent(this, ActiveBluetooth.class);
-
-        startActivity(intent);
     }
 
 }
