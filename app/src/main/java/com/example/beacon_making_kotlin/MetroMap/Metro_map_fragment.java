@@ -103,7 +103,7 @@ public class Metro_map_fragment extends Fragment {
         metro_map.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                if(event.getAction() == MotionEvent.ACTION_DOWN && metro_map.getScale() >= 1.0f && metro_map.getScale() <= 2.0f){
                     class SelectCoordination implements Runnable{
                         int x;
                         int y;
@@ -124,10 +124,6 @@ public class Metro_map_fragment extends Fragment {
                     insertRunnable.y = (int)  sCoord.y;
                     Thread t = new Thread(insertRunnable);
                     t.start();
-                }
-
-                if(event.getAction() == MotionEvent.ACTION_UP){
-
                 }
 
                 if(event.getAction() == MotionEvent.ACTION_MOVE){
@@ -214,16 +210,15 @@ public class Metro_map_fragment extends Fragment {
     public class BackgroundThread extends Thread{
         String name;
         public void run(){
-            HashMap<String, Metro_time_info> map;
             try {
-                 map = Metro_time_view.insertInfo(RealTimeAPI.loadRealTimeData(name));
+                 Metro_time_view.insertInfo(RealTimeAPI.loadRealTimeData(name));
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
             }
 
             Message msg = handler.obtainMessage();
             Bundle bundle = new Bundle();
-            bundle.putInt("value", map.keySet().size());
+            bundle.putInt("value", 0);
             msg.setData(bundle);
             handler.sendMessage(msg);
         }
@@ -234,6 +229,7 @@ public class Metro_map_fragment extends Fragment {
         public void handleMessage(@NonNull Message msg){
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
+            Metro_time_view.settingBtn();
             Metro_time_view.settingView(bundle.getInt("value"));
         }
     }

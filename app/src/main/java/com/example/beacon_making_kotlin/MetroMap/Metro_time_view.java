@@ -2,6 +2,7 @@ package com.example.beacon_making_kotlin.MetroMap;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -25,12 +26,12 @@ import java.util.Vector;
 
 public class Metro_time_view {
 
-    static Vector<Vector<String>> realTime;
+    static Vector<String> lineInfo;
 
     static HashMap<String, Metro_time_info> metroHash;
     static ConstraintLayout include;
 
-    LinearLayout lineListLayout;
+    static LinearLayout lineListLayout;
     ImageButton refreshBtn;
     ImageButton infoBtn;
     ImageButton cancelBtn;
@@ -47,11 +48,11 @@ public class Metro_time_view {
     Button timeTable;
 
     public Metro_time_view(View view) {
-        realTime = new Vector<>();
+        lineInfo = new Vector<>();
         metroHash = new HashMap<>();
 
         include = (ConstraintLayout) view.findViewById(R.id.include);
-        lineListLayout = (LinearLayout) view.findViewById(R.id.routeMapList);
+        lineListLayout = (LinearLayout) include.findViewById(R.id.routeMapList);
         refreshBtn = (ImageButton) view.findViewById(R.id.refreshBtn);
         infoBtn = (ImageButton) view.findViewById(R.id.metroInfoBtn);
         cancelBtn = (ImageButton) view.findViewById(R.id.cancelBtn);
@@ -85,12 +86,11 @@ public class Metro_time_view {
 
     public static HashMap<String, Metro_time_info> insertInfo(Vector<Vector<String>> realTime) {
         metroHash.clear();
-        Log.v("realTimeListValue", "" + realTime.size());
+        lineInfo.clear();
+
         for(int i = 0; i < realTime.size(); i++){
-            String lineInfo = realTime.get(0).get(0);
-            Log.v("realTimeListValue", "" + realTime.get(i).get(1));
-            Log.v("realTimeListValue", "" + realTime.get(i).get(2));
-            Log.v("realTimeListValue", "" + realTime.get(i).get(3));
+            String lineInfo = realTime.get(i).get(0);
+            Log.v("lineInfo", lineInfo);
             if(metroHash.containsKey(lineInfo) && !realTime.get(i).get(2).equals("N/A") && !realTime.get(i).get(1).equals("N/A")){
                 if(Integer.parseInt(realTime.get(i).get(2)) < Integer.parseInt(realTime.get(i).get(1)) && metroHash.get(lineInfo).getMetro_name_right().isEmpty()){
                     String[] tempTrain = realTime.get(i).get(6).split(" - ");
@@ -112,7 +112,6 @@ public class Metro_time_view {
                 }
             }
             else if(!realTime.get(i).get(2).equals("N/A") && !realTime.get(i).get(1).equals("N/A")){
-                Log.v("putMap", "?");
                 metroHash.put(lineInfo, new Metro_time_info());
 
                 metroHash.get(lineInfo).setMetro_name(realTime.get(i).get(4));
@@ -137,13 +136,35 @@ public class Metro_time_view {
                 }
             }
         }
-        Log.v("putMap", "" + metroHash.keySet().size());
+
+        lineInfo.addAll(metroHash.keySet());
         return metroHash;
     }
 
+    static void settingBtn(){
+        Button[] lineBtnList = new Button[lineInfo.size()];
+        lineListLayout.removeAllViews();
+        Log.v("lineInfoSize", lineInfo.size() + " ");
+        for(int i = 0; i < lineInfo.size(); i++){
+            lineBtnList[i] = new Button(include.getContext());
+            lineBtnList[i].setText(lineInfo.get(i));
+            lineBtnList[i].setTextColor(Color.parseColor("#ffffff"));
+            lineListLayout.addView(lineBtnList[i]);
+            int value = i;
+            lineBtnList[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    settingView(value);
+                }
+            });
+
+        }
+    }
+
+
     @SuppressLint("SetTextI18n")
     static void settingView(int value) {
-        Metro_time_info temp = Metro_time_view.metroHash.get("1호선");
+        Metro_time_info temp = Metro_time_view.metroHash.get(lineInfo.get(value));
         stationName.setText(temp.getMetro_name());
         leftStation.setText(temp.getMetro_name_left());
         if(temp.getBtrainSttus_left().equals("급행")){
