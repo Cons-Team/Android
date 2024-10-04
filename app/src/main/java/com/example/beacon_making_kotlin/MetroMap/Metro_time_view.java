@@ -10,7 +10,10 @@ import android.widget.TextView;
 import android.widget.Button;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.beacon_making_kotlin.MainActivity;
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.db.api.RealTimeAPI;
 
@@ -25,7 +28,7 @@ public class Metro_time_view {
     static Vector<Vector<String>> realTime;
 
     static HashMap<String, Metro_time_info> metroHash;
-    ConstraintLayout include;
+    static ConstraintLayout include;
 
     LinearLayout lineListLayout;
     ImageButton refreshBtn;
@@ -37,8 +40,6 @@ public class Metro_time_view {
     static TextView leftStationTime;
     static TextView rightStation;
     static TextView rightStationTime;
-
-    static int test = 100;
 
     Button departureStation;
     Button transitStation;
@@ -73,13 +74,20 @@ public class Metro_time_view {
                 include.setVisibility(View.GONE);
             }
         });
+
+        timeTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     public static HashMap<String, Metro_time_info> insertInfo(Vector<Vector<String>> realTime) {
         metroHash.clear();
         Log.v("realTimeListValue", "" + realTime.size());
         for(int i = 0; i < realTime.size(); i++){
-            String lineInfo = realTime.get(0).get(0) + "1호선";
+            String lineInfo = realTime.get(0).get(0);
             Log.v("realTimeListValue", "" + realTime.get(i).get(1));
             Log.v("realTimeListValue", "" + realTime.get(i).get(2));
             Log.v("realTimeListValue", "" + realTime.get(i).get(3));
@@ -135,28 +143,29 @@ public class Metro_time_view {
 
     @SuppressLint("SetTextI18n")
     static void settingView(int value) {
-        stationName.setText("" + Metro_time_view.test);
-//        Metro_time_info temp = Metro_time_view.metroHash.get("1호선");
-//        stationName.setText(temp.getMetro_name());
-//        leftStation.setText(temp.getMetro_name_left());
-//        if(temp.getBtrainSttus_left().equals("급행")){
-//            String tempTime = temp.getDestination_left() + " " + temp.getTime_left() + "(" + temp.getBtrainSttus_left() + ")";
-//            leftStationTime.setText(tempTime);
-//        }
-//        else{
-//            String tempTime = temp.getDestination_left() + " " + temp.getTime_left();
-//            leftStationTime.setText(tempTime);
-//        }
-//
-//        rightStation.setText(temp.getMetro_name_right());
-//        if(temp.getBtrainSttus_right().equals("급행")){
-//            String tempTime = temp.getDestination_right() + " " + temp.getTime_right() + "(" + temp.getBtrainSttus_right() + ")";
-//            rightStationTime.setText(tempTime);
-//        }
-//        else{
-//            String tempTime = temp.getDestination_right() + " " + temp.getTime_right();
-//            rightStationTime.setText(tempTime);
-//        }
+        Metro_time_info temp = Metro_time_view.metroHash.get("1호선");
+        stationName.setText(temp.getMetro_name());
+        leftStation.setText(temp.getMetro_name_left());
+        if(temp.getBtrainSttus_left().equals("급행")){
+            String tempTime = temp.getDestination_left() + " " + temp.getTime_left() + "(" + temp.getBtrainSttus_left() + ")";
+            leftStationTime.setText(tempTime);
+        }
+        else{
+            String tempTime = temp.getDestination_left() + " " + temp.getTime_left();
+            leftStationTime.setText(tempTime);
+        }
+
+        rightStation.setText(temp.getMetro_name_right());
+        if(temp.getBtrainSttus_right().equals("급행")){
+            String tempTime = temp.getDestination_right() + " " + temp.getTime_right() + "(" + temp.getBtrainSttus_right() + ")";
+            rightStationTime.setText(tempTime);
+        }
+        else{
+            String tempTime = temp.getDestination_right() + " " + temp.getTime_right();
+            rightStationTime.setText(tempTime);
+        }
+
+        include.setVisibility(View.VISIBLE);
     }
 
 

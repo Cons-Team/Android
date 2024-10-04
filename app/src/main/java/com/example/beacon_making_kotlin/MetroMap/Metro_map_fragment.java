@@ -110,23 +110,23 @@ public class Metro_map_fragment extends Fragment {
                         @Override
                         public void run() {
                             List<String> coordinationList = ConsDatabase.getDatabase(mContext).coordinateDao().getStationName(x, y);
+                            if(!coordinationList.isEmpty()){
+                                BackgroundThread thread = new BackgroundThread();
+                                thread.name = coordinationList.get(0);
+                                thread.start();
+                            }
                         }
                     }
+                    PointF sCoord  =  metro_map.viewToSourceCoord(event.getX(),  event.getY());
 
                     SelectCoordination insertRunnable = new SelectCoordination();
-                    insertRunnable.x = (int)event.getX();
-                    insertRunnable.y = (int)event.getRawY();
+                    insertRunnable.x = (int)  sCoord.x;
+                    insertRunnable.y = (int)  sCoord.y;
                     Thread t = new Thread(insertRunnable);
                     t.start();
-
-                    BackgroundThread thread = new BackgroundThread();
-                    thread.start();
                 }
 
                 if(event.getAction() == MotionEvent.ACTION_UP){
-                    int x = (int)event.getX();
-                    int y = (int)event.getY();
-                    include.setVisibility(View.VISIBLE);
 
                 }
 
@@ -212,10 +212,11 @@ public class Metro_map_fragment extends Fragment {
     }
 
     public class BackgroundThread extends Thread{
+        String name;
         public void run(){
             HashMap<String, Metro_time_info> map;
             try {
-                 map = Metro_time_view.insertInfo(RealTimeAPI.loadRealTimeData("수원"));
+                 map = Metro_time_view.insertInfo(RealTimeAPI.loadRealTimeData(name));
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
             }

@@ -52,7 +52,9 @@ import com.example.beacon_making_kotlin.Menu.MainMenuAdapter;
 import com.example.beacon_making_kotlin.Menu.MainMenuGroup;
 import com.example.beacon_making_kotlin.Menu.SettingMenuAdapter;
 import com.example.beacon_making_kotlin.Menu.SettingMenuGroup;
+import com.example.beacon_making_kotlin.MetroMap.Metro_info_fragment;
 import com.example.beacon_making_kotlin.MetroMap.Metro_map_fragment;
+import com.example.beacon_making_kotlin.MetroMap.Metro_timeTable_fragment;
 import com.example.beacon_making_kotlin.beaconfind.BeaconBackgroundService;
 import com.example.beacon_making_kotlin.beaconfind.LoadingDialog;
 import com.example.beacon_making_kotlin.db.database.ConsDatabase;
@@ -96,11 +98,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         preferces = getSharedPreferences("Setting", 0);
         metro_map_fragment = new Metro_map_fragment();
+//        Metro_timeTable_fragment timeTableFragment = new Metro_timeTable_fragment();
+//        Metro_info_fragment metroInfoFragment = new Metro_info_fragment();
 
         //FragmentManager
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container_view, metro_map_fragment).commitAllowingStateLoss();
+//        transaction.replace(R.id.fragment_container_view, timeTableFragment).commitAllowingStateLoss();
+//        transaction.replace(R.id.fragment_container_view, metroInfoFragment).commitAllowingStateLoss();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.main);
         menu_button = (ImageButton) findViewById(R.id.menu_button);

@@ -66,9 +66,9 @@ public class RealTimeAPI {
                 JSONObject item = jsonArray.getJSONObject(i);
 
                 String subwayId = item.optString("subwayId", "N/A");
-                String statnld = item.optString("statnld", "N/A");
+                String statnld = item.optString("statnId", "N/A");
                 String statnFid = item.optString("statnFid", "N/A");
-                String statnTid = item.optString("statnTd", "N/A");
+                String statnTid = item.optString("statnTid", "N/A");
                 String statnNm = item.optString("statnNm", "N/A");
                 String btrainSttus = item.optString("btrainSttus", "N/A");
                 String trainLineNm = item.optString("trainLineNm", "N/A");
@@ -108,7 +108,7 @@ public class RealTimeAPI {
 
                 for (int i = 0; i < realTimeArray.length(); i++) {
                     JSONObject realTimeObject = realTimeArray.getJSONObject(i);
-                    if (realTimeObject.getString("STATN_ID").equals(id)){
+                    if (realTimeObject.getString("SUBWAY_ID").equals(id)){
                         line = realTimeObject.getString("호선이름");
                         break;
                     }
