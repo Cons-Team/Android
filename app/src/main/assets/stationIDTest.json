@@ -1,154 +1,259 @@
 {
 "station":[
  {
-  "stationID": "MTRKR1P177",
-  "stationName": "신창",
-  "line": "1호선"
+  "stationID": "MTRS12234-4",
+  "stationName": "까치산",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P176",
-  "stationName": "온양온천",
-  "line": "1호선"
+  "stationID": "MTRS12249",
+  "stationName": "신정네거리",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P174",
-  "stationName": "배방",
-  "line": "1호선"
+  "stationID": "MTRS12248",
+  "stationName": "양천구청",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1p173",
-  "stationName": "탕정",
-  "line": "1호선"
+  "stationID": "MTRS12247",
+  "stationName": "도림천",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P172",
-  "stationName": "아산",
-  "line": "1호선"
+  "stationID": "MTRS12234",
+  "stationName": "신도림",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P171",
-  "stationName": "쌍용",
-  "line": "1호선"
+  "stationID": "MTRS12233",
+  "stationName": "대림",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P170",
-  "stationName": "봉명",
-  "line": "1호선"
+  "stationID": "MTRS12232",
+  "stationName": "구로디지털단지",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P169",
-  "stationName": "천안",
-  "line": "1호선"
+  "stationID": "MTRS12231",
+  "stationName": "신대방",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P168",
-  "stationName": "두정",
-  "line": "1호선"
+  "stationID": "MTRS12230",
+  "stationName": "신림",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P167",
-  "stationName": "직산",
-  "line": "1호선"
+  "stationID": "MTRS12229",
+  "stationName": "봉천",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P166",
-  "stationName": "성환",
-  "line": "1호선"
+  "stationID": "MTRS12228",
+  "stationName": "서울대입구",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P165",
-  "stationName": "평택",
-  "line": "1호선"
+  "stationID": "MTRS12227",
+  "stationName": "낙성대",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P164",
-  "stationName": "평택지제",
-  "line": "1호선"
+  "stationID": "MTRS12226",
+  "stationName": "사당",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P163",
-  "stationName": "서정리",
-  "line": "1호선"
+  "stationID": "MTRS12225",
+  "stationName": "방배",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P162",
-  "stationName": "송탄",
-  "line": "1호선"
+  "stationID": "MTRS12224",
+  "stationName": "서초",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P161",
-  "stationName": "진위",
-  "line": "1호선"
+  "stationID": "MTRS12223",
+  "stationName": "교대",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P160",
-  "stationName": "오산",
-  "line": "1호선"
+  "stationID": "MTRS12222",
+  "stationName": "강남",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P159",
-  "stationName": "오산대",
-  "line": "1호선"
+  "stationID": "MTRS12221",
+  "stationName": "역삼",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P158",
-  "stationName": "세마",
-  "line": "1호선"
+  "stationID": "MTRS12220",
+  "stationName": "선릉",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P157",
-  "stationName": "병점",
-  "line": "1호선"
+  "stationID": "MTRS12219",
+  "stationName": "삼성",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P157-2",
-  "stationName": "서동탄",
-  "line": "1호선"
+  "stationID": "MTRS12218",
+  "stationName": "종합운동장",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR11715",
-  "stationName": "세류",
-  "line": "1호선"
+  "stationID": "MTRS12217",
+  "stationName": "잠실새내",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P155",
-  "stationName": "수원",
-  "line": "1호선"
+  "stationID": "MTRS12216",
+  "stationName": "잠실",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P154",
-  "stationName": "화서",
-  "line": "1호선"
+  "stationID": "MTRS12215",
+  "stationName": "잠실나루",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR10153",
-  "stationName": "성균관대",
-  "line": "1호선"
+  "stationID": "MTRS12214",
+  "stationName": "강변",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P152",
-  "stationName": "의왕",
-  "line": "1호선"
+  "stationID": "MTRS12213",
+  "stationName": "구의",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P151",
-  "stationName": "당정",
-  "line": "1호선"
+  "stationID": "MTRS12212",
+  "stationName": "건대입구",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P150",
-  "stationName": "군포",
-  "line": "1호선"
+  "stationID": "MTRS12211",
+  "stationName": "성수",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P149",
-  "stationName": "금정",
-  "line": "1호선"
+  "stationID": "MTRS12244",
+  "stationName": "용답",
+  "line": "2호선"
  },
  {
-  "stationID": "MTRKR1P148",
-  "stationName": "명학",
-  "line": "1호선"
+  "stationID": "MTRS12245",
+  "stationName": "신답",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12250",
+  "stationName": "용두",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12246",
+  "stationName": "신설동",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12210",
+  "stationName": "뚝섬",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12209",
+  "stationName": "한양대",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12208",
+  "stationName": "왕십리",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12207",
+  "stationName": "상왕십리",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12206",
+  "stationName": "신당",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12205",
+  "stationName": "동대문역사문화공원",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12204",
+  "stationName": "을지로4가",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12203",
+  "stationName": "을지로3가",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12202",
+  "stationName": "을지로입구",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12201",
+  "stationName": "시청",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12243",
+  "stationName": "충정로",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12242",
+  "stationName": "아현",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12241",
+  "stationName": "이대",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12240",
+  "stationName": "신촌",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12239",
+  "stationName": "홍대입구",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12238",
+  "stationName": "합정",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12237",
+  "stationName": "당산",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12236",
+  "stationName": "영등포구청",
+  "line": "2호선"
+ },
+ {
+  "stationID": "MTRS12235",
+  "stationName": "문래",
+  "line": "2호선"
  }
 ]
 }

@@ -49,11 +49,11 @@ public class ResetData {
     }
 
     private void coordinateReset(Context context){
-        String jsonString1 = JsonHelper.loadJSONFromAsset(context, "coordinate.json");
-        if (jsonString1 != null) {
+        String jsonString = JsonHelper.loadJSONFromAsset(context, "coordinate.json");
+        if (jsonString != null) {
             try {
-                JSONObject jsonObject1 = new JSONObject(jsonString1);
-                JSONArray coordinateArray = jsonObject1.getJSONArray("coordinate");
+                JSONObject jsonObject = new JSONObject(jsonString);
+                JSONArray coordinateArray = jsonObject.getJSONArray("coordinate");
 
                 for (int i = 0; i < coordinateArray.length(); i++) {
                     JSONObject coordinateObject = coordinateArray.getJSONObject(i);
@@ -77,10 +77,10 @@ public class ResetData {
     }
 
     private void stationReset(Context context){
-        String jsonString2 = JsonHelper.loadJSONFromAsset(context, "stationIDTest.json");
-        if (jsonString2 != null) {
+        String jsonString = JsonHelper.loadJSONFromAsset(context, "stationIDTest.json");
+        if (jsonString != null) {
             try {
-                JSONObject jsonObject = new JSONObject(jsonString2);
+                JSONObject jsonObject = new JSONObject(jsonString);
                 JSONArray stationArray = jsonObject.getJSONArray("station");
 
                 for (int i = 0; i < stationArray.length(); i++) {
@@ -92,6 +92,7 @@ public class ResetData {
 
                     Station station = new Station(stationID, stationName, line);
                     stationDao.insertStation(station);
+                    infoReset(context, stationID, stationName, line);
 
                     for (String day : dailyTypeCode) {
                         for (String updown : upDownTypeCode) {
@@ -103,10 +104,35 @@ public class ResetData {
                     Log.d("station data", "station " + i);
                 }
                 Log.d("station end", "station end");
-                Info info = new Info("MTRKR1P157", "경기도 화성시 떡전골로 97", "031-234-7788");
-                infoDao.insertInfo(info);
-                Log.d("info end", "info end");
             } catch (JSONException | IOException | ParseException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void infoReset(Context context, String stationID, String stationName, String line){
+        String jsonString = JsonHelper.loadJSONFromAsset(context, "info.json");
+        if (jsonString != null) {
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+                JSONArray stationArray = jsonObject.getJSONArray("info");
+
+                for (int i = 0; i < stationArray.length(); i++) {
+                    JSONObject stationObject = stationArray.getJSONObject(i);
+
+                    String jsonstationName = stationObject.getString("역명");
+                    String jsonLine = stationObject.getString("호선");
+                    String address = stationObject.getString("도로명주소");
+                    String tel = stationObject.getString("역전화번호");
+
+                    if (stationName.equals(jsonstationName) && line.equals(jsonLine + "호선")){
+                        Info info = new Info(stationID, address, tel);
+                        infoDao.insertInfo(info);
+                        Log.d("info data", "info : " + jsonstationName + "역 " + tel);
+                        return;
+                    }
+                }
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }

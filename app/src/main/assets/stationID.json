@@ -327,7 +327,7 @@
  },
  {
   "stationID": "MTRS11150",
-  "stationName": "서울역",
+  "stationName": "서울",
   "line": "1호선"
  },
  {
@@ -1122,7 +1122,7 @@
  },
  {
   "stationID": "MTRS14426",
-  "stationName": "서울역",
+  "stationName": "서울",
   "line": "4호선"
  },
  {
@@ -3037,7 +3037,7 @@
  },
  {
   "stationID": "MTRKRK41251",
-  "stationName": "서울역",
+  "stationName": "서울",
   "line": "경의중앙"
  },
  {
@@ -3272,7 +3272,7 @@
  },
  {
   "stationID": "MTRARA1A01",
-  "stationName": "서울역",
+  "stationName": "서울",
   "line": "공항철도"
  },
  {
