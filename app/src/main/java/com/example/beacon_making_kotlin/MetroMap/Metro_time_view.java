@@ -2,7 +2,11 @@ package com.example.beacon_making_kotlin.MetroMap;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -11,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Button;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -29,6 +34,7 @@ public class Metro_time_view {
     static Vector<String> lineInfo;
 
     static HashMap<String, Metro_time_info> metroHash;
+    static HashMap<String, String> metroLineColor;
     static ConstraintLayout include;
 
     static LinearLayout lineListLayout;
@@ -82,6 +88,30 @@ public class Metro_time_view {
 
             }
         });
+
+        metroLineColor = new HashMap<>();
+        settingColor();
+    }
+
+    private void settingColor() {
+        metroLineColor.put("1호선", "#004B85");
+        metroLineColor.put("2호선", "#01A13F");
+        metroLineColor.put("3호선", "#ED6D00");
+        metroLineColor.put("4호선", "#039CCE");
+        metroLineColor.put("5호선", "#794598");
+        metroLineColor.put("6호선", "#7C4A33v");
+        metroLineColor.put("7호선", "#6D7E30");
+        metroLineColor.put("8호선", "#D01870v");
+        metroLineColor.put("9호선", "#A49E88");
+        metroLineColor.put("경의중앙선", "#69C3B1");
+        metroLineColor.put("공항철도", "#0079AC");
+        metroLineColor.put("경춘선", "#007A63");
+        metroLineColor.put("수인분당선", "#ECA50E");
+        metroLineColor.put("신분당선", "#B71B30");
+        metroLineColor.put("우의신설선", "#B9CB03");
+        metroLineColor.put("서해선", "#70B22C");
+        metroLineColor.put("경강선", "#063190");
+
     }
 
     public static HashMap<String, Metro_time_info> insertInfo(Vector<Vector<String>> realTime) {
@@ -92,7 +122,7 @@ public class Metro_time_view {
             String lineInfo = realTime.get(i).get(0);
             Log.v("lineInfo", lineInfo);
             if(metroHash.containsKey(lineInfo) && !realTime.get(i).get(2).equals("N/A") && !realTime.get(i).get(1).equals("N/A")){
-                if(Integer.parseInt(realTime.get(i).get(2)) < Integer.parseInt(realTime.get(i).get(1)) && metroHash.get(lineInfo).getMetro_name_right().isEmpty()){
+                if(Integer.parseInt(realTime.get(i).get(2)) > Integer.parseInt(realTime.get(i).get(1)) && metroHash.get(lineInfo).getMetro_name_right().isEmpty()){
                     String[] tempTrain = realTime.get(i).get(6).split(" - ");
 
                     metroHash.get(lineInfo).setMetro_name_right(tempTrain[1].split("방면")[0]);
@@ -101,7 +131,7 @@ public class Metro_time_view {
                     metroHash.get(lineInfo).setBtrainSttus_right(realTime.get(i).get(5));
                     metroHash.get(lineInfo).setBarvlDt_right(changeTime(realTime.get(i).get(9)));
                 }
-                else if(Integer.parseInt(realTime.get(i).get(2)) > Integer.parseInt(realTime.get(i).get(1)) && metroHash.get(lineInfo).getMetro_name_left().isEmpty()){
+                else if(Integer.parseInt(realTime.get(i).get(2)) < Integer.parseInt(realTime.get(i).get(1)) && metroHash.get(lineInfo).getMetro_name_left().isEmpty()){
                     String[] tempTrain = realTime.get(i).get(6).split(" - ");
 
                     metroHash.get(lineInfo).setMetro_name_left(tempTrain[1].split("방면")[0]);
@@ -116,7 +146,7 @@ public class Metro_time_view {
 
                 metroHash.get(lineInfo).setMetro_name(realTime.get(i).get(4));
 
-                if(Integer.parseInt(realTime.get(i).get(2)) < Integer.parseInt(realTime.get(i).get(1))){
+                if(Integer.parseInt(realTime.get(i).get(2)) > Integer.parseInt(realTime.get(i).get(1))){
                     String[] tempTrain = realTime.get(i).get(6).split(" - ");
 
                     metroHash.get(lineInfo).setMetro_name_right(tempTrain[1].split("방면")[0]);
@@ -125,7 +155,7 @@ public class Metro_time_view {
                     metroHash.get(lineInfo).setBtrainSttus_right(realTime.get(i).get(5));
                     metroHash.get(lineInfo).setBarvlDt_right(changeTime(realTime.get(i).get(9)));
                 }
-                else if(Integer.parseInt(realTime.get(i).get(2)) > Integer.parseInt(realTime.get(i).get(1))){
+                else if(Integer.parseInt(realTime.get(i).get(2)) < Integer.parseInt(realTime.get(i).get(1))){
                     String[] tempTrain = realTime.get(i).get(6).split(" - ");
 
                     metroHash.get(lineInfo).setMetro_name_left(tempTrain[1].split("방면")[0]);
@@ -149,6 +179,8 @@ public class Metro_time_view {
             lineBtnList[i] = new Button(include.getContext());
             lineBtnList[i].setText(lineInfo.get(i));
             lineBtnList[i].setTextColor(Color.parseColor("#ffffff"));
+            lineBtnList[i].setBackgroundColor(Color.parseColor(metroLineColor.get(lineInfo.get(i))));
+            lineBtnList[i].setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(metroLineColor.get(lineInfo.get(i)))));
             lineListLayout.addView(lineBtnList[i]);
             int value = i;
             lineBtnList[i].setOnClickListener(new View.OnClickListener() {
@@ -186,6 +218,8 @@ public class Metro_time_view {
             rightStationTime.setText(tempTime);
         }
 
+        stationName.setBackgroundColor(Color.parseColor(metroLineColor.get(lineInfo.get(value))));
+        stationName.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(metroLineColor.get(lineInfo.get(value)))));
         include.setVisibility(View.VISIBLE);
     }
 

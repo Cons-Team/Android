@@ -1,5 +1,6 @@
 package com.example.beacon_making_kotlin.MetroMap;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,8 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
-import android.widget.TableRow;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.db.database.ConsDatabase;
-import com.example.beacon_making_kotlin.db.entity.Info;
 import com.example.beacon_making_kotlin.db.entity.Timetable;
 
 import java.util.List;
@@ -27,15 +26,14 @@ public class Metro_timeTable_fragment extends Fragment {
 
     ConsDatabase db;
     TimeTableHandler handler = new TimeTableHandler();
-
-    TableLayout tableLayout;
-    TableRow tableRow;
+    LinearLayout upLayout;
+    LinearLayout downLayout;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.metro_timetable_fragmennt, container, false);
 
         db = ConsDatabase.getDatabase(getContext());
-        tableLayout = (TableLayout) view.findViewById(R.id.timeTable);
-        tableRow = new TableRow(getContext());
+        upLayout = view.findViewById(R.id.upLine);
+        downLayout = view.findViewById(R.id.downLine);
 
         return view;
     }
@@ -54,32 +52,32 @@ public class Metro_timeTable_fragment extends Fragment {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                Log.v("stationIdText", stationName);
-                List<String> stationId = db.stationDao().getStationID(stationName);
-                Log.v("stationIdTest", stationId.size() + "");
-
-                List<Timetable> timeTables = db.timetableDao().getAllTimetables();
-                Log.v("TimeTable", timeTables.size() +"");
+//                Log.v("stationIdText", stationName);
+//                List<String> stationId = db.stationDao().getStationID(stationName);
+//                Log.v("stationIdTest", stationId.size() + "");
+//
+//                List<Timetable> timeTables = db.timetableDao().getAllTimetables();
+//                Log.v("TimeTable", timeTables.size() +"");
 
 //                List<Info> infoTables = db.infoDao().getInfo(stationId.get(0));
 
                 String up = "";
                 String down = "";
 
-                for(int i = 0; i < timeTables.size(); i++){
-                    Log.v("timeTableID", "id : " + timeTables.get(i).getStationID());
-                    if(timeTables.get(i).getStationID().equals(stationId.get(0))){
-                        Log.v("timeTable", "Day : " + timeTables.get(i).getDay());
-                        Log.v("timeTable", "Updown : " + timeTables.get(i).getUpdown());
-                        Log.v("timeTable", "Time : " + timeTables.get(i).getTime());
-                        if(timeTables.get(i).getDay().equals("01") && timeTables.get(i).getUpdown().equals("U")){
-                            up = timeTables.get(i).getTime();
-                        }
-                        else if(timeTables.get(i).getDay().equals("01") && timeTables.get(i).getUpdown().equals("D")){
-                            down = timeTables.get(i).getTime();
-                        }
-                    }
-                }
+//                for(int i = 0; i < timeTables.size(); i++){
+//                    Log.v("timeTableID", "id : " + timeTables.get(i).getStationID());
+//                    if(timeTables.get(i).getStationID().equals(stationId.get(0))){
+//                        Log.v("timeTable", "Day : " + timeTables.get(i).getDay());
+//                        Log.v("timeTable", "Updown : " + timeTables.get(i).getUpdown());
+//                        Log.v("timeTable", "Time : " + timeTables.get(i).getTime());
+//                        if(timeTables.get(i).getDay().equals("01") && timeTables.get(i).getUpdown().equals("U")){
+//                            up = timeTables.get(i).getTime();
+//                        }
+//                        else if(timeTables.get(i).getDay().equals("01") && timeTables.get(i).getUpdown().equals("D")){
+//                            down = timeTables.get(i).getTime();
+//                        }
+//                    }
+//                }
 //                Log.v("stationId", stationId.get(0));
 //                Log.v("inftoTableSize", "" + infoTables.size());
 //                for(int i = 0; i < infoTables.size(); i++){
@@ -111,20 +109,24 @@ public class Metro_timeTable_fragment extends Fragment {
             String[] upTime = bundle.getString("상행").split("@");
             String[] downTime = bundle.getString("하행").split("@");
 
+            upLayout.removeAllViews();
+            downLayout.removeAllViews();
+
             for(int i = 0; i < upTime.length; i++){
-                tableRow.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                TextView upText = new TextView(getContext());
-                TextView downText = new TextView(getContext());
-                upText.setTextColor(Color.parseColor("#ffffff"));
-                downText.setTextColor(Color.parseColor("#FFFFFF"));
-                upText.setText(upTime[i]);
-                downText.setText(downTime[i]);
-                upText.setTextSize(14);
-                downText.setTextSize(14);
-                tableRow.addView(upText);
-                tableRow.addView(downText);
+                TextView up = new TextView(getContext());
+                up.setPadding(10, 15, 15, 15);
+                up.setText(upTime[i]);
+                up.setTextColor(Color.parseColor("#000000"));
+                up.setTextSize(14);
+                upLayout.addView(up);
+
+                TextView down = new TextView(getContext());
+                down.setPadding(15, 15, 10, 15);
+                down.setText(downTime[i]);
+                down.setTextColor(Color.parseColor("#000000"));
+                down.setTextSize(14);
+                downLayout.addView(down);
             }
-            tableLayout.addView(tableRow);
         }
     }
 }
