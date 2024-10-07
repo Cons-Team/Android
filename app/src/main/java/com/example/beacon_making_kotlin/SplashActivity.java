@@ -5,20 +5,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import com.example.beacon_making_kotlin.db.database.ConsDatabase;
@@ -58,28 +52,50 @@ public class SplashActivity extends AppCompatActivity {
         ArrayList<String> requestList = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= 31) {
 
-            requestList.add(android.Manifest.permission.BLUETOOTH_SCAN); // 스캔 권한
-            requestList.add(android.Manifest.permission.BLUETOOTH_CONNECT); // 연결 권한
-            requestList.add(android.Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
+            requestList.add(Manifest.permission.BLUETOOTH_SCAN); // 스캔 권한
+            requestList.add(Manifest.permission.BLUETOOTH_CONNECT); // 연결 권한
+            requestList.add(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
 
         } else if (Build.VERSION.SDK_INT >= 29) {
 
-            requestList.add(android.Manifest.permission.BLUETOOTH); // 블루투스 연결 요청 및 수락, 데이터 전송 등에 필요
-            requestList.add(android.Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
-            requestList.add(android.Manifest.permission.ACCESS_BACKGROUND_LOCATION); // 백그라운드에서 스캔해야 할 경우
+            requestList.add(Manifest.permission.BLUETOOTH); // 블루투스 연결 요청 및 수락, 데이터 전송 등에 필요
+            requestList.add(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
+            requestList.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION); // 백그라운드에서 스캔해야 할 경우
 
         } else if (Build.VERSION.SDK_INT >= 23) {
 
-            requestList.add(android.Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
+            requestList.add(Manifest.permission.ACCESS_FINE_LOCATION); // 유저의 위치를 포함해야 할 경우
         }
         
         // 카메라 사용 권한
-        requestList.add(android.Manifest.permission.CAMERA);
+        requestList.add(Manifest.permission.CAMERA);
         
         // 문자 전송 권한
         requestList.add(Manifest.permission.SEND_SMS);
         requestList.add(Manifest.permission.RECEIVE_SMS);
+        requestList.add(Manifest.permission.READ_SMS);
+        requestList.add(Manifest.permission.RECEIVE_MMS);
+        requestList.add(Manifest.permission.VIBRATE);
+        requestList.add(Manifest.permission.INTERNET);
+        requestList.add(Manifest.permission.ACCESS_WIFI_STATE);
+        requestList.add(Manifest.permission.CHANGE_WIFI_STATE);
+        requestList.add(Manifest.permission.ACCESS_NETWORK_STATE);
+        requestList.add(Manifest.permission.CHANGE_NETWORK_STATE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestList.add(Manifest.permission.READ_MEDIA_IMAGES);
+        }
+        else{
+            requestList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+
+        // 전화 권환
         requestList.add(Manifest.permission.READ_PHONE_STATE);
+        requestList.add(Manifest.permission.CALL_PHONE);
+
+        // Contact 권한
+        requestList.add(Manifest.permission.WRITE_CONTACTS);
+        requestList.add(Manifest.permission.READ_CONTACTS);
 
         permissionRequest(requestList);
 
