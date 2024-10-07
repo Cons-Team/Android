@@ -47,7 +47,6 @@ public class PathFindingActivity extends AppCompatActivity {
             if (requestCode == LAUNCH_SECOND_ACTIVITY && resultCode == RESULT_OK) {
 //                String value = data.getStringExtra("result");
 //                Toast.makeText(PathFindingActivity.this, value, Toast.LENGTH_SHORT).show();
-
             }
         } catch (Exception ex){
             Toast.makeText(PathFindingActivity.this, ex.toString(), Toast.LENGTH_SHORT).show();
