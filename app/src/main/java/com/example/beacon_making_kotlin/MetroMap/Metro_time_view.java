@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -38,6 +40,8 @@ public class Metro_time_view {
     static ConstraintLayout include;
 
     static LinearLayout lineListLayout;
+    static LinearLayout stationNameListLayout;
+    static Button[] lineBtnList;
     ImageButton refreshBtn;
     ImageButton infoBtn;
     ImageButton cancelBtn;
@@ -63,6 +67,7 @@ public class Metro_time_view {
         infoBtn = (ImageButton) view.findViewById(R.id.metroInfoBtn);
         cancelBtn = (ImageButton) view.findViewById(R.id.cancelBtn);
 
+        stationNameListLayout = (LinearLayout) view.findViewById(R.id.stationNameList);
         stationName = (TextView) view.findViewById(R.id.stationName);
         leftStation = (TextView) view.findViewById(R.id.leftStation);
         leftStationTime = (TextView) view.findViewById(R.id.leftStationTime);
@@ -172,15 +177,11 @@ public class Metro_time_view {
     }
 
     static void settingBtn(){
-        Button[] lineBtnList = new Button[lineInfo.size()];
+        lineBtnList = new Button[lineInfo.size()];
         lineListLayout.removeAllViews();
         Log.v("lineInfoSize", lineInfo.size() + " ");
         for(int i = 0; i < lineInfo.size(); i++){
             lineBtnList[i] = new Button(include.getContext());
-            lineBtnList[i].setText(lineInfo.get(i));
-            lineBtnList[i].setTextColor(Color.parseColor("#ffffff"));
-            lineBtnList[i].setBackgroundColor(Color.parseColor(metroLineColor.get(lineInfo.get(i))));
-            lineBtnList[i].setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(metroLineColor.get(lineInfo.get(i)))));
             lineListLayout.addView(lineBtnList[i]);
             int value = i;
             lineBtnList[i].setOnClickListener(new View.OnClickListener() {
@@ -194,9 +195,24 @@ public class Metro_time_view {
     }
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "ResourceAsColor"})
     static void settingView(int value) {
         Metro_time_info temp = Metro_time_view.metroHash.get(lineInfo.get(value));
+
+        for(int i = 0; i < lineBtnList.length; i++){
+            lineBtnList[i].setTextColor(Color.parseColor(metroLineColor.get(lineInfo.get(i))));
+            if(i == value){
+                SpannableString content = new SpannableString(lineInfo.get(value));
+                content.setSpan(new UnderlineSpan(), 0, lineInfo.get(value).length(), 5);
+                lineBtnList[i].setText(content);
+            }
+            else{
+                SpannableString content = new SpannableString(lineInfo.get(i));
+                content.setSpan(new UnderlineSpan(), 0, 0, 5);
+                lineBtnList[i].setText(content);
+            }
+        }
+
         stationName.setText(temp.getMetro_name());
         leftStation.setText(temp.getMetro_name_left());
         if(temp.getBtrainSttus_left().equals("급행")){
@@ -220,6 +236,9 @@ public class Metro_time_view {
 
         stationName.setBackgroundColor(Color.parseColor(metroLineColor.get(lineInfo.get(value))));
         stationName.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(metroLineColor.get(lineInfo.get(value)))));
+        stationNameListLayout.setBackgroundColor(Color.parseColor(metroLineColor.get(lineInfo.get(value))));
+        stationNameListLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(metroLineColor.get(lineInfo.get(value)))));
+
         include.setVisibility(View.VISIBLE);
     }
 

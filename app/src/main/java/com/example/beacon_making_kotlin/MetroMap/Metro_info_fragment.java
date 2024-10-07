@@ -8,12 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.beacon_making_kotlin.R;
@@ -30,6 +33,11 @@ import java.util.List;
 public class Metro_info_fragment extends Fragment {
 
     ConsDatabase db;
+
+    ConstraintLayout metroTimeView;
+    ImageButton infoBtn;
+    LinearLayout btnList;
+
     TimeTableHandler handler = new TimeTableHandler();
     MainHandler mainHandler = new MainHandler();
     TextView telText;
@@ -39,6 +47,12 @@ public class Metro_info_fragment extends Fragment {
         View view = inflater.inflate(R.layout.metro_info_fragment, container, false);
 
         db = ConsDatabase.getDatabase(getContext());
+
+        metroTimeView = (ConstraintLayout) view.findViewById(R.id.include);
+        infoBtn = (ImageButton) view.findViewById(R.id.metroInfoBtn);
+        btnList = (LinearLayout) view.findViewById(R.id.btnList);
+        infoBtn.setVisibility(View.GONE);
+        btnList.setVisibility(View.GONE);
 
         telText = (TextView) view.findViewById(R.id.metro_info_num);
         locationText = (TextView) view.findViewById(R.id.metro_info_location);
