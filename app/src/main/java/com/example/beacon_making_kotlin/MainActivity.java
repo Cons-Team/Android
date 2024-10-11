@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -86,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     SharedPreferences preferces;
 
+    //Search
+    InputMethodManager manager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,6 +123,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         drawerLayout.closeDrawer(GravityCompat.START);
                     }
                     else{
+                        manager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                        manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                         drawerLayout.openDrawer(GravityCompat.START);
                     }
                 }

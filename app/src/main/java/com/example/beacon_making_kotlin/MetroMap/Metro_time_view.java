@@ -11,6 +11,7 @@ import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -182,6 +183,7 @@ public class Metro_time_view {
         Log.v("lineInfoSize", lineInfo.size() + " ");
         for(int i = 0; i < lineInfo.size(); i++){
             lineBtnList[i] = new Button(include.getContext());
+            lineBtnList[i].setStateListAnimator(null);
             lineListLayout.addView(lineBtnList[i]);
             int value = i;
             lineBtnList[i].setOnClickListener(new View.OnClickListener() {
