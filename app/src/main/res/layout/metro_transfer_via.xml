@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/via_image"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="68dp"
@@ -16,13 +16,13 @@
         app:srcCompat="@drawable/transfer_via" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/station_via"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/via_image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.511" />
 

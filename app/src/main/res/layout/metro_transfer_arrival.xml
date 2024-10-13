@@ -30,15 +30,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수인\n분당"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintBottom_toBottomOf="@+id/line_image"
+            app:layout_constraintEnd_toEndOf="@+id/line_image"
             app:layout_constraintHorizontal_bias="0.608"
             app:layout_constraintStart_toEndOf="@+id/transfer_arrival_time"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/line_image"
             app:layout_constraintVertical_bias="0.478" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/line_image"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginStart="8dp"
@@ -56,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.086"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/line_image"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -111,7 +111,7 @@
                         android:text="내리는 문" />
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/door_direction"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -133,7 +133,7 @@
                         android:text="빠른 하차" />
 
                     <TextView
-                        android:id="@+id/textView11"
+                        android:id="@+id/quick_get_off"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
