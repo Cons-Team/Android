@@ -78,7 +78,7 @@ dependencies {
 
     compileOnly(libs.lombok)
     annotationProcessor(libs.lombok)
-    implementation(project(":unityLibrary"))
+//    implementation(project(":unityLibrary"))
 
     testImplementation(libs.junit)
 
@@ -93,5 +93,5 @@ dependencies {
     implementation(libs.subsampling.scale.image.view)
 
     // MMS Image Sending library
-    implementation(libs.picasso)
+//    implementation(libs.picasso)
 }

@@ -1,6 +1,7 @@
 package com.example.beacon_making_kotlin.db.database;
 
 import com.example.beacon_making_kotlin.db.api.TimetableAPI;
+import com.example.beacon_making_kotlin.db.api.TransferAPI;
 import com.example.beacon_making_kotlin.db.dao.*;
 import com.example.beacon_making_kotlin.db.entity.*;
 import com.example.beacon_making_kotlin.db.helper.JsonHelper;
@@ -12,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -138,3 +140,4 @@ public class ResetData {
         }
     }
 }
+

@@ -20,6 +20,7 @@ import java.util.Vector;
 public class RealTimeAPI {
 
     private static String serviceKey = realTime_key;
+
     public static Vector<Vector<String>> loadRealTimeData(String subwayStationName) throws IOException, ParseException{
         StringBuilder urlBuilder = new StringBuilder("http://swopenAPI.seoul.go.kr/api/subway"); /*URL*/
         urlBuilder.append("/" +  URLEncoder.encode(serviceKey,"UTF-8") ); /*인증키*/
