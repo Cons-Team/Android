@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,6 +65,7 @@ public class Metro_map_fragment extends Fragment {
 
     //View
     Metro_time_view metro_time_view;
+    Metro_timeTable_fragment metroTimeTableFragment;
 
     private ConsDatabase db;
     List<String> coordinationList;
@@ -85,14 +87,15 @@ public class Metro_map_fragment extends Fragment {
     SharedPreferences preferces;
     ConstraintLayout include;
 
+    FragmentTransaction transaction;
     @SuppressLint({"ClickableViewAccessibility", "UseCompatLoadingForDrawables"})
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.metro_map_fragment, container, false);
         db = ConsDatabase.getDatabase(getContext());
 
         //Fragment 전환
-//        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-//        transaction.replace(R.id.frameLayout, memo).commitAllowingStateLoss();
+        transaction = getParentFragmentManager().beginTransaction();
+        metroTimeTableFragment = new Metro_timeTable_fragment();
 
         metro_time_view = new Metro_time_view(view);
         include = (ConstraintLayout) view.findViewById(R.id.include);
@@ -161,6 +164,14 @@ public class Metro_map_fragment extends Fragment {
 
         loadingDialog = new LoadingDialog(getContext());
 
+        Button timeTable = view.findViewById(R.id.timeTable);
+        timeTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transaction.replace(R.id.fragment_container_view, metroTimeTableFragment).commitAllowingStateLoss();
+            }
+        });
+
         return view;
     }
 
@@ -216,17 +227,30 @@ public class Metro_map_fragment extends Fragment {
     public class BackgroundThread extends Thread{
         String name;
         public void run(){
+            HashMap<String, Metro_time_info> map = new HashMap<>();
             try {
-                 Metro_time_view.insertInfo(RealTimeAPI.loadRealTimeData(name));
+                 map = Metro_time_view.insertInfo(RealTimeAPI.loadRealTimeData(name));
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
             }
-
-            Message msg = handler.obtainMessage();
-            Bundle bundle = new Bundle();
-            bundle.putInt("value", 0);
-            msg.setData(bundle);
-            handler.sendMessage(msg);
+            
+            if(!map.isEmpty()){
+                Message msg = handler.obtainMessage();
+                Bundle bundle = new Bundle();
+                bundle.putInt("value", 0);
+                msg.setData(bundle);
+                handler.sendMessage(msg);    
+            }
+            else {
+                //Toast 출력
+//                Toast.makeText("입력된 정보가 없습니다.", null);
+                Message msg = handler.obtainMessage();
+                Bundle bundle = new Bundle();
+                bundle.putInt("value", -1);
+                msg.setData(bundle);
+                handler.sendMessage(msg);
+            }
+            
         }
     }
 
@@ -235,8 +259,13 @@ public class Metro_map_fragment extends Fragment {
         public void handleMessage(@NonNull Message msg){
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
-            Metro_time_view.settingBtn();
-            Metro_time_view.settingView(bundle.getInt("value"));
+            if(bundle.getInt("value") == -1){
+                include.setVisibility(View.GONE);
+            }
+            else{
+                Metro_time_view.settingBtn();
+                Metro_time_view.settingView(bundle.getInt("value"));
+            }
         }
     }
 }

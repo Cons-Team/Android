@@ -26,6 +26,7 @@ import java.util.List;
 
 public class Metro_timeTable_fragment extends Fragment {
 
+    static String temp = "";
     ConsDatabase db;
     TimeTableHandler handler = new TimeTableHandler();
     LinearLayout upLayout;
@@ -88,12 +89,6 @@ public class Metro_timeTable_fragment extends Fragment {
                         }
                     }
                 }
-//                Log.v("stationId", stationId.get(0));
-//                Log.v("inftoTableSize", "" + infoTables.size());
-//                for(int i = 0; i < infoTables.size(); i++){
-//                    Log.v("infoTable", "Address : " + infoTables.get(i).getAddress());
-//                    Log.v("infoTable", "tel : " + infoTables.get(i).getTel());
-//                }
 
                 Message msg = handler.obtainMessage();
                 Bundle bundle = new Bundle();

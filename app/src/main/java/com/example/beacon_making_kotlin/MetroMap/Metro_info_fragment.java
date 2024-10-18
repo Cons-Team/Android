@@ -34,6 +34,8 @@ public class Metro_info_fragment extends Fragment {
 
     ConsDatabase db;
 
+    String temp = "";
+
     ConstraintLayout metroTimeView;
     ImageButton infoBtn;
     LinearLayout btnList;
@@ -75,9 +77,8 @@ public class Metro_info_fragment extends Fragment {
                     throw new RuntimeException(e);
                 }
 
-                List<String> coordinationList = db.coordinateDao().getStationName(2270, 4200);
                 BackgroundThread thread = new BackgroundThread();
-                thread.name = coordinationList.get(0);
+                thread.name = temp;
                 thread.start();
 
                 List<String> stationId = db.stationDao().getStationID(stationName);
@@ -91,12 +92,14 @@ public class Metro_info_fragment extends Fragment {
                     msg.setData(bundle);
                     handler.sendMessage(msg);
                 }
-
+                else{
+                    //toast 굽기
+                }
             }
         }
 
         SelectTimeTable tableClass = new SelectTimeTable();
-        tableClass.stationName = "병점";
+        tableClass.stationName = "temp";
 
         Thread t = new Thread(tableClass);
         t.start();

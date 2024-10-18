@@ -88,13 +88,6 @@ public class Metro_time_view {
             }
         });
 
-        timeTable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         metroLineColor = new HashMap<>();
         settingColor();
     }
@@ -105,9 +98,9 @@ public class Metro_time_view {
         metroLineColor.put("3호선", "#ED6D00");
         metroLineColor.put("4호선", "#039CCE");
         metroLineColor.put("5호선", "#794598");
-        metroLineColor.put("6호선", "#7C4A33v");
+        metroLineColor.put("6호선", "#7C4A33");
         metroLineColor.put("7호선", "#6D7E30");
-        metroLineColor.put("8호선", "#D01870v");
+        metroLineColor.put("8호선", "#D01870");
         metroLineColor.put("9호선", "#A49E88");
         metroLineColor.put("경의중앙선", "#69C3B1");
         metroLineColor.put("공항철도", "#0079AC");
