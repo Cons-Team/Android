@@ -29,14 +29,13 @@ public class TransferAPI {
         Log.d("지하철 환승 안내", "eCode 완료");
         Vector<Object> result = transferApi(sCode, eCode, sopt);
 //        Vector<Object> result = transferApi("188", "11718", sopt);  // 오산대 - 신림 길찾기 테스트
+
         return result;
     }
 
     public static Vector<Object> transferApi(String sid, String eid, int sopt) throws IOException, ParseException, JSONException {
         String urlInfo = "https://api.odsay.com/v1/api/subwayPath?lang=0&CID=1000&SID=" + sid + "&EID=" + eid + "&Sopt=1&apiKey="
                 + URLEncoder.encode(serviceKey, "UTF-8");
-
-        Log.d("지하철 환승 안내", "" + urlInfo);
 
         URL url = new URL(urlInfo);
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -56,37 +55,44 @@ public class TransferAPI {
         Vector<Object> resultVector = new Vector<>();
 
         JSONObject jsonObject = new JSONObject(sb.toString());
-        JSONObject result = jsonObject.getJSONObject("result");
+        if (jsonObject.has("result")){
+            try {
+                JSONObject result = jsonObject.getJSONObject("result");
 
-        String globalStartName = result.getString("globalStartName");   // 출발역 명
-        String globalEndName = result.getString("globalEndName");   // 도착역 명
-        int globalTravelTime = result.getInt("globalTravelTime");   // 소요 시간(분)
-        int globalStationCount = result.getInt("globalStationCount");   // 정차역 수
-        int fare = result.getInt("fare");   // 성인 요금 (카드)
-        int cashFare = result.getInt("cashFare");   // 성인 요금 (현금)
+                String globalStartName = result.optString("globalStartName", "X");   // 출발역 명
+                String globalEndName = result.optString("globalEndName", "X");   // 도착역 명
+                int globalTravelTime = result.optInt("globalTravelTime", 0);   // 소요 시간(분)
+                int globalStationCount = result.optInt("globalStationCount", 0);   // 정차역 수
+                int fare = result.optInt("fare", 0);   // 성인 요금 (카드)
+                int cashFare = result.optInt("cashFare", 0);   // 성인 요금 (현금)
 
-        JSONArray exChangeInfoArray = result.getJSONObject("exChangeInfoSet").getJSONArray("exChangeInfo"); // 환승역 명
-        Vector<String> exNames = new Vector<>();
-        for (int i = 0; i < exChangeInfoArray.length(); i++) {
-            String startName = exChangeInfoArray.getJSONObject(i).getString("exName");
-            exNames.add(startName);
+                JSONArray exChangeInfoArray = result.getJSONObject("exChangeInfoSet").getJSONArray("exChangeInfo"); // 환승역 명
+                Vector<String> exNames = new Vector<>();
+                for (int i = 0; i < exChangeInfoArray.length(); i++) {
+                    String startName = exChangeInfoArray.getJSONObject(i).optString("exName", "X");
+                    exNames.add(startName);
+                }
+
+                JSONArray stationsArray = result.getJSONObject("stationSet").getJSONArray("stations");  // 정차역 명
+                Vector<String> stationNames = new Vector<>();
+                for (int i = 0; i < stationsArray.length(); i++) {
+                    String startName = stationsArray.getJSONObject(i).optString("startName", "X");
+                    stationNames.add(startName);
+                }
+
+                resultVector.add(globalStartName);
+                resultVector.add(globalEndName);
+                resultVector.add(globalTravelTime);
+                resultVector.add(globalStationCount);
+                resultVector.add(fare);
+                resultVector.add(cashFare);
+                resultVector.add(exNames);
+                resultVector.add(stationNames);
+            } catch (JSONException e){
+                Log.d("JSONException", "transferApi Error");
+            }
         }
 
-        JSONArray stationsArray = result.getJSONObject("stationSet").getJSONArray("stations");  // 정차역 명
-        Vector<String> stationNames = new Vector<>();
-        for (int i = 0; i < stationsArray.length(); i++) {
-            String startName = stationsArray.getJSONObject(i).getString("startName");
-            stationNames.add(startName);
-        }
-
-        resultVector.add(globalStartName);
-        resultVector.add(globalEndName);
-        resultVector.add(globalTravelTime);
-        resultVector.add(globalStationCount);
-        resultVector.add(fare);
-        resultVector.add(cashFare);
-        resultVector.add(exNames);
-        resultVector.add(stationNames);
 
         return resultVector;
     }
@@ -122,7 +128,7 @@ public class TransferAPI {
         JSONArray stationArray = jsonObject.getJSONObject("result").getJSONArray("station");
 
         if (stationArray.length() > 0) {
-            return stationArray.getJSONObject(0).getString("stationID");
+            return stationArray.getJSONObject(0).optString("stationID", "X");
         }
         return null;
     }
@@ -157,7 +163,7 @@ public class TransferAPI {
         JSONArray cidArray = jsonObject.getJSONObject("result").getJSONArray("CID");
 
         if (cidArray.length() > 0) {
-            return cidArray.getJSONObject(0).getString("cityCode");
+            return cidArray.getJSONObject(0).optString("cityCode", "X");
         }
 
         return null;

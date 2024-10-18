@@ -1,6 +1,5 @@
 package com.example.beacon_making_kotlin.db.database;
 
-import com.example.beacon_making_kotlin.db.api.TimetableAPI;
 import com.example.beacon_making_kotlin.db.api.TransferAPI;
 import com.example.beacon_making_kotlin.db.dao.*;
 import com.example.beacon_making_kotlin.db.entity.*;
@@ -11,6 +10,7 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Vector;
@@ -45,6 +45,7 @@ public class ResetData {
             if (stationDao.getAllStations().isEmpty()) {
                 coordinateReset(context);
                 stationReset(context);
+                timetableReset(context);
             }
         executor.shutdown();
         });
@@ -56,6 +57,8 @@ public class ResetData {
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 JSONArray coordinateArray = jsonObject.getJSONArray("coordinate");
+                Vector<Object> test = TransferAPI.loadTransferData("오산", "신림", 2);
+                Log.d("경로안내 data", "결과 " + test);
 
                 for (int i = 0; i < coordinateArray.length(); i++) {
                     JSONObject coordinateObject = coordinateArray.getJSONObject(i);
@@ -74,6 +77,10 @@ public class ResetData {
                 Log.d("coordinate end", "coordinate end");
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -96,17 +103,10 @@ public class ResetData {
                     stationDao.insertStation(station);
                     infoReset(context, stationID, stationName, line);
 
-                    for (String day : dailyTypeCode) {
-                        for (String updown : upDownTypeCode) {
-                            Timetable timetable = new Timetable(stationID, day, updown, TimetableAPI.loadTimetableData(stationID, day, updown));
-                            timetableDao.insertTimetable(timetable);
-                        }
-                    }
-
                     Log.d("station data", "station " + i);
                 }
                 Log.d("station end", "station end");
-            } catch (JSONException | IOException | ParseException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
@@ -134,6 +134,33 @@ public class ResetData {
                         return;
                     }
                 }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void timetableReset(Context context){
+        String jsonString = JsonHelper.loadJSONFromAsset(context, "timetable.json");
+        if (jsonString != null) {
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+                JSONArray timetableArray = jsonObject.getJSONArray("timetable");
+
+                for (int i = 0; i < timetableArray.length(); i++) {
+                    JSONObject timetableObject = timetableArray.getJSONObject(i);
+
+                    String stationID = timetableObject.getString("stationID");
+                    String day = timetableObject.getString("day");
+                    String updown = timetableObject.getString("updown");
+                    String time = timetableObject.getString("time");
+
+                    Timetable timetable = new Timetable(stationID, day, updown, time);
+                    timetableDao.insertTimetable(timetable);
+
+                    Log.d("timetable data", "timetable " + i);
+                }
+                Log.d("timetable end", "timetable end");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
