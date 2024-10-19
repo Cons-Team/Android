@@ -1,6 +1,8 @@
 package com.example.beacon_making_kotlin.MetroMap;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -72,22 +74,16 @@ public class Metro_info_fragment extends Fragment {
 
             @Override
             public void run() {
-                try {
-                    sleep(5000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
                 BackgroundThread thread = new BackgroundThread();
                 thread.name = stationName;
                 Log.v("StationName", stationName);
                 thread.start();
 
-                List<String> stationId = db.stationDao().getStationID("병점");
-                Log.v("stationID", "" + stationId.size());
+                List<String> stationId = db.stationDao().getStationID(stationName);
+                Log.v("stationID", "" + stationId.get(0));
 
                 if(!stationId.isEmpty()){
-                    List<Info> infoTables = db.infoDao().getInfo("까치산");
+                    List<Info> infoTables = db.infoDao().getInfo(stationId.get(0));
                     Log.v("infoTables", infoTables.size() + " ");
 
                     Message msg = handler.obtainMessage();
@@ -122,6 +118,13 @@ public class Metro_info_fragment extends Fragment {
             String addresses = bundle.getString("address");
 
             telText.setText(tel);
+            telText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent numberIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tel));
+                    Metro_info_fragment.this.getContext().startActivity(numberIntent);
+                }
+            });
             locationText.setText(addresses);
         }
     }

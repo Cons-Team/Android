@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -166,11 +167,12 @@ public class Metro_map_fragment extends Fragment {
         loadingDialog = new LoadingDialog(getContext());
 
         ImageButton metro_info = view.findViewById(R.id.metroInfoBtn);
+        TextView stationName = (TextView) view.findViewById(R.id.stationName);
         metro_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("metro_name", "신창");
+                bundle.putString("metro_name", (String) stationName.getText());
                 Metro_info_fragment metroInfoFragment = new Metro_info_fragment();
                 metroInfoFragment.setArguments(bundle);
                 transaction.replace(R.id.fragment_container_view, metroInfoFragment).commitAllowingStateLoss();
@@ -182,7 +184,7 @@ public class Metro_map_fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("metro_name", "까치산");
+                bundle.putString("metro_name", (String) stationName.getText());
                 metroTimeTableFragment.setArguments(bundle);
                 transaction.replace(R.id.fragment_container_view, metroTimeTableFragment).commitAllowingStateLoss();
             }

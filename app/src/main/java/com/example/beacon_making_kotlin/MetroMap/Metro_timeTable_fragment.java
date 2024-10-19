@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import com.example.beacon_making_kotlin.db.database.ConsDatabase;
 import com.example.beacon_making_kotlin.db.entity.Info;
 import com.example.beacon_making_kotlin.db.entity.Timetable;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Metro_timeTable_fragment extends Fragment {
@@ -81,7 +84,7 @@ public class Metro_timeTable_fragment extends Fragment {
                 String down = "";
 
                 for(int i = 0; i < timeTables.size(); i++){
-                    Log.v("timeTableID", "id : " + timeTables.get(i).getStationID());
+                    Log.v("timeTableID", "id : " + timeTables.get(i).getStationID() + " " + i);
                     if(timeTables.get(i).getStationID().equals(stationId.get(0))){
                         Log.v("timeTable", "Day : " + timeTables.get(i).getDay());
                         Log.v("timeTable", "Updown : " + timeTables.get(i).getUpdown());
@@ -125,21 +128,54 @@ public class Metro_timeTable_fragment extends Fragment {
             upLayout.removeAllViews();
             downLayout.removeAllViews();
 
-            for(int i = 0; i < upTime.length; i++){
+            String[] upTimeSetting = timeSetting(upTime);
+            String[] downTimeSetting = timeSetting(downTime);
+
+            for(String s : upTimeSetting){
                 TextView up = new TextView(getContext());
                 up.setPadding(15, 15, 15, 15);
-                up.setText(upTime[i]);
+                up.setText(s);
                 up.setTextColor(Color.parseColor(textColor));
                 up.setTextSize(14);
                 upLayout.addView(up);
+            }
 
+            for(String s : downTimeSetting){
                 TextView down = new TextView(getContext());
                 down.setPadding(15, 15, 15, 15);
-                down.setText(downTime[i]);
+                down.setText(s);
                 down.setTextColor(Color.parseColor(textColor));
                 down.setTextSize(14);
                 downLayout.addView(down);
             }
+        }
+
+        private String[] timeSetting(String[] time) {
+            String[] value = new String[time.length];
+            ArrayList<String> list = new ArrayList<>();
+            int index = 0;
+            for(String s : time){
+                String[] temp = s.split("-");
+                if(temp[0].equals("0")){
+                   continue;
+                }
+                else if(Integer.parseInt(temp[0]) < 20000){
+                    String timeValue = "" + temp[0].charAt(0) + temp[0].charAt(1) + "시 " +
+                            temp[0].charAt(2) + temp[0].charAt(3) + "분\n" + temp[1];
+                    list.add(timeValue);
+                }
+                else{
+                    String timeValue = "" + temp[0].charAt(0) + temp[0].charAt(1) + "시 " +
+                            temp[0].charAt(2) + temp[0].charAt(3) + "분\n" + temp[1];
+                    value[index++] = timeValue;
+                }
+            }
+
+            for(String s : list){
+                value[index++] = s;
+            }
+
+            return value;
         }
     }
 }

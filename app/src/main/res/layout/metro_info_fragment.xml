@@ -22,12 +22,14 @@
                 android:layout_height="wrap_content"
                 android:visibility="visible"/>
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="5dp">
+                app:cardElevation="5dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white">
 
 
                 <LinearLayout
@@ -52,7 +54,7 @@
                         android:textColor="@color/fontColor"
                         android:text="TextView" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
