@@ -123,8 +123,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         drawerLayout.closeDrawer(GravityCompat.START);
                     }
                     else{
-                        manager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                        manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                        View currentFocus = getCurrentFocus();
+                        if (currentFocus != null) {
+                            manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                            manager.hideSoftInputFromWindow(currentFocus.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                        }
                         drawerLayout.openDrawer(GravityCompat.START);
                     }
                 }

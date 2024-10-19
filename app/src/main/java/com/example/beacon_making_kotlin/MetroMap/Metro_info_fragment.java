@@ -23,6 +23,7 @@ import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.db.api.RealTimeAPI;
 import com.example.beacon_making_kotlin.db.database.ConsDatabase;
 import com.example.beacon_making_kotlin.db.entity.Info;
+import com.example.beacon_making_kotlin.db.entity.Station;
 import com.example.beacon_making_kotlin.db.entity.Timetable;
 
 import java.io.IOException;
@@ -78,12 +79,16 @@ public class Metro_info_fragment extends Fragment {
                 }
 
                 BackgroundThread thread = new BackgroundThread();
-                thread.name = temp;
+                thread.name = stationName;
+                Log.v("StationName", stationName);
                 thread.start();
 
-                List<String> stationId = db.stationDao().getStationID(stationName);
+                List<String> stationId = db.stationDao().getStationID("병점");
+                Log.v("stationID", "" + stationId.size());
+
                 if(!stationId.isEmpty()){
-                    List<Info> infoTables = db.infoDao().getInfo(stationId.get(0));
+                    List<Info> infoTables = db.infoDao().getInfo("까치산");
+                    Log.v("infoTables", infoTables.size() + " ");
 
                     Message msg = handler.obtainMessage();
                     Bundle bundle = new Bundle();
@@ -99,7 +104,10 @@ public class Metro_info_fragment extends Fragment {
         }
 
         SelectTimeTable tableClass = new SelectTimeTable();
-        tableClass.stationName = "temp";
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            tableClass.stationName = bundle.getString("metro_name");
+        }
 
         Thread t = new Thread(tableClass);
         t.start();
@@ -131,7 +139,7 @@ public class Metro_info_fragment extends Fragment {
 
             Message msg = mainHandler.obtainMessage();
             Bundle bundle = new Bundle();
-            bundle.putInt("value", map.keySet().size());
+            bundle.putInt("value", map.keySet().size()-1);
             Log.v("mapKeyTest", map.keySet().size()+"");
             msg.setData(bundle);
             mainHandler.sendMessage(msg);

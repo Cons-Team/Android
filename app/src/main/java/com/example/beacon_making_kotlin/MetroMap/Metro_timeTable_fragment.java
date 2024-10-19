@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.db.database.ConsDatabase;
@@ -38,6 +39,9 @@ public class Metro_timeTable_fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.metro_timetable_fragmennt, container, false);
 
+        //Fragment 전환
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
         db = ConsDatabase.getDatabase(getContext());
         upLayout = view.findViewById(R.id.upLine);
         downLayout = view.findViewById(R.id.downLine);
@@ -45,10 +49,17 @@ public class Metro_timeTable_fragment extends Fragment {
         preferces = this.getActivity().getSharedPreferences("Setting", 0);
         textColor = preferces.getString("theme", "Day").equals("Day") ? "#000000" : "#ffffff";
 
+        TextView back = (TextView) view.findViewById(R.id.up_line);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transaction.replace(R.id.fragment_container_view, new Metro_map_fragment()).addToBackStack(null).commit();
+            }
+        });
+
         return view;
     }
 
-    @Override
     public void onStart() {
         super.onStart();
         class SelectTimeTable extends Thread implements Runnable {
@@ -57,11 +68,6 @@ public class Metro_timeTable_fragment extends Fragment {
 
             @Override
             public void run() {
-                try {
-                    sleep(400000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
                 Log.v("stationIdText", stationName);
                 List<String> stationId = db.stationDao().getStationID(stationName);
                 Log.v("stationIdTest", stationId.size() + "");
@@ -76,8 +82,7 @@ public class Metro_timeTable_fragment extends Fragment {
 
                 for(int i = 0; i < timeTables.size(); i++){
                     Log.v("timeTableID", "id : " + timeTables.get(i).getStationID());
-//                    if(timeTables.get(i).getStationID().equals(stationId.get(0))){
-                    if(timeTables.get(i).getStationID().equals("MTRS12249")){
+                    if(timeTables.get(i).getStationID().equals(stationId.get(0))){
                         Log.v("timeTable", "Day : " + timeTables.get(i).getDay());
                         Log.v("timeTable", "Updown : " + timeTables.get(i).getUpdown());
                         Log.v("timeTable", "Time : " + timeTables.get(i).getTime());
@@ -100,7 +105,10 @@ public class Metro_timeTable_fragment extends Fragment {
         }
 
         SelectTimeTable tableClass = new SelectTimeTable();
-        tableClass.stationName = "병점";
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            tableClass.stationName = bundle.getString("metro_name");
+        }
 
         Thread t = new Thread(tableClass);
         t.start();

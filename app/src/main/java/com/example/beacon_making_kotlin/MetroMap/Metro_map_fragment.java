@@ -20,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -164,10 +165,25 @@ public class Metro_map_fragment extends Fragment {
 
         loadingDialog = new LoadingDialog(getContext());
 
+        ImageButton metro_info = view.findViewById(R.id.metroInfoBtn);
+        metro_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("metro_name", "신창");
+                Metro_info_fragment metroInfoFragment = new Metro_info_fragment();
+                metroInfoFragment.setArguments(bundle);
+                transaction.replace(R.id.fragment_container_view, metroInfoFragment).commitAllowingStateLoss();
+            }
+        });
+
         Button timeTable = view.findViewById(R.id.timeTable);
         timeTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("metro_name", "까치산");
+                metroTimeTableFragment.setArguments(bundle);
                 transaction.replace(R.id.fragment_container_view, metroTimeTableFragment).commitAllowingStateLoss();
             }
         });
