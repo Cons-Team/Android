@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.db.api.RealTimeAPI;
@@ -37,8 +38,6 @@ public class Metro_info_fragment extends Fragment {
 
     ConsDatabase db;
 
-    String temp = "";
-
     ConstraintLayout metroTimeView;
     ImageButton infoBtn;
     LinearLayout btnList;
@@ -52,6 +51,7 @@ public class Metro_info_fragment extends Fragment {
         View view = inflater.inflate(R.layout.metro_info_fragment, container, false);
 
         db = ConsDatabase.getDatabase(getContext());
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
 
         metroTimeView = (ConstraintLayout) view.findViewById(R.id.include);
         infoBtn = (ImageButton) view.findViewById(R.id.metroInfoBtn);
@@ -62,6 +62,15 @@ public class Metro_info_fragment extends Fragment {
         telText = (TextView) view.findViewById(R.id.metro_info_num);
         locationText = (TextView) view.findViewById(R.id.metro_info_location);
         metro_time_view = new Metro_time_view(view);
+
+        ImageButton backBtn = (ImageButton) view.findViewById(R.id.infoTableBackBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transaction.replace(R.id.fragment_container_view, new Metro_map_fragment()).addToBackStack(null).commit();
+            }
+        });
+
         return view;
     }
 

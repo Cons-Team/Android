@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,7 +31,6 @@ import java.util.List;
 
 public class Metro_timeTable_fragment extends Fragment {
 
-    static String temp = "";
     ConsDatabase db;
     TimeTableHandler handler = new TimeTableHandler();
     LinearLayout upLayout;
@@ -52,8 +52,8 @@ public class Metro_timeTable_fragment extends Fragment {
         preferces = this.getActivity().getSharedPreferences("Setting", 0);
         textColor = preferces.getString("theme", "Day").equals("Day") ? "#000000" : "#ffffff";
 
-        TextView back = (TextView) view.findViewById(R.id.up_line);
-        back.setOnClickListener(new View.OnClickListener() {
+        ImageButton backBtn = (ImageButton) view.findViewById(R.id.timeTableBackBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 transaction.replace(R.id.fragment_container_view, new Metro_map_fragment()).addToBackStack(null).commit();

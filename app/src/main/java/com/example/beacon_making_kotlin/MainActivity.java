@@ -56,6 +56,7 @@ import com.example.beacon_making_kotlin.Menu.SettingMenuGroup;
 import com.example.beacon_making_kotlin.MetroMap.Metro_info_fragment;
 import com.example.beacon_making_kotlin.MetroMap.Metro_map_fragment;
 import com.example.beacon_making_kotlin.MetroMap.Metro_timeTable_fragment;
+import com.example.beacon_making_kotlin.MetroMap.Metro_transfer_fragment;
 import com.example.beacon_making_kotlin.beaconfind.BeaconBackgroundService;
 import com.example.beacon_making_kotlin.beaconfind.LoadingDialog;
 import com.example.beacon_making_kotlin.db.database.ConsDatabase;
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ArrayList<SettingMenuGroup> settingMenus;
 
     //Toolbar
-    Toolbar toolbar;
+    public static Toolbar toolbar;
     TextView page_title;
 
     SharedPreferences preferces;
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         metro_map_fragment = new Metro_map_fragment();
 //        Metro_timeTable_fragment timeTableFragment = new Metro_timeTable_fragment();
 //        Metro_info_fragment metroInfoFragment = new Metro_info_fragment();
+//        Metro_transfer_fragment metroTransferFragment = new Metro_transfer_fragment();
 
         //FragmentManager
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.replace(R.id.fragment_container_view, metro_map_fragment).commitAllowingStateLoss();
 //        transaction.replace(R.id.fragment_container_view, timeTableFragment).commitAllowingStateLoss();
 //        transaction.replace(R.id.fragment_container_view, metroInfoFragment).commitAllowingStateLoss();
+//        transaction.replace(R.id.fragment_container_view, metroTransferFragment).commitAllowingStateLoss();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.main);
         menu_button = (ImageButton) findViewById(R.id.menu_button);

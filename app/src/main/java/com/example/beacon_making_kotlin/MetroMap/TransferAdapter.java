@@ -2,6 +2,11 @@ package com.example.beacon_making_kotlin.MetroMap;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,30 +33,51 @@ public class TransferAdapter extends BaseExpandableListAdapter {
         this.arrivalLay = arrivalLay;
         this.listView = listView;
         this.myInf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
     }
 
     @SuppressLint("ResourceAsColor")
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        if(listView.get(groupPosition).departure){
+        SharedPreferences preferences = context.getSharedPreferences("Setting", 0);
+        String theme = preferences.getString("theme", "Day");
+        if(listView.get(groupPosition).departure == 0){
             convertView = myInf.inflate(this.departureLay, parent, false);
             TextView time = convertView.findViewById(R.id.transfer_departure_time);
             TextView line = convertView.findViewById(R.id.transfer_lineInfo);
             ImageView lineImage = convertView.findViewById(R.id.line_image);
             TextView departure = convertView.findViewById(R.id.transfer_departure_dire);
+
+            departure.setText(listView.get(groupPosition).name);
+            line.setText(listView.get(groupPosition).lineInfo);
+            line.setTextColor(theme.equals("Day") ? Color.parseColor("#000000") : Color.parseColor("#ffffff"));
+            lineImage.setColorFilter(Color.parseColor(listView.get(groupPosition).lineColor));
         }
-        else {
+        else if(listView.get(groupPosition).departure == 2){
             convertView = myInf.inflate(this.arrivalLay, parent, false);
             TextView time = convertView.findViewById(R.id.transfer_arrival_time);
-            TextView line = convertView.findViewById(R.id.transfer_lineInfo);
+            TextView line = convertView.findViewById(R.id.transfer_lineInfo_arrival);
             ImageView lineImage = convertView.findViewById(R.id.line_image);
             TextView arrival = convertView.findViewById(R.id.transfer_arrival_dire);
             ImageView walk = convertView.findViewById(R.id.transfer_walk);
             TextView door = convertView.findViewById(R.id.door_direction);
             TextView getOff = convertView.findViewById(R.id.quick_get_off);
-        }
 
+            arrival.setText(listView.get(groupPosition).name);
+            line.setText(listView.get(groupPosition).lineInfo);
+            line.setTextColor(theme.equals("Day") ? Color.parseColor("#000000") : Color.parseColor("#ffffff"));
+            lineImage.setColorFilter(Color.parseColor(listView.get(groupPosition).lineColor));
+            Log.v("parentCheck", parent + "");
+        }
+        else{
+            convertView = myInf.inflate(this.viaLay, parent, false);
+
+            ImageView line = convertView.findViewById(R.id.via_image);
+            TextView via = convertView.findViewById(R.id.station_via);
+
+            line.setColorFilter(Color.parseColor(listView.get(groupPosition).lineColor));
+            via.setText(listView.get(groupPosition).name);
+            via.setTextColor(theme.equals("Day") ? Color.parseColor("#000000") : Color.parseColor("#ffffff"));
+        }
         return convertView;
     }
 
@@ -59,9 +85,14 @@ public class TransferAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         convertView = myInf.inflate(this.viaLay, parent, false);
+        Log.v("viaLoad", childPosition + "");
 
-        ImageView line = convertView.findViewById(R.id.via_image);
-        TextView via = convertView.findViewById(R.id.station_via);
+//        ImageView line = convertView.findViewById(R.id.via_image);
+//        TextView via = convertView.findViewById(R.id.station_via);
+//
+//        line.setBackgroundColor(Color.parseColor(listView.get(groupPosition).lineColor));
+//        line.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(listView.get(groupPosition).lineColor)));
+//        via.setText(listView.get(groupPosition).via_list.get(childPosition));
 
         return convertView;
     }

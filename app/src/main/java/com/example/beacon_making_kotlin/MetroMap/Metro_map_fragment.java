@@ -70,7 +70,7 @@ public class Metro_map_fragment extends Fragment {
     Metro_timeTable_fragment metroTimeTableFragment;
 
     private ConsDatabase db;
-    List<String> coordinationList;
+
     Context mContext;
 
     MainHandler handler = new MainHandler();
@@ -171,6 +171,7 @@ public class Metro_map_fragment extends Fragment {
         metro_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.toolbar.setVisibility(View.GONE);
                 Bundle bundle = new Bundle();
                 bundle.putString("metro_name", (String) stationName.getText());
                 Metro_info_fragment metroInfoFragment = new Metro_info_fragment();
@@ -183,6 +184,7 @@ public class Metro_map_fragment extends Fragment {
         timeTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MainActivity.toolbar.setVisibility(View.GONE);
                 Bundle bundle = new Bundle();
                 bundle.putString("metro_name", (String) stationName.getText());
                 metroTimeTableFragment.setArguments(bundle);
@@ -192,6 +194,14 @@ public class Metro_map_fragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        Log.v("Metro_map_fragment", "onStart");
+        MainActivity.toolbar.setVisibility(View.VISIBLE);
+    }
+
 
     public void navBtnClick(){
         if(bluetoothStateCheck()){
