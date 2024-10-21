@@ -66,7 +66,7 @@ public class TransferAdapter extends BaseExpandableListAdapter {
             line.setText(listView.get(groupPosition).lineInfo);
             line.setTextColor(theme.equals("Day") ? Color.parseColor("#000000") : Color.parseColor("#ffffff"));
             lineImage.setColorFilter(Color.parseColor(listView.get(groupPosition).lineColor));
-            Log.v("parentCheck", parent + "");
+            walk.setColorFilter(theme.equals("Day") ? Color.parseColor("#000000") : Color.parseColor("#ffffff"));
         }
         else{
             convertView = myInf.inflate(this.viaLay, parent, false);
@@ -87,12 +87,12 @@ public class TransferAdapter extends BaseExpandableListAdapter {
         convertView = myInf.inflate(this.viaLay, parent, false);
         Log.v("viaLoad", childPosition + "");
 
-//        ImageView line = convertView.findViewById(R.id.via_image);
-//        TextView via = convertView.findViewById(R.id.station_via);
-//
-//        line.setBackgroundColor(Color.parseColor(listView.get(groupPosition).lineColor));
-//        line.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(listView.get(groupPosition).lineColor)));
-//        via.setText(listView.get(groupPosition).via_list.get(childPosition));
+        ImageView line = convertView.findViewById(R.id.via_image);
+        TextView via = convertView.findViewById(R.id.station_via);
+
+        line.setBackgroundColor(Color.parseColor(listView.get(groupPosition).lineColor));
+        line.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(listView.get(groupPosition).lineColor)));
+        via.setText(listView.get(groupPosition).via_list.get(childPosition));
 
         return convertView;
     }

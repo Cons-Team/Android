@@ -11,12 +11,14 @@ public class Transfer_Group {
     String time;
     String door_dire;
     String get_off;
+    ArrayList<String> via_list;
 
     public Transfer_Group(String name, int departure, String lineInfo, String lineColor){
         this.name = name;
         this.departure = departure;
         this.lineInfo = lineInfo;
         this.lineColor = lineColor;
+        via_list = new ArrayList<>();
     }
 
     public Transfer_Group(String name, int departure, String lineInfo, String lineColor, String time, String door_dire, String get_off){

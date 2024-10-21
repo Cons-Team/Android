@@ -37,7 +37,7 @@ public class Metro_timeTable_fragment extends Fragment {
     LinearLayout downLayout;
 
     static String textColor;
-
+    static TextView title;
     SharedPreferences preferces;
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.metro_timetable_fragmennt, container, false);
@@ -51,6 +51,7 @@ public class Metro_timeTable_fragment extends Fragment {
 
         preferces = this.getActivity().getSharedPreferences("Setting", 0);
         textColor = preferces.getString("theme", "Day").equals("Day") ? "#000000" : "#ffffff";
+        title = (TextView) view.findViewById(R.id.timeTableTitle);
 
         ImageButton backBtn = (ImageButton) view.findViewById(R.id.timeTableBackBtn);
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +103,7 @@ public class Metro_timeTable_fragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("상행", up);
                 bundle.putString("하행", down);
+                bundle.putString("역명", stationName);
                 msg.setData(bundle);
                 handler.sendMessage(msg);
             }
@@ -124,6 +126,8 @@ public class Metro_timeTable_fragment extends Fragment {
             Bundle bundle = msg.getData();
             String[] upTime = bundle.getString("상행").split("@");
             String[] downTime = bundle.getString("하행").split("@");
+            
+            title.setText(bundle.getString("역명"));
 
             upLayout.removeAllViews();
             downLayout.removeAllViews();

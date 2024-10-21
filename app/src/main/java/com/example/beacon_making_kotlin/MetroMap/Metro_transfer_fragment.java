@@ -10,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.beacon_making_kotlin.MainActivity;
 import com.example.beacon_making_kotlin.Menu.MainMenuAdapter;
@@ -54,6 +56,8 @@ public class Metro_transfer_fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.metro_transfer_fragment, container, false);
 
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+
         //transfer info view
         transferView = (ExpandableListView) view.findViewById(R.id.transferView);
         context = getContext();
@@ -64,6 +68,17 @@ public class Metro_transfer_fragment extends Fragment {
         station_arrival = view.findViewById(R.id.metro_arrival);
         station_via_num = view.findViewById(R.id.metro_via_num);
         station_total_time = view.findViewById(R.id.metro_via_total);
+
+        //toolbar
+        ImageButton backBtn = (ImageButton) view.findViewById(R.id.transferBackBtn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transaction.replace(R.id.fragment_container_view, new Metro_map_fragment()).addToBackStack(null).commit();
+            }
+        });
+
+
         return view;
     }
 
@@ -85,45 +100,31 @@ public class Metro_transfer_fragment extends Fragment {
                 }
 
                 Log.v("TransferDataTest", list.size()+"");
-                Vector<String> viaList = (Vector<String>) list.get(6);
+                Vector<String> viaTemp = (Vector<String>) list.get(6);
+                ArrayList<String> viaList = new ArrayList<>();
+
+                for(int i = 0; i < viaTemp.size(); i++){
+                    viaList.add(viaTemp.get(i));
+                }
+
                 StringBuilder sb = new StringBuilder();
                 for(String via : viaList){
                     sb.append(via).append(", ");
                 }
                 sb.deleteCharAt(sb.length()-1);
                 sb.deleteCharAt(sb.length()-1);
+                Vector<String> stationTemp = (Vector<String>) list.get(7);
+                ArrayList<String> stationNames = new ArrayList<>();
 
-                Vector<String> stationNames = (Vector<String>) list.get(7);
-                Vector<Vector<String>> metroList = new Vector<>();
-                for(int i = 0; i <= viaList.size(); i++){
-                    metroList.add(new Vector());
+                for(int i = 0; i < stationTemp.size(); i++){
+                    stationNames.add(stationTemp.get(i));
                 }
-                Log.v("list", viaList.size()+"");
-                Log.v("stationSize()", ""+stationNames.size());
 
-                String[][] temp = {{"1호선", "#004B85"}, {"4호선", "#039CCE"}, {"2호선", "#01A13F"}};
-                transferGroups = new ArrayList<>();
-                int index = 0;
-                transferGroups.add(new Transfer_Group(stationNames.get(0), 0, temp[index][0], temp[index][1]));
-                for(int i = 1; i < stationNames.size(); i++) {
-                    if(index < viaList.size() && stationNames.get(i).equals(viaList.get(index))){
-                        transferGroups.add(new Transfer_Group(stationNames.get(i), 2, temp[index][0], temp[index][1], "", "", ""));
-                        index++;
-                        transferGroups.add(new Transfer_Group(stationNames.get(i), 0, temp[index][0], temp[index][1]));
-                    }
-                    else{
-                        transferGroups.add(new Transfer_Group(stationNames.get(i), 1, temp[index][0], temp[index][1]));
-                    }
-                }
-                transferGroups.add(new Transfer_Group("신림", 2, temp[index][0], temp[index][1], "", "", ""));
-                transferGroups.add(new Transfer_Group("신림", 2, temp[index][0], temp[index][1], "", "", ""));
-
-                TransferAdapter transferAdapter = new TransferAdapter(getContext(), R.layout.metro_transfer_departure, R.layout.metro_transfer_via, R.layout.metro_transfer_arrival, transferGroups);
-                transferView.setGroupIndicator(null);
-                transferView.setAdapter(transferAdapter);
 
                 Message msg = transferInfoHandler.obtainMessage();
                 Bundle bundle = new Bundle();
+                bundle.putStringArrayList("stationList", stationNames);
+                bundle.putStringArrayList("viaList", viaList);
                 bundle.putString("출발지", "오산대");
                 bundle.putString("경유지", "금정");
                 bundle.putString("도착지", "신림");
@@ -164,6 +165,39 @@ public class Metro_transfer_fragment extends Fragment {
             station_arrival.setText(bundle.getString("도착지"));
             station_via_num.setText(bundle.getString("환승역"));
             station_total_time.setText(bundle.getString("소요시간") + "분");
+
+            ArrayList<String> stationNames = bundle.getStringArrayList("stationList");
+            ArrayList<String> viaList = bundle.getStringArrayList("viaList");
+            ArrayList<ArrayList<String>> metroList = new ArrayList<>();
+            for(int i = 0; i <= viaList.size(); i++){
+                metroList.add(new ArrayList<String>());
+            }
+            Log.v("list", viaList.size()+"");
+            Log.v("stationSize()", ""+stationNames.size());
+
+            String[][] temp = {{"1호선", "#004B85"}, {"4호선", "#039CCE"}, {"2호선", "#01A13F"}};
+            transferGroups = new ArrayList<>();
+            int index = 0;
+            Transfer_Group item = new Transfer_Group(stationNames.get(0), 0, temp[index][0], temp[index][1]);
+            transferGroups.add(item);
+            for(int i = 1; i < stationNames.size(); i++) {
+                if(index < viaList.size() && stationNames.get(i).equals(viaList.get(index))){
+                    transferGroups.add(new Transfer_Group(stationNames.get(i), 2, temp[index][0], temp[index][1], "", "", ""));
+                    index++;
+                    transferGroups.add(new Transfer_Group(stationNames.get(i), 0, temp[index][0], temp[index][1]));
+                }
+                else{
+                    transferGroups.add(new Transfer_Group(stationNames.get(i), 1, temp[index][0], temp[index][1]));
+                }
+            }
+            transferGroups.add(new Transfer_Group("신림", 2, temp[index][0], temp[index][1], "", "", ""));
+            transferGroups.add(new Transfer_Group("신림", 2, temp[index][0], temp[index][1], "", "", ""));
+
+            TransferAdapter transferAdapter = new TransferAdapter(getContext(), R.layout.metro_transfer_departure, R.layout.metro_transfer_via, R.layout.metro_transfer_arrival, transferGroups);
+            transferView.setGroupIndicator(null);
+            transferView.setAdapter(transferAdapter);
+
+
         }
     }
 }
