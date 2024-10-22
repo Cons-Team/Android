@@ -69,10 +69,13 @@ public class TimetableAPI {
                 String depTime = item.optString("arrTime", "N/A");
                 String endStationName = item.optString("endSubwayStationNm", "N/A");
 
-                if (i > 0) {
-                    resultBuilder.append("@");
+                if (!depTime.equals("0")) {
+                    if (resultBuilder.length() > 0) {
+                        resultBuilder.append("@");
+                    }
+                    resultBuilder.append(depTime).append("-").append(endStationName);
                 }
-                resultBuilder.append(depTime).append("-").append(endStationName);
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
