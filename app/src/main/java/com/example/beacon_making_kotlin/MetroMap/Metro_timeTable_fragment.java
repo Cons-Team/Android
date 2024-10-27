@@ -57,6 +57,7 @@ public class Metro_timeTable_fragment extends Fragment {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                transaction.setCustomAnimations(R.anim.to_right, R.anim.from_right);
                 transaction.replace(R.id.fragment_container_view, new Metro_map_fragment()).addToBackStack(null).commit();
             }
         });

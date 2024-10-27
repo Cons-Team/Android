@@ -28,6 +28,7 @@ import com.example.beacon_making_kotlin.db.api.RealTimeAPI;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
@@ -175,6 +176,7 @@ public class Metro_time_view {
         lineListLayout.removeAllViews();
         Log.v("lineInfoSize", lineInfo.size() + " ");
         for(int i = 0; i < lineInfo.size(); i++){
+            Log.v("lineListTest", "" + include.getContext());
             lineBtnList[i] = new Button(include.getContext());
             lineBtnList[i].setStateListAnimator(null);
             lineListLayout.addView(lineBtnList[i]);

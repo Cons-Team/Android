@@ -151,17 +151,17 @@ public class Metro_map_fragment extends Fragment {
         nav_btn_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navBtnClick();
+//                navBtnClick();
+                MainActivity.toolbar.setVisibility(View.GONE);
+                Metro_transfer_fragment metroTransferFragment = new Metro_transfer_fragment();
+                transaction.replace(R.id.fragment_container_view, metroTransferFragment).commitAllowingStateLoss();
             }
         });
 
         nav_btn_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                navBtnClick();
-                MainActivity.toolbar.setVisibility(View.GONE);
-                Metro_transfer_fragment metroTransferFragment = new Metro_transfer_fragment();
-                transaction.replace(R.id.fragment_container_view, metroTransferFragment).commitAllowingStateLoss();
+                navBtnClick();
             }
         });
 
