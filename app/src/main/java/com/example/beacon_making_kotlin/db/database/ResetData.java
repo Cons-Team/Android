@@ -1,5 +1,6 @@
 package com.example.beacon_making_kotlin.db.database;
 
+import com.example.beacon_making_kotlin.db.api.TimetableAPI;
 import com.example.beacon_making_kotlin.db.api.TransferAPI;
 import com.example.beacon_making_kotlin.db.dao.*;
 import com.example.beacon_making_kotlin.db.entity.*;
@@ -86,7 +87,7 @@ public class ResetData {
     }
 
     private void stationReset(Context context){
-        String jsonString = JsonHelper.loadJSONFromAsset(context, "stationIDTest.json");
+        String jsonString = JsonHelper.loadJSONFromAsset(context, "stationID.json");
         if (jsonString != null) {
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
@@ -103,11 +104,22 @@ public class ResetData {
                     stationDao.insertStation(station);
                     infoReset(context, stationID, stationName, line);
 
+//                    for (String day : dailyTypeCode) {
+//                        for (String updown : upDownTypeCode) {
+//                            Timetable timetable = new Timetable(stationID, day, updown, TimetableAPI.loadTimetableData(stationID, day, updown));
+//                            timetableDao.insertTimetable(timetable);
+//                        }
+//                    }
+
                     Log.d("station data", "station " + i);
                 }
                 Log.d("station end", "station end");
             } catch (JSONException e) {
                 e.printStackTrace();
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            } catch (ParseException e) {
+//                throw new RuntimeException(e);
             }
         }
     }
