@@ -129,13 +129,12 @@
 
         <!-- MMS Image Sending Provider -->
         <provider
-            android:authorities="${applicationId}.provider"
+            android:authorities="com.example.beacon_making_kotlin.provider"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                tools:replace="android:resource"
                 android:resource="@xml/path" />
         </provider>
 
