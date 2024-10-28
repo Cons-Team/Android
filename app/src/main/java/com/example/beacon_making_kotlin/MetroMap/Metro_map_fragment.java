@@ -83,8 +83,8 @@ public class Metro_map_fragment extends Fragment {
     public static LoadingDialog loadingDialog;
 
     //Button
-    FloatingActionButton nav_btn_left;
-    FloatingActionButton nav_btn_right;
+    static FloatingActionButton nav_btn_left;
+    static FloatingActionButton nav_btn_right;
 
     SharedPreferences preferces;
     ConstraintLayout include;
@@ -174,12 +174,18 @@ public class Metro_map_fragment extends Fragment {
         metro_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.toolbar.setVisibility(View.GONE);
                 Bundle bundle = new Bundle();
                 bundle.putString("metro_name", (String) stationName.getText());
                 Metro_info_fragment metroInfoFragment = new Metro_info_fragment();
                 metroInfoFragment.setArguments(bundle);
+                transaction.setCustomAnimations(R.anim.from_left, 0);
                 transaction.replace(R.id.fragment_container_view, metroInfoFragment).commitAllowingStateLoss();
+                MainActivity.title.setText("역사 정보");
+                MainActivity.subToolBar.setVisibility(View.VISIBLE);
+                MainActivity.subToolBar.setTranslationX(-100);
+                MainActivity.subToolBar.setAlpha(0f);
+                MainActivity.subToolBar.animate().translationX(0).alpha(1f).setDuration(300).start();
+                MainActivity.mainToolBar.setVisibility(View.GONE);
             }
         });
 
@@ -187,11 +193,16 @@ public class Metro_map_fragment extends Fragment {
         timeTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.toolbar.setVisibility(View.GONE);
                 Bundle bundle = new Bundle();
                 bundle.putString("metro_name", (String) stationName.getText());
                 metroTimeTableFragment.setArguments(bundle);
+                transaction.setCustomAnimations(R.anim.from_left, 0);
                 transaction.replace(R.id.fragment_container_view, metroTimeTableFragment).commitAllowingStateLoss();
+                MainActivity.mainToolBar.setVisibility(View.GONE);
+                MainActivity.subToolBar.setVisibility(View.VISIBLE);
+                MainActivity.subToolBar.setTranslationX(-100);
+                MainActivity.subToolBar.setAlpha(0f);
+                MainActivity.subToolBar.animate().translationX(0).alpha(1f).setDuration(300).start();
             }
         });
 
@@ -245,13 +256,14 @@ public class Metro_map_fragment extends Fragment {
             editor.putString("hand", "왼손 모드");
             nav_btn_left.setVisibility(View.VISIBLE);
             nav_btn_right.setVisibility(View.GONE);
+            Log.v("handModeTest", "left");
         }
         else{
             editor.putString("hand", "오른손 모드");
             nav_btn_right.setVisibility(View.VISIBLE);
             nav_btn_left.setVisibility(View.GONE);
+            Log.v("handModeTest", "right");
         }
-
         editor.commit();
     }
 
