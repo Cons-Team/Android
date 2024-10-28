@@ -23,6 +23,7 @@ activity = "1.9.0"
 subsamplingScaleImageView = "3.10.0"
 roomRuntime = "2.6.1"
 roomCompiler = "2.6.1"
+core = "1.13.1"
 
 [libraries]
 android-beacon-library = { module = "org.altbeacon:android-beacon-library", version.ref = "androidBeaconLibrary" }
@@ -54,6 +55,7 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 subsampling-scale-image-view = { module = "com.davemorrissey.labs:subsampling-scale-image-view", version.ref = "subsamplingScaleImageView" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomRuntime" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
+androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
