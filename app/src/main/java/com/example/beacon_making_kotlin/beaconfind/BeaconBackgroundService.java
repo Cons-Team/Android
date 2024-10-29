@@ -135,6 +135,13 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
             beaconUnBind();
 //            Toast.makeText(BeaconBackgroundService.this, "loading dismiss success", Toast.LENGTH_SHORT).show();
 
+            String text = "";
+            for(int i = 0; i < beaconData.length;   i++){
+                text += i + 1 + "번째 beacon: " + beaconData[i].getName();
+            }
+
+            Toast.makeText(BeaconBackgroundService.this, text, Toast.LENGTH_SHORT).show();
+
             Intent intent = new Intent(BeaconBackgroundService.this, PathFindingActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("result", coordinate);
@@ -201,7 +208,7 @@ public class BeaconBackgroundService extends Service implements BeaconConsumer {
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
 
         // 비콘 탐색 주기 1초
-        beaconManager.setForegroundScanPeriod(10000);
+        beaconManager.setForegroundScanPeriod(3000);
 
         //binding BeaconService to Android Activity or service
         beaconManager.startRangingBeacons(new Region("test", uuid, null, null));
