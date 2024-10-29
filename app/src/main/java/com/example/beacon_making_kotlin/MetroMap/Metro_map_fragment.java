@@ -309,11 +309,25 @@ public class Metro_map_fragment extends Fragment {
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
             if(bundle.getInt("value") == -1){
-                include.setVisibility(View.GONE);
+                include.animate()
+                        .alpha(0f)
+                        .setDuration(300)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                include.setVisibility(View.GONE);
+                            }
+                        })
+                        .start();
             }
             else{
                 Metro_time_view.settingBtn();
                 Metro_time_view.settingView(bundle.getInt("value"));
+                if(include.getVisibility() == View.GONE){
+                    include.setVisibility(View.VISIBLE);
+                    include.setAlpha(0f);
+                    include.animate().alpha(1f).setDuration(300).start();
+                }
             }
         }
     }

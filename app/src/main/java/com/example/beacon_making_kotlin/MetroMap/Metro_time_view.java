@@ -28,7 +28,9 @@ import com.example.beacon_making_kotlin.db.api.RealTimeAPI;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
@@ -84,8 +86,16 @@ public class Metro_time_view {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                include.setVisibility(View.GONE);
+                include.animate()
+                        .alpha(0f)
+                        .setDuration(300)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                include.setVisibility(View.GONE);
+                            }
+                        })
+                        .start();
             }
         });
 
@@ -111,7 +121,8 @@ public class Metro_time_view {
         metroLineColor.put("우의신설선", "#B9CB03");
         metroLineColor.put("서해선", "#70B22C");
         metroLineColor.put("경강선", "#063190");
-
+        metroLineColor.put("신림선", "#557EBE");
+        metroLineColor.put("우의신설", "#BBCC0A");
     }
 
     public static HashMap<String, Metro_time_info> insertInfo(Vector<Vector<String>> realTime) {
@@ -168,6 +179,7 @@ public class Metro_time_view {
         }
 
         lineInfo.addAll(metroHash.keySet());
+        Collections.sort(lineInfo);
         return metroHash;
     }
 
@@ -235,8 +247,6 @@ public class Metro_time_view {
         stationName.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(metroLineColor.get(lineInfo.get(value)))));
         stationNameListLayout.setBackgroundColor(Color.parseColor(metroLineColor.get(lineInfo.get(value))));
         stationNameListLayout.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(metroLineColor.get(lineInfo.get(value)))));
-
-        include.setVisibility(View.VISIBLE);
     }
 
 

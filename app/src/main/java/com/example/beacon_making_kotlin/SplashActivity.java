@@ -125,7 +125,7 @@ public class SplashActivity extends AppCompatActivity {
     private void updateProgress() {
         SharedPreferences preferences = getSharedPreferences("Setting", 0);
         int totalDuration = preferences.getInt("DBCheck", 60000);
-        int updateInterval = 10;
+        int updateInterval = 30;
         int totalSteps = totalDuration / updateInterval; // 총 스텝 수
 
         Handler handler = new Handler();
