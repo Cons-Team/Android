@@ -1,73 +1,61 @@
 package com.example.beacon_making_kotlin.beaconfind;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.example.beacon_making_kotlin.MetroMap.Metro_map_fragment;
 import com.example.beacon_making_kotlin.R;
 
 public class LoadingDialog extends Dialog {
 
     ImageView loadingImage;
-    Button tempBtn1;
-    Button tempBtn2;
+    ProgressBar progressBar;
+    TextView loadingText;
+
     public LoadingDialog(Context context){
         super(context);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.loading_dialog);
+    }
 
+    @Override
+    public void show() {
+        super.show();
         loadingImage = (ImageView) findViewById(R.id.loadingImage);
-
-        tempBtn1 = (Button) findViewById(R.id.tempBtn1);
-        tempBtn2 = (Button) findViewById(R.id.tempBtn2);
-
-        tempBtn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!tempBtn2.getText().equals("확인")){
-                    success();
-                }
-                else{
-                    dismiss_loading_dialog();
-                }
-            }
-        });
-
-        tempBtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(tempBtn2.getText().equals("연동 실패")){
-                    fail();
-                }
-                else{
-                    dismiss_loading_dialog();
-                }
-            }
-        });
-
-    }
-
-
-    public void onStart(){
-
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        loadingText = (TextView) findViewById(R.id.loadingText);
         loadingImage.setImageResource(R.drawable.loading);
-        tempBtn1.setVisibility(View.VISIBLE);
-        tempBtn2.setText("연동 실패");
+
+        startProgressBar(Metro_map_fragment.currentActivity);
     }
 
-    public void success(){
-        loadingImage.setImageResource(R.drawable.success);
-        tempBtn1.setVisibility(View.INVISIBLE);
-        tempBtn2.setText("확인");
+    public void setProgress(int progress) {
+        if (progressBar != null) {
+            progressBar.setProgress(progress);
+        }
     }
 
-    public void fail(){
-        loadingImage.setImageResource(R.drawable.fail);
-        tempBtn1.setVisibility(View.INVISIBLE);
-        tempBtn2.setText("닫기");
+    public void startProgressBar(Activity activity) {
+        new Thread(() -> {
+            for (int progress = 0; progress <= 100; progress++) {
+                try {
+                    Thread.sleep(150);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                final int currentProgress = progress;
+
+                // Activity를 통해 UI 업데이트
+                activity.runOnUiThread(() -> setProgress(currentProgress));
+            }
+        }).start();
     }
 
     public void dismiss_loading_dialog(){

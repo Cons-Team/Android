@@ -35,8 +35,8 @@
         android:id="@+id/metro_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:tint="@color/defaultColor"
         app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:srcCompat="@drawable/metro_icon" />
+        app:srcCompat="@drawable/metro_icon"
+        app:tint="@color/defaultColor" />
 </androidx.constraintlayout.widget.ConstraintLayout>

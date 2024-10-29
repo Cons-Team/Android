@@ -2,6 +2,7 @@ package com.example.beacon_making_kotlin.MetroMap;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
@@ -81,6 +82,7 @@ public class Metro_map_fragment extends Fragment {
     Bitmap resized;
 
     public static LoadingDialog loadingDialog;
+    public static Activity currentActivity;
 
     //Button
     static FloatingActionButton nav_btn_left;
@@ -309,6 +311,14 @@ public class Metro_map_fragment extends Fragment {
                 Metro_time_view.settingBtn();
                 Metro_time_view.settingView(bundle.getInt("value"));
             }
+        }
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof Activity) {
+            currentActivity = (Activity) context; // 현재 Activity 참조 저장
         }
     }
 }
