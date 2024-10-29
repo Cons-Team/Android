@@ -161,10 +161,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.setCustomAnimations(R.anim.to_left, 0);
                 transaction.replace(R.id.fragment_container_view, metro_map_fragment).commitAllowingStateLoss();
-                mainToolBar.setVisibility(View.VISIBLE);
-                mainToolBar.setTranslationX(100);
-                mainToolBar.setAlpha(0f);
-                mainToolBar.animate().translationX(0).alpha(1f).setDuration(300).start();
             }
         });
     }

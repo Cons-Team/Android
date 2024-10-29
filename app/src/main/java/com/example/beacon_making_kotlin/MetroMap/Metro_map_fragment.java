@@ -200,11 +200,11 @@ public class Metro_map_fragment extends Fragment {
                 metroTimeTableFragment.setArguments(bundle);
                 transaction.setCustomAnimations(R.anim.from_left, 0);
                 transaction.replace(R.id.fragment_container_view, metroTimeTableFragment).commitAllowingStateLoss();
-                MainActivity.mainToolBar.setVisibility(View.GONE);
                 MainActivity.subToolBar.setVisibility(View.VISIBLE);
                 MainActivity.subToolBar.setTranslationX(-100);
                 MainActivity.subToolBar.setAlpha(0f);
                 MainActivity.subToolBar.animate().translationX(0).alpha(1f).setDuration(300).start();
+                MainActivity.mainToolBar.setVisibility(View.GONE);
             }
         });
 
@@ -215,7 +215,11 @@ public class Metro_map_fragment extends Fragment {
     public void onStart(){
         super.onStart();
         Log.v("Metro_map_fragment", "onStart");
-        MainActivity.toolbar.setVisibility(View.VISIBLE);
+
+        MainActivity.mainToolBar.setVisibility(View.VISIBLE);
+        MainActivity.mainToolBar.setTranslationX(90);
+        MainActivity.mainToolBar.setAlpha(0f);
+        MainActivity.mainToolBar.animate().translationX(0).alpha(1f).setDuration(300).start();
     }
 
 
