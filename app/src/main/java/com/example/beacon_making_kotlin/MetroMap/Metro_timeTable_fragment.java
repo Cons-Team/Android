@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.beacon_making_kotlin.MainActivity;
 import com.example.beacon_making_kotlin.R;
 import com.example.beacon_making_kotlin.db.database.ConsDatabase;
 import com.example.beacon_making_kotlin.db.entity.Info;
@@ -28,6 +29,8 @@ import com.example.beacon_making_kotlin.db.entity.Timetable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import kotlinx.coroutines.MainCoroutineDispatcher;
 
 public class Metro_timeTable_fragment extends Fragment {
 
@@ -51,16 +54,6 @@ public class Metro_timeTable_fragment extends Fragment {
 
         preferces = this.getActivity().getSharedPreferences("Setting", 0);
         textColor = preferces.getString("theme", "Day").equals("Day") ? "#000000" : "#ffffff";
-        title = (TextView) view.findViewById(R.id.timeTableTitle);
-
-        ImageButton backBtn = (ImageButton) view.findViewById(R.id.timeTableBackBtn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                transaction.replace(R.id.fragment_container_view, new Metro_map_fragment()).addToBackStack(null).commit();
-            }
-        });
-
         return view;
     }
 
@@ -127,7 +120,7 @@ public class Metro_timeTable_fragment extends Fragment {
             String[] upTime = bundle.getString("상행").split("@");
             String[] downTime = bundle.getString("하행").split("@");
             
-            title.setText(bundle.getString("역명"));
+            MainActivity.title.setText(bundle.getString("역명"));
 
             upLayout.removeAllViews();
             downLayout.removeAllViews();

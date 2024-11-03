@@ -2,6 +2,7 @@ package com.example.beacon_making_kotlin.MetroMap;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
@@ -81,10 +82,11 @@ public class Metro_map_fragment extends Fragment {
     Bitmap resized;
 
     public static LoadingDialog loadingDialog;
+    public static Activity currentActivity;
 
     //Button
-    FloatingActionButton nav_btn_left;
-    FloatingActionButton nav_btn_right;
+    static FloatingActionButton nav_btn_left;
+    static FloatingActionButton nav_btn_right;
 
     SharedPreferences preferces;
     ConstraintLayout include;
@@ -151,17 +153,17 @@ public class Metro_map_fragment extends Fragment {
         nav_btn_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navBtnClick();
+//                navBtnClick();
+                MainActivity.toolbar.setVisibility(View.GONE);
+                Metro_transfer_fragment metroTransferFragment = new Metro_transfer_fragment();
+                transaction.replace(R.id.fragment_container_view, metroTransferFragment).commitAllowingStateLoss();
             }
         });
 
         nav_btn_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                navBtnClick();
-                MainActivity.toolbar.setVisibility(View.GONE);
-                Metro_transfer_fragment metroTransferFragment = new Metro_transfer_fragment();
-                transaction.replace(R.id.fragment_container_view, metroTransferFragment).commitAllowingStateLoss();
+                navBtnClick();
             }
         });
 
@@ -174,12 +176,18 @@ public class Metro_map_fragment extends Fragment {
         metro_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.toolbar.setVisibility(View.GONE);
                 Bundle bundle = new Bundle();
                 bundle.putString("metro_name", (String) stationName.getText());
                 Metro_info_fragment metroInfoFragment = new Metro_info_fragment();
                 metroInfoFragment.setArguments(bundle);
+                transaction.setCustomAnimations(R.anim.from_left, 0);
                 transaction.replace(R.id.fragment_container_view, metroInfoFragment).commitAllowingStateLoss();
+                MainActivity.title.setText("역사 정보");
+                MainActivity.subToolBar.setVisibility(View.VISIBLE);
+                MainActivity.subToolBar.setTranslationX(-100);
+                MainActivity.subToolBar.setAlpha(0f);
+                MainActivity.subToolBar.animate().translationX(0).alpha(1f).setDuration(300).start();
+                MainActivity.mainToolBar.setVisibility(View.GONE);
             }
         });
 
@@ -187,11 +195,16 @@ public class Metro_map_fragment extends Fragment {
         timeTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.toolbar.setVisibility(View.GONE);
                 Bundle bundle = new Bundle();
                 bundle.putString("metro_name", (String) stationName.getText());
                 metroTimeTableFragment.setArguments(bundle);
+                transaction.setCustomAnimations(R.anim.from_left, 0);
                 transaction.replace(R.id.fragment_container_view, metroTimeTableFragment).commitAllowingStateLoss();
+                MainActivity.subToolBar.setVisibility(View.VISIBLE);
+                MainActivity.subToolBar.setTranslationX(-100);
+                MainActivity.subToolBar.setAlpha(0f);
+                MainActivity.subToolBar.animate().translationX(0).alpha(1f).setDuration(300).start();
+                MainActivity.mainToolBar.setVisibility(View.GONE);
             }
         });
 
@@ -202,7 +215,11 @@ public class Metro_map_fragment extends Fragment {
     public void onStart(){
         super.onStart();
         Log.v("Metro_map_fragment", "onStart");
-        MainActivity.toolbar.setVisibility(View.VISIBLE);
+
+        MainActivity.mainToolBar.setVisibility(View.VISIBLE);
+        MainActivity.mainToolBar.setTranslationX(90);
+        MainActivity.mainToolBar.setAlpha(0f);
+        MainActivity.mainToolBar.animate().translationX(0).alpha(1f).setDuration(300).start();
     }
 
 
@@ -245,13 +262,14 @@ public class Metro_map_fragment extends Fragment {
             editor.putString("hand", "왼손 모드");
             nav_btn_left.setVisibility(View.VISIBLE);
             nav_btn_right.setVisibility(View.GONE);
+            Log.v("handModeTest", "left");
         }
         else{
             editor.putString("hand", "오른손 모드");
             nav_btn_right.setVisibility(View.VISIBLE);
             nav_btn_left.setVisibility(View.GONE);
+            Log.v("handModeTest", "right");
         }
-
         editor.commit();
     }
 
@@ -291,12 +309,34 @@ public class Metro_map_fragment extends Fragment {
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
             if(bundle.getInt("value") == -1){
-                include.setVisibility(View.GONE);
+                include.animate()
+                        .alpha(0f)
+                        .setDuration(300)
+                        .withEndAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                include.setVisibility(View.GONE);
+                            }
+                        })
+                        .start();
             }
             else{
                 Metro_time_view.settingBtn();
                 Metro_time_view.settingView(bundle.getInt("value"));
+                if(include.getVisibility() == View.GONE){
+                    include.setVisibility(View.VISIBLE);
+                    include.setAlpha(0f);
+                    include.animate().alpha(1f).setDuration(300).start();
+                }
             }
+        }
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof Activity) {
+            currentActivity = (Activity) context; // 현재 Activity 참조 저장
         }
     }
 }

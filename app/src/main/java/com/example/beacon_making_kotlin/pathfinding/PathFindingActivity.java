@@ -11,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.beacon_making_kotlin.R;
 //import com.unity3d.player.UnityPlayerActivity;
-//import com.unity3d.player.UnityPlayerActivity;
-//import com.unity3d.player.UnityPlayerActivity;
 
 
 public class PathFindingActivity extends AppCompatActivity {

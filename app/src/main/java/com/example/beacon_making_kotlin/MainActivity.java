@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -84,7 +85,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Toolbar
     public static Toolbar toolbar;
-    TextView page_title;
+    public static LinearLayout mainToolBar;
+    public static ConstraintLayout subToolBar;
+    public static TextView title;
+    ImageButton backBtn;
 
     SharedPreferences preferces;
 
@@ -146,6 +150,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Toolbar
         toolbar = findViewById(R.id.toolbar);
+        mainToolBar = (LinearLayout) findViewById(R.id.mainToolbar);
+        subToolBar = (ConstraintLayout) findViewById(R.id.subToolbar);
+        backBtn = (ImageButton) findViewById(R.id.backBtn);
+        title = (TextView) findViewById(R.id.title);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.setCustomAnimations(R.anim.to_left, 0);
+                transaction.replace(R.id.fragment_container_view, metro_map_fragment).commitAllowingStateLoss();
+            }
+        });
     }
 
     public void setMainMenu(){

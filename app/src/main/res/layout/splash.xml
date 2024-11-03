@@ -17,4 +17,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.357"
         app:srcCompat="@drawable/splash_logo" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="240dp"
+        android:layout_height="10dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/progress_bar_custom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/splashImage"
+        app:layout_constraintStart_toStartOf="@+id/splashImage"
+        app:layout_constraintTop_toBottomOf="@+id/splashImage" />
+
+    <ImageView
+        android:id="@+id/metro_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
+        app:layout_constraintStart_toStartOf="@+id/progressBar"
+        app:srcCompat="@drawable/metro_icon"
+        app:tint="@color/defaultColor" />
 </androidx.constraintlayout.widget.ConstraintLayout>

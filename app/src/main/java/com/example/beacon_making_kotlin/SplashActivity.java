@@ -9,6 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,11 +34,17 @@ import java.util.Vector;
 public class SplashActivity extends AppCompatActivity {
 
     private ConsDatabase db;
+    ProgressBar progressBar;
+    ImageView metro;
+    int progressStatus = 0;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.splash);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        metro = (ImageView) findViewById(R.id.metro_icon);
+        float progressBarX = progressBar.getX();
 
         SharedPreferences preferces = getSharedPreferences("Setting", 0);
         if (preferces.getString("theme", "Day").equals("Day")) {
@@ -114,6 +122,49 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    private void updateProgress() {
+        SharedPreferences preferences = getSharedPreferences("Setting", 0);
+        int totalDuration = preferences.getInt("DBCheck", 60000);
+        int updateInterval = 30;
+        int totalSteps = totalDuration / updateInterval; // 총 스텝 수
+
+        Handler handler = new Handler();
+        int[] progress = {0}; // 진행 상태
+        float trainWidth = 30 * getResources().getDisplayMetrics().density; // 기차 이미지의 실제 너비 (dp -> px)
+        float progressBarWidth = 240 * getResources().getDisplayMetrics().density; // ProgressBar의 실제 너비 (dp -> px)
+
+        // 총 이동 거리 계산
+        float totalDistance = progressBarWidth - trainWidth; // 기차가 이동해야 할 총 거리
+        float distancePerStep = totalDistance / totalSteps; // 각 스텝마다 이동할 거리
+
+        // 기차 이미지 초기 위치 설정
+        metro.setTranslationX(0);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (progress[0] < totalSteps) {
+                    progress[0]++;
+                    progressBar.setProgress((int)((progress[0] / (float)totalSteps) * 100)); // ProgressBar 진행률 업데이트
+
+                    // 기차 이미지 이동
+                    metro.setTranslationX(distancePerStep * progress[0]);
+                    handler.postDelayed(this, updateInterval);
+                } else {
+                    // 작업 완료 후 Activity 전환
+                    editor.putInt("DBCheck", 2000);
+                    editor.apply();
+                    editor.commit();
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    finish();
+                }
+            }
+        };
+
+        handler.post(runnable);
+    }
+
     private void permissionCheck(ArrayList<String> requestList){
         boolean check = false;
         for(String permissionName : requestList){
@@ -127,8 +178,9 @@ public class SplashActivity extends AppCompatActivity {
         }
 
         if(check){
-            Handler hd = new Handler();
-            hd.postDelayed(new SplashHandler(), 2000);
+//            Handler hd = new Handler();
+//            hd.postDelayed(new SplashHandler(), 2000);
+            updateProgress();
         }
     }
 
@@ -153,8 +205,6 @@ public class SplashActivity extends AppCompatActivity {
                 public void onPermissionDenied(List<String> deniedPermissions) {
                     Toast.makeText(SplashActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
                 }
-
-
             };
 
             TedPermission.create()
