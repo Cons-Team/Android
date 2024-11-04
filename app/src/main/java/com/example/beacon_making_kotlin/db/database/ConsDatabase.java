@@ -8,14 +8,13 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Coordinate.class, Station.class, Info.class, Timetable.class, Favorite.class}, version = 1)
+@Database(entities = {Coordinate.class, Station.class, Info.class, Timetable.class}, version = 1)
 public abstract class ConsDatabase extends RoomDatabase {
 
     public abstract CoordinateDao coordinateDao();
     public abstract StationDao stationDao();
     public abstract InfoDao infoDao();
     public abstract TimetableDao timetableDao();
-    public abstract FavoriteDao favoriteDao();
     private static volatile ConsDatabase INSTANCE;
 
     public static ConsDatabase getDatabase(final Context context) {
