@@ -59,8 +59,8 @@ public class TransferAPI {
             try {
                 JSONObject result = jsonObject.getJSONObject("result");
 
-                String globalStartName = result.optString("globalStartName", "X");   // 출발역 명
-                String globalEndName = result.optString("globalEndName", "X");   // 도착역 명
+                String globalStartName = result.optString("globalStartName", "");   // 출발역 명
+                String globalEndName = result.optString("globalEndName", "");   // 도착역 명
                 int globalTravelTime = result.optInt("globalTravelTime", 0);   // 소요 시간(분)
                 int globalStationCount = result.optInt("globalStationCount", 0);   // 정차역 수
                 int fare = result.optInt("fare", 0);   // 성인 요금 (카드)
@@ -69,14 +69,14 @@ public class TransferAPI {
                 JSONArray exChangeInfoArray = result.getJSONObject("exChangeInfoSet").getJSONArray("exChangeInfo"); // 환승역 명
                 Vector<String> exNames = new Vector<>();
                 for (int i = 0; i < exChangeInfoArray.length(); i++) {
-                    String startName = exChangeInfoArray.getJSONObject(i).optString("exName", "X");
+                    String startName = exChangeInfoArray.getJSONObject(i).optString("exName", "");
                     exNames.add(startName);
                 }
 
                 JSONArray stationsArray = result.getJSONObject("stationSet").getJSONArray("stations");  // 정차역 명
                 Vector<String> stationNames = new Vector<>();
                 for (int i = 0; i < stationsArray.length(); i++) {
-                    String startName = stationsArray.getJSONObject(i).optString("startName", "X");
+                    String startName = stationsArray.getJSONObject(i).optString("startName", "");
                     stationNames.add(startName);
                 }
 
@@ -128,7 +128,7 @@ public class TransferAPI {
         JSONArray stationArray = jsonObject.getJSONObject("result").getJSONArray("station");
 
         if (stationArray.length() > 0) {
-            return stationArray.getJSONObject(0).optString("stationID", "X");
+            return stationArray.getJSONObject(0).optString("stationID", "");
         }
         return null;
     }
@@ -163,7 +163,7 @@ public class TransferAPI {
         JSONArray cidArray = jsonObject.getJSONObject("result").getJSONArray("CID");
 
         if (cidArray.length() > 0) {
-            return cidArray.getJSONObject(0).optString("cityCode", "X");
+            return cidArray.getJSONObject(0).optString("cityCode", "");
         }
 
         return null;

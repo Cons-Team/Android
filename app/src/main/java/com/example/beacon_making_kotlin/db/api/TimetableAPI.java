@@ -62,21 +62,23 @@ public class TimetableAPI {
             JSONObject jsonObject3 = jsonObject2.getJSONObject("body");
             JSONObject jsonObject4 = jsonObject3.getJSONObject("items");
 
-            JSONArray jsonArray = jsonObject4.getJSONArray("item");
+            if (jsonObject4 != null){
+                JSONArray jsonArray = jsonObject4.getJSONArray("item");
 
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject item = jsonArray.getJSONObject(i);
-                String depTime = item.optString("arrTime", "N/A");
-                String endStationName = item.optString("endSubwayStationNm", "N/A");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject item = jsonArray.getJSONObject(i);
+                    String depTime = item.optString("arrTime", "");
+                    String endStationName = item.optString("endSubwayStationNm", "");
 
-                if (!depTime.equals("0")) {
-                    if (resultBuilder.length() > 0) {
-                        resultBuilder.append("@");
+                    if (!depTime.equals("0")) {
+                        if (resultBuilder.length() > 0) {
+                            resultBuilder.append("@");
+                        }
+                        resultBuilder.append(depTime).append("-").append(endStationName);
                     }
-                    resultBuilder.append(depTime).append("-").append(endStationName);
                 }
-
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -1,7 +1,6 @@
 package com.example.beacon_making_kotlin.db.database;
 
-import com.example.beacon_making_kotlin.db.api.TimetableAPI;
-import com.example.beacon_making_kotlin.db.api.TransferAPI;
+import com.example.beacon_making_kotlin.db.api.*;
 import com.example.beacon_making_kotlin.db.dao.*;
 import com.example.beacon_making_kotlin.db.entity.*;
 import com.example.beacon_making_kotlin.db.helper.JsonHelper;
@@ -24,7 +23,6 @@ public class ResetData {
     private final StationDao stationDao;
     private final InfoDao infoDao;
     private final TimetableDao timetableDao;
-    private final FavoriteDao favoriteDao;
     private final ExecutorService executorService;
 
     private static final String[] dailyTypeCode = {"01", "03"};
@@ -36,7 +34,6 @@ public class ResetData {
         stationDao = db.stationDao();
         infoDao = db.infoDao();
         timetableDao = db.timetableDao();
-        favoriteDao = db.favoriteDao();
         executorService = Executors.newSingleThreadExecutor();
     }
 
@@ -57,18 +54,18 @@ public class ResetData {
         if (jsonString != null) {
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
-                JSONArray coordinateArray = jsonObject.getJSONArray("coordinate");
+                JSONArray coordinateArray = jsonObject.optJSONArray("coordinate");
                 Vector<Object> test = TransferAPI.loadTransferData("오산", "신림", 2);
                 Log.d("경로안내 data", "결과 " + test);
 
                 for (int i = 0; i < coordinateArray.length(); i++) {
-                    JSONObject coordinateObject = coordinateArray.getJSONObject(i);
+                    JSONObject coordinateObject = coordinateArray.optJSONObject(i);
 
-                    String name = coordinateObject.getString("name");
-                    int x1 = coordinateObject.getInt("x1");
-                    int y1 = coordinateObject.getInt("y1");
-                    int x2 = coordinateObject.getInt("x2");
-                    int y2 = coordinateObject.getInt("y2");
+                    String name = coordinateObject.optString("name");
+                    int x1 = coordinateObject.optInt("x1");
+                    int y1 = coordinateObject.optInt("y1");
+                    int x2 = coordinateObject.optInt("x2");
+                    int y2 = coordinateObject.optInt("y2");
 
                     Coordinate coordinate = new Coordinate(name, x1, y1, x2, y2);
                     coordinateDao.insertCoordinate(coordinate);
@@ -91,19 +88,19 @@ public class ResetData {
         if (jsonString != null) {
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
-                JSONArray stationArray = jsonObject.getJSONArray("station");
+                JSONArray stationArray = jsonObject.optJSONArray("station");
 
                 for (int i = 0; i < stationArray.length(); i++) {
-                    JSONObject stationObject = stationArray.getJSONObject(i);
+                    JSONObject stationObject = stationArray.optJSONObject(i);
 
-                    String stationID = stationObject.getString("stationID");
-                    String stationName = stationObject.getString("stationName");
-                    String line = stationObject.getString("line");
+                    String stationID = stationObject.optString("stationID");
+                    String stationName = stationObject.optString("stationName");
+                    String line = stationObject.optString("line");
 
                     Station station = new Station(stationID, stationName, line);
                     stationDao.insertStation(station);
                     infoReset(context, stationID, stationName, line);
-
+//
 //                    for (String day : dailyTypeCode) {
 //                        for (String updown : upDownTypeCode) {
 //                            Timetable timetable = new Timetable(stationID, day, updown, TimetableAPI.loadTimetableData(stationID, day, updown));
@@ -129,15 +126,15 @@ public class ResetData {
         if (jsonString != null) {
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
-                JSONArray stationArray = jsonObject.getJSONArray("info");
+                JSONArray stationArray = jsonObject.optJSONArray("info");
 
                 for (int i = 0; i < stationArray.length(); i++) {
-                    JSONObject stationObject = stationArray.getJSONObject(i);
+                    JSONObject stationObject = stationArray.optJSONObject(i);
 
-                    String jsonstationName = stationObject.getString("역명");
-                    String jsonLine = stationObject.getString("호선");
-                    String address = stationObject.getString("도로명주소");
-                    String tel = stationObject.getString("역전화번호");
+                    String jsonstationName = stationObject.optString("역명");
+                    String jsonLine = stationObject.optString("호선");
+                    String address = stationObject.optString("도로명주소");
+                    String tel = stationObject.optString("역전화번호");
 
                     if (stationName.equals(jsonstationName) && line.equals(jsonLine + "호선")){
                         Info info = new Info(stationID, address, tel);
@@ -157,15 +154,15 @@ public class ResetData {
         if (jsonString != null) {
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
-                JSONArray timetableArray = jsonObject.getJSONArray("timetable");
+                JSONArray timetableArray = jsonObject.optJSONArray("timetable");
 
                 for (int i = 0; i < timetableArray.length(); i++) {
-                    JSONObject timetableObject = timetableArray.getJSONObject(i);
+                    JSONObject timetableObject = timetableArray.optJSONObject(i);
 
-                    String stationID = timetableObject.getString("stationID");
-                    String day = timetableObject.getString("day");
-                    String updown = timetableObject.getString("updown");
-                    String time = timetableObject.getString("time");
+                    String stationID = timetableObject.optString("stationID");
+                    String day = timetableObject.optString("day");
+                    String updown = timetableObject.optString("updown");
+                    String time = timetableObject.optString("time");
 
                     Timetable timetable = new Timetable(stationID, day, updown, time);
                     timetableDao.insertTimetable(timetable);
