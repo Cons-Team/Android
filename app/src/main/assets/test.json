@@ -1,258 +1,283 @@
 {
   "station":[
     {
-      "stationID": "MTRS12234-4",
+      "stationID": "MTRS152511",
+      "stationName": "방화",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152512",
+      "stationName": "개화산",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152513",
+      "stationName": "김포공항",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152514",
+      "stationName": "송정",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152515",
+      "stationName": "마곡",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152516",
+      "stationName": "발산",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152517",
+      "stationName": "우장산",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152518",
+      "stationName": "화곡",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152519",
       "stationName": "까치산",
-      "line": "2호선"
+      "line": "5호선"
     },
     {
-      "stationID": "MTRS12249",
-      "stationName": "신정네거리",
-      "line": "2호선"
+      "stationID": "MTRS152520",
+      "stationName": "신정",
+      "line": "5호선"
     },
     {
-      "stationID": "MTRS12248",
-      "stationName": "양천구청",
-      "line": "2호선"
+      "stationID": "MTRS152521",
+      "stationName": "목동",
+      "line": "5호선"
     },
     {
-      "stationID": "MTRS12247",
-      "stationName": "도림천",
-      "line": "2호선"
+      "stationID": "MTRS152522",
+      "stationName": "오목교",
+      "line": "5호선"
     },
     {
-      "stationID": "MTRS12234",
-      "stationName": "신도림",
-      "line": "2호선"
+      "stationID": "MTRS152523",
+      "stationName": "양평",
+      "line": "5호선"
     },
     {
-      "stationID": "MTRS12233",
-      "stationName": "대림",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12232",
-      "stationName": "구로디지털단지",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12231",
-      "stationName": "신대방",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12230",
-      "stationName": "신림",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12229",
-      "stationName": "봉천",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12228",
-      "stationName": "서울대입구",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12227",
-      "stationName": "낙성대",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12226",
-      "stationName": "사당",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12225",
-      "stationName": "방배",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12224",
-      "stationName": "서초",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12223",
-      "stationName": "교대",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12222",
-      "stationName": "강남",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12221",
-      "stationName": "역삼",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12220",
-      "stationName": "선릉",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12219",
-      "stationName": "삼성",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12218",
-      "stationName": "종합운동장",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12217",
-      "stationName": "잠실새내",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12216",
-      "stationName": "잠실",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12215",
-      "stationName": "잠실나루",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12214",
-      "stationName": "강변",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12213",
-      "stationName": "구의",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12212",
-      "stationName": "건대입구",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12211",
-      "stationName": "성수",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12244",
-      "stationName": "용답",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12245",
-      "stationName": "신답",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12250",
-      "stationName": "용두",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12246",
-      "stationName": "신설동",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12210",
-      "stationName": "뚝섬",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12209",
-      "stationName": "한양대",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12208",
-      "stationName": "왕십리",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12207",
-      "stationName": "상왕십리",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12206",
-      "stationName": "신당",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12205",
-      "stationName": "동대문역사문화공원",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12204",
-      "stationName": "을지로4가",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12203",
-      "stationName": "을지로3가",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12202",
-      "stationName": "을지로입구",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12201",
-      "stationName": "시청",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12243",
-      "stationName": "충정로",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12242",
-      "stationName": "아현",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12241",
-      "stationName": "이대",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12240",
-      "stationName": "신촌",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12239",
-      "stationName": "홍대입구",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12238",
-      "stationName": "합정",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12237",
-      "stationName": "당산",
-      "line": "2호선"
-    },
-    {
-      "stationID": "MTRS12236",
+      "stationID": "MTRS152524",
       "stationName": "영등포구청",
-      "line": "2호선"
+      "line": "5호선"
     },
     {
-      "stationID": "MTRS12235",
-      "stationName": "문래",
-      "line": "2호선"
+      "stationID": "MTRS152525",
+      "stationName": "영등포시장",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152526",
+      "stationName": "신길",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152527",
+      "stationName": "여의도",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152528",
+      "stationName": "여의나루",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152529",
+      "stationName": "마포",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152530",
+      "stationName": "공덕",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152531",
+      "stationName": "애오개",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152532",
+      "stationName": "충정로",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152533",
+      "stationName": "서대문",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152534",
+      "stationName": "광화문",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152535",
+      "stationName": "종로3가",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152536",
+      "stationName": "을지로4가",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152537",
+      "stationName": "동대문역사문화공원",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152538",
+      "stationName": "청구",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152539",
+      "stationName": "신금호",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152540",
+      "stationName": "행당",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152541",
+      "stationName": "왕십리",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152542",
+      "stationName": "마장",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152543",
+      "stationName": "답십리",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152544",
+      "stationName": "장한평",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152545",
+      "stationName": "군자",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152546",
+      "stationName": "아차산",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152547",
+      "stationName": "광나루",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152548",
+      "stationName": "천호",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152549",
+      "stationName": "강동",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152550",
+      "stationName": "길동",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152551",
+      "stationName": "굽은다리",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152552",
+      "stationName": "명일",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152553",
+      "stationName": "고덕",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152554",
+      "stationName": "상일동",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152562",
+      "stationName": "강일",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152563",
+      "stationName": "미사",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152564",
+      "stationName": "하남풍산",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152565",
+      "stationName": "하남시청",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152566",
+      "stationName": "하남검단산",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152555",
+      "stationName": "둔촌동",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152556",
+      "stationName": "올림픽공원",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152557",
+      "stationName": "방이",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152558",
+      "stationName": "오금",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152559",
+      "stationName": "개롱",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152560",
+      "stationName": "거여",
+      "line": "5호선"
+    },
+    {
+      "stationID": "MTRS152561",
+      "stationName": "마천",
+      "line": "5호선"
     }
   ]}
