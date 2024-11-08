@@ -1,283 +1,198 @@
 {
   "station":[
     {
-      "stationID": "MTRS152511",
-      "stationName": "방화",
-      "line": "5호선"
+      "stationID": "MTRS162649",
+      "stationName": "신내",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152512",
-      "stationName": "개화산",
-      "line": "5호선"
+      "stationID": "MTRS162648",
+      "stationName": "봉화산",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152513",
-      "stationName": "김포공항",
-      "line": "5호선"
+      "stationID": "MTRS162647",
+      "stationName": "화랑대",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152514",
-      "stationName": "송정",
-      "line": "5호선"
+      "stationID": "MTRS162646",
+      "stationName": "태릉입구",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152515",
-      "stationName": "마곡",
-      "line": "5호선"
+      "stationID": "MTRS162645",
+      "stationName": "석계",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152516",
-      "stationName": "발산",
-      "line": "5호선"
+      "stationID": "MTRS162644",
+      "stationName": "돌곶이",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152517",
-      "stationName": "우장산",
-      "line": "5호선"
+      "stationID": "MTRS162643",
+      "stationName": "상월곡",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152518",
-      "stationName": "화곡",
-      "line": "5호선"
+      "stationID": "MTRS162642",
+      "stationName": "월곡",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152519",
-      "stationName": "까치산",
-      "line": "5호선"
+      "stationID": "MTRS162641",
+      "stationName": "고려대",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152520",
-      "stationName": "신정",
-      "line": "5호선"
+      "stationID": "MTRS162640",
+      "stationName": "안암",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152521",
-      "stationName": "목동",
-      "line": "5호선"
+      "stationID": "MTRS162639",
+      "stationName": "보문",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152522",
-      "stationName": "오목교",
-      "line": "5호선"
+      "stationID": "MTRS162638",
+      "stationName": "창신",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152523",
-      "stationName": "양평",
-      "line": "5호선"
+      "stationID": "MTRS162637",
+      "stationName": "동묘앞",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152524",
-      "stationName": "영등포구청",
-      "line": "5호선"
+      "stationID": "MTRS162636",
+      "stationName": "신당",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152525",
-      "stationName": "영등포시장",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152526",
-      "stationName": "신길",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152527",
-      "stationName": "여의도",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152528",
-      "stationName": "여의나루",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152529",
-      "stationName": "마포",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152530",
-      "stationName": "공덕",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152531",
-      "stationName": "애오개",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152532",
-      "stationName": "충정로",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152533",
-      "stationName": "서대문",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152534",
-      "stationName": "광화문",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152535",
-      "stationName": "종로3가",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152536",
-      "stationName": "을지로4가",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152537",
-      "stationName": "동대문역사문화공원",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152538",
+      "stationID": "MTRS162635",
       "stationName": "청구",
-      "line": "5호선"
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152539",
-      "stationName": "신금호",
-      "line": "5호선"
+      "stationID": "MTRS162634",
+      "stationName": "약수",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152540",
-      "stationName": "행당",
-      "line": "5호선"
+      "stationID": "MTRS162633",
+      "stationName": "버티고개",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152541",
-      "stationName": "왕십리",
-      "line": "5호선"
+      "stationID": "MTRS162632",
+      "stationName": "한강진",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152542",
-      "stationName": "마장",
-      "line": "5호선"
+      "stationID": "MTRS162631",
+      "stationName": "이태원",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152543",
-      "stationName": "답십리",
-      "line": "5호선"
+      "stationID": "MTRS162630",
+      "stationName": "녹사평",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152544",
-      "stationName": "장한평",
-      "line": "5호선"
+      "stationID": "MTRS162629",
+      "stationName": "삼각지",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152545",
-      "stationName": "군자",
-      "line": "5호선"
+      "stationID": "MTRS162628",
+      "stationName": "효창공원앞",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152546",
-      "stationName": "아차산",
-      "line": "5호선"
+      "stationID": "MTRS162627",
+      "stationName": "공덕",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152547",
-      "stationName": "광나루",
-      "line": "5호선"
+      "stationID": "MTRS162626",
+      "stationName": "대흥",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152548",
-      "stationName": "천호",
-      "line": "5호선"
+      "stationID": "MTRS162625",
+      "stationName": "광흥창",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152549",
-      "stationName": "강동",
-      "line": "5호선"
+      "stationID": "MTRS162624",
+      "stationName": "상수",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152550",
-      "stationName": "길동",
-      "line": "5호선"
+      "stationID": "MTRS162623",
+      "stationName": "합정",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152551",
-      "stationName": "굽은다리",
-      "line": "5호선"
+      "stationID": "MTRS162622",
+      "stationName": "망원",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152552",
-      "stationName": "명일",
-      "line": "5호선"
+      "stationID": "MTRS162621",
+      "stationName": "마포구청",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152553",
-      "stationName": "고덕",
-      "line": "5호선"
+      "stationID": "MTRS162620",
+      "stationName": "월드컵경기장",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152554",
-      "stationName": "상일동",
-      "line": "5호선"
+      "stationID": "MTRS162619",
+      "stationName": "디지털미디어시티",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152562",
-      "stationName": "강일",
-      "line": "5호선"
+      "stationID": "MTRS162618",
+      "stationName": "증산",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152563",
-      "stationName": "미사",
-      "line": "5호선"
+      "stationID": "MTRS162617",
+      "stationName": "새절",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152564",
-      "stationName": "하남풍산",
-      "line": "5호선"
+      "stationID": "MTRS162611",
+      "stationName": "응암",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152565",
-      "stationName": "하남시청",
-      "line": "5호선"
+      "stationID": "MTRS162612",
+      "stationName": "역촌",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152566",
-      "stationName": "하남검단산",
-      "line": "5호선"
+      "stationID": "MTRS162613",
+      "stationName": "불광",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152555",
-      "stationName": "둔촌동",
-      "line": "5호선"
+      "stationID": "MTRS162614",
+      "stationName": "독바위",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152556",
-      "stationName": "올림픽공원",
-      "line": "5호선"
+      "stationID": "MTRS162615",
+      "stationName": "연신내",
+      "line": "6호선"
     },
     {
-      "stationID": "MTRS152557",
-      "stationName": "방이",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152558",
-      "stationName": "오금",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152559",
-      "stationName": "개롱",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152560",
-      "stationName": "거여",
-      "line": "5호선"
-    },
-    {
-      "stationID": "MTRS152561",
-      "stationName": "마천",
-      "line": "5호선"
+      "stationID": "MTRS162616",
+      "stationName": "구산",
+      "line": "6호선"
     }
   ]}
