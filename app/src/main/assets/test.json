@@ -1,198 +1,303 @@
 {
   "station":[
     {
-      "stationID": "MTRS162649",
-      "stationName": "신내",
-      "line": "6호선"
+      "stationID": "MTREVE1Y110",
+      "stationName": "기흥",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS162648",
-      "stationName": "봉화산",
-      "line": "6호선"
+      "stationID": "MTREVE1Y111",
+      "stationName": "강남대",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS162647",
-      "stationName": "화랑대",
-      "line": "6호선"
+      "stationID": "MTREVE1Y112",
+      "stationName": "지석",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS162646",
-      "stationName": "태릉입구",
-      "line": "6호선"
+      "stationID": "MTREVE1Y113",
+      "stationName": "어정",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS162645",
-      "stationName": "석계",
-      "line": "6호선"
+      "stationID": "MTREVE1Y114",
+      "stationName": "동백",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS162644",
-      "stationName": "돌곶이",
-      "line": "6호선"
+      "stationID": "MTREVE1Y115",
+      "stationName": "초당",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS162643",
-      "stationName": "상월곡",
-      "line": "6호선"
+      "stationID": "MTREVE1Y116",
+      "stationName": "삼가",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS162642",
-      "stationName": "월곡",
-      "line": "6호선"
+      "stationID": "MTREVE1Y117",
+      "stationName": "시청-용인대",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS162641",
-      "stationName": "고려대",
-      "line": "6호선"
+      "stationID": "MTREVE1Y118",
+      "stationName": "명지대",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS162640",
-      "stationName": "안암",
-      "line": "6호선"
+      "stationID": "MTREVE1Y119",
+      "stationName": "김량장",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS162639",
+      "stationID": "MTREVE1Y120",
+      "stationName": "용인중앙시장",
+      "line": "에버라인"
+    },
+    {
+      "stationID": "MTREVE1Y121",
+      "stationName": "고진",
+      "line": "에버라인"
+    },
+    {
+      "stationID": "MTREVE1Y122",
+      "stationName": "보평",
+      "line": "에버라인"
+    },
+    {
+      "stationID": "MTREVE1Y123",
+      "stationName": "둔전",
+      "line": "에버라인"
+    },
+    {
+      "stationID": "MTREVE1Y124",
+      "stationName": "전대-에버랜드",
+      "line": "에버라인"
+    },
+    {
+      "stationID": "MTRKRK5K410",
+      "stationName": "판교",
+      "line": "경강선"
+    },
+    {
+      "stationID": "MTRKRK5K411",
+      "stationName": "이매",
+      "line": "경강선"
+    },
+    {
+      "stationID": "MTRKRK5K412",
+      "stationName": "삼동",
+      "line": "경강선"
+    },
+    {
+      "stationID": "MTRKRK5K413",
+      "stationName": "경기광주",
+      "line": "경강선"
+    },
+    {
+      "stationID": "MTRKRK5k414",
+      "stationName": "초월",
+      "line": "경강선"
+    },
+    {
+      "stationID": "MTRKRK5k415",
+      "stationName": "곤지암",
+      "line": "경강선"
+    },
+    {
+      "stationID": "MTRKRK5K416",
+      "stationName": "신둔도예촌",
+      "line": "경강선"
+    },
+    {
+      "stationID": "MTRKRK5K417",
+      "stationName": "이천",
+      "line": "경강선"
+    },
+    {
+      "stationID": "MTRKRK5K418",
+      "stationName": "부발",
+      "line": "경강선"
+    },
+    {
+      "stationID": "MTRKRK5k419",
+      "stationName": "세종대왕릉",
+      "line": "경강선"
+    },
+    {
+      "stationID": "MTRKRK5K420",
+      "stationName": "여주",
+      "line": "경강선"
+    },
+    {
+      "stationID": "MTRUIUIS110",
+      "stationName": "북한산우이",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS111",
+      "stationName": "솔밭공원",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS112",
+      "stationName": "4.19민주묘지",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS113",
+      "stationName": "가오리",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS114",
+      "stationName": "화계",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS115",
+      "stationName": "삼양",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS116",
+      "stationName": "삼양사거리",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS117",
+      "stationName": "솔샘",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS118",
+      "stationName": "북한산보국문",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS119",
+      "stationName": "정릉",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS120",
+      "stationName": "성신여대입구",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS121",
       "stationName": "보문",
-      "line": "6호선"
+      "line": "우이신설"
     },
     {
-      "stationID": "MTRS162638",
-      "stationName": "창신",
-      "line": "6호선"
+      "stationID": "MTRUIUIS122",
+      "stationName": "신설동",
+      "line": "우이신설"
     },
     {
-      "stationID": "MTRS162637",
-      "stationName": "동묘앞",
-      "line": "6호선"
+      "stationID": "MTRGMG1G100",
+      "stationName": "양촌",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS162636",
-      "stationName": "신당",
-      "line": "6호선"
+      "stationID": "MTRGMG1G101",
+      "stationName": "구래",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS162635",
-      "stationName": "청구",
-      "line": "6호선"
+      "stationID": "MTRGMG1G102",
+      "stationName": "마산",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS162634",
-      "stationName": "약수",
-      "line": "6호선"
+      "stationID": "MTRGMG1G103",
+      "stationName": "장기",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS162633",
-      "stationName": "버티고개",
-      "line": "6호선"
+      "stationID": "MTRGMG1G104",
+      "stationName": "운양",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS162632",
-      "stationName": "한강진",
-      "line": "6호선"
+      "stationID": "MTRGMG1G105",
+      "stationName": "걸포북변",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS162631",
-      "stationName": "이태원",
-      "line": "6호선"
+      "stationID": "MTRGMG1G106",
+      "stationName": "사우(김포시청)",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS162630",
-      "stationName": "녹사평",
-      "line": "6호선"
+      "stationID": "MTRGMG1G107",
+      "stationName": "풍무",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS162629",
-      "stationName": "삼각지",
-      "line": "6호선"
+      "stationID": "MTRGMG1G108",
+      "stationName": "고촌",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS162628",
-      "stationName": "효창공원앞",
-      "line": "6호선"
+      "stationID": "MTRGMG1G109",
+      "stationName": "김포공항",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS162627",
-      "stationName": "공덕",
-      "line": "6호선"
+      "stationID": "MTRSLL1S401",
+      "stationName": "샛강",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS162626",
-      "stationName": "대흥",
-      "line": "6호선"
+      "stationID": "MTRSLL1S402",
+      "stationName": "대방",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS162625",
-      "stationName": "광흥창",
-      "line": "6호선"
+      "stationID": "MTRSLL1S403",
+      "stationName": "서울지방병무청",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS162624",
-      "stationName": "상수",
-      "line": "6호선"
+      "stationID": "MTRSLL1S404",
+      "stationName": "보라매",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS162623",
-      "stationName": "합정",
-      "line": "6호선"
+      "stationID": "MTRSLL1S405",
+      "stationName": "보라매공원",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS162622",
-      "stationName": "망원",
-      "line": "6호선"
+      "stationID": "MTRSLL1S406",
+      "stationName": "보라매병원",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS162621",
-      "stationName": "마포구청",
-      "line": "6호선"
+      "stationID": "MTRSLL1S407",
+      "stationName": "당곡",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS162620",
-      "stationName": "월드컵경기장",
-      "line": "6호선"
+      "stationID": "MTRSLL1S408",
+      "stationName": "신림",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS162619",
-      "stationName": "디지털미디어시티",
-      "line": "6호선"
+      "stationID": "MTRSLL1S409",
+      "stationName": "서원",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS162618",
-      "stationName": "증산",
-      "line": "6호선"
+      "stationID": "MTRSLL1S410",
+      "stationName": "서울대벤처타운",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS162617",
-      "stationName": "새절",
-      "line": "6호선"
-    },
-    {
-      "stationID": "MTRS162611",
-      "stationName": "응암",
-      "line": "6호선"
-    },
-    {
-      "stationID": "MTRS162612",
-      "stationName": "역촌",
-      "line": "6호선"
-    },
-    {
-      "stationID": "MTRS162613",
-      "stationName": "불광",
-      "line": "6호선"
-    },
-    {
-      "stationID": "MTRS162614",
-      "stationName": "독바위",
-      "line": "6호선"
-    },
-    {
-      "stationID": "MTRS162615",
-      "stationName": "연신내",
-      "line": "6호선"
-    },
-    {
-      "stationID": "MTRS162616",
-      "stationName": "구산",
-      "line": "6호선"
+      "stationID": "MTRSLL1S411",
+      "stationName": "관악산(서울대)",
+      "line": "신림선"
     }
   ]}
