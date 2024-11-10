@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.os.Handler;
@@ -220,6 +221,16 @@ public class Metro_map_fragment extends Fragment {
         MainActivity.mainToolBar.setTranslationX(90);
         MainActivity.mainToolBar.setAlpha(0f);
         MainActivity.mainToolBar.animate().translationX(0).alpha(1f).setDuration(300).start();
+
+        metro_map.post(new Runnable() {
+            @Override
+            public void run() {
+                PointF center = new PointF(2500, 2500);
+                metro_map.setMaxScale(2.0f);
+                metro_map.setMinScale(1.0f);
+                metro_map.setScaleAndCenter(1.0f, center);
+            }
+        });
     }
 
 
@@ -282,7 +293,7 @@ public class Metro_map_fragment extends Fragment {
             } catch (IOException | ParseException e) {
                 throw new RuntimeException(e);
             }
-            
+
             if(!map.isEmpty()){
                 Message msg = handler.obtainMessage();
                 Bundle bundle = new Bundle();
