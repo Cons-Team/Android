@@ -1,258 +1,303 @@
 {
   "station":[
     {
-      "stationID": "MTRS12234-4",
-      "stationName": "까치산",
-      "line": "2호선"
+      "stationID": "MTREVE1Y110",
+      "stationName": "기흥",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12249",
-      "stationName": "신정네거리",
-      "line": "2호선"
+      "stationID": "MTREVE1Y111",
+      "stationName": "강남대",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12248",
-      "stationName": "양천구청",
-      "line": "2호선"
+      "stationID": "MTREVE1Y112",
+      "stationName": "지석",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12247",
-      "stationName": "도림천",
-      "line": "2호선"
+      "stationID": "MTREVE1Y113",
+      "stationName": "어정",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12234",
-      "stationName": "신도림",
-      "line": "2호선"
+      "stationID": "MTREVE1Y114",
+      "stationName": "동백",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12233",
-      "stationName": "대림",
-      "line": "2호선"
+      "stationID": "MTREVE1Y115",
+      "stationName": "초당",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12232",
-      "stationName": "구로디지털단지",
-      "line": "2호선"
+      "stationID": "MTREVE1Y116",
+      "stationName": "삼가",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12231",
-      "stationName": "신대방",
-      "line": "2호선"
+      "stationID": "MTREVE1Y117",
+      "stationName": "시청-용인대",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12230",
-      "stationName": "신림",
-      "line": "2호선"
+      "stationID": "MTREVE1Y118",
+      "stationName": "명지대",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12229",
-      "stationName": "봉천",
-      "line": "2호선"
+      "stationID": "MTREVE1Y119",
+      "stationName": "김량장",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12228",
-      "stationName": "서울대입구",
-      "line": "2호선"
+      "stationID": "MTREVE1Y120",
+      "stationName": "용인중앙시장",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12227",
-      "stationName": "낙성대",
-      "line": "2호선"
+      "stationID": "MTREVE1Y121",
+      "stationName": "고진",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12226",
-      "stationName": "사당",
-      "line": "2호선"
+      "stationID": "MTREVE1Y122",
+      "stationName": "보평",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12225",
-      "stationName": "방배",
-      "line": "2호선"
+      "stationID": "MTREVE1Y123",
+      "stationName": "둔전",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12224",
-      "stationName": "서초",
-      "line": "2호선"
+      "stationID": "MTREVE1Y124",
+      "stationName": "전대-에버랜드",
+      "line": "에버라인"
     },
     {
-      "stationID": "MTRS12223",
-      "stationName": "교대",
-      "line": "2호선"
+      "stationID": "MTRKRK5K410",
+      "stationName": "판교",
+      "line": "경강선"
     },
     {
-      "stationID": "MTRS12222",
-      "stationName": "강남",
-      "line": "2호선"
+      "stationID": "MTRKRK5K411",
+      "stationName": "이매",
+      "line": "경강선"
     },
     {
-      "stationID": "MTRS12221",
-      "stationName": "역삼",
-      "line": "2호선"
+      "stationID": "MTRKRK5K412",
+      "stationName": "삼동",
+      "line": "경강선"
     },
     {
-      "stationID": "MTRS12220",
-      "stationName": "선릉",
-      "line": "2호선"
+      "stationID": "MTRKRK5K413",
+      "stationName": "경기광주",
+      "line": "경강선"
     },
     {
-      "stationID": "MTRS12219",
-      "stationName": "삼성",
-      "line": "2호선"
+      "stationID": "MTRKRK5k414",
+      "stationName": "초월",
+      "line": "경강선"
     },
     {
-      "stationID": "MTRS12218",
-      "stationName": "종합운동장",
-      "line": "2호선"
+      "stationID": "MTRKRK5k415",
+      "stationName": "곤지암",
+      "line": "경강선"
     },
     {
-      "stationID": "MTRS12217",
-      "stationName": "잠실새내",
-      "line": "2호선"
+      "stationID": "MTRKRK5K416",
+      "stationName": "신둔도예촌",
+      "line": "경강선"
     },
     {
-      "stationID": "MTRS12216",
-      "stationName": "잠실",
-      "line": "2호선"
+      "stationID": "MTRKRK5K417",
+      "stationName": "이천",
+      "line": "경강선"
     },
     {
-      "stationID": "MTRS12215",
-      "stationName": "잠실나루",
-      "line": "2호선"
+      "stationID": "MTRKRK5K418",
+      "stationName": "부발",
+      "line": "경강선"
     },
     {
-      "stationID": "MTRS12214",
-      "stationName": "강변",
-      "line": "2호선"
+      "stationID": "MTRKRK5k419",
+      "stationName": "세종대왕릉",
+      "line": "경강선"
     },
     {
-      "stationID": "MTRS12213",
-      "stationName": "구의",
-      "line": "2호선"
+      "stationID": "MTRKRK5K420",
+      "stationName": "여주",
+      "line": "경강선"
     },
     {
-      "stationID": "MTRS12212",
-      "stationName": "건대입구",
-      "line": "2호선"
+      "stationID": "MTRUIUIS110",
+      "stationName": "북한산우이",
+      "line": "우이신설"
     },
     {
-      "stationID": "MTRS12211",
-      "stationName": "성수",
-      "line": "2호선"
+      "stationID": "MTRUIUIS111",
+      "stationName": "솔밭공원",
+      "line": "우이신설"
     },
     {
-      "stationID": "MTRS12244",
-      "stationName": "용답",
-      "line": "2호선"
+      "stationID": "MTRUIUIS112",
+      "stationName": "4.19민주묘지",
+      "line": "우이신설"
     },
     {
-      "stationID": "MTRS12245",
-      "stationName": "신답",
-      "line": "2호선"
+      "stationID": "MTRUIUIS113",
+      "stationName": "가오리",
+      "line": "우이신설"
     },
     {
-      "stationID": "MTRS12250",
-      "stationName": "용두",
-      "line": "2호선"
+      "stationID": "MTRUIUIS114",
+      "stationName": "화계",
+      "line": "우이신설"
     },
     {
-      "stationID": "MTRS12246",
+      "stationID": "MTRUIUIS115",
+      "stationName": "삼양",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS116",
+      "stationName": "삼양사거리",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS117",
+      "stationName": "솔샘",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS118",
+      "stationName": "북한산보국문",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS119",
+      "stationName": "정릉",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS120",
+      "stationName": "성신여대입구",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS121",
+      "stationName": "보문",
+      "line": "우이신설"
+    },
+    {
+      "stationID": "MTRUIUIS122",
       "stationName": "신설동",
-      "line": "2호선"
+      "line": "우이신설"
     },
     {
-      "stationID": "MTRS12210",
-      "stationName": "뚝섬",
-      "line": "2호선"
+      "stationID": "MTRGMG1G100",
+      "stationName": "양촌",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS12209",
-      "stationName": "한양대",
-      "line": "2호선"
+      "stationID": "MTRGMG1G101",
+      "stationName": "구래",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS12208",
-      "stationName": "왕십리",
-      "line": "2호선"
+      "stationID": "MTRGMG1G102",
+      "stationName": "마산",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS12207",
-      "stationName": "상왕십리",
-      "line": "2호선"
+      "stationID": "MTRGMG1G103",
+      "stationName": "장기",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS12206",
-      "stationName": "신당",
-      "line": "2호선"
+      "stationID": "MTRGMG1G104",
+      "stationName": "운양",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS12205",
-      "stationName": "동대문역사문화공원",
-      "line": "2호선"
+      "stationID": "MTRGMG1G105",
+      "stationName": "걸포북변",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS12204",
-      "stationName": "을지로4가",
-      "line": "2호선"
+      "stationID": "MTRGMG1G106",
+      "stationName": "사우(김포시청)",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS12203",
-      "stationName": "을지로3가",
-      "line": "2호선"
+      "stationID": "MTRGMG1G107",
+      "stationName": "풍무",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS12202",
-      "stationName": "을지로입구",
-      "line": "2호선"
+      "stationID": "MTRGMG1G108",
+      "stationName": "고촌",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS12201",
-      "stationName": "시청",
-      "line": "2호선"
+      "stationID": "MTRGMG1G109",
+      "stationName": "김포공항",
+      "line": "김포골드라인"
     },
     {
-      "stationID": "MTRS12243",
-      "stationName": "충정로",
-      "line": "2호선"
+      "stationID": "MTRSLL1S401",
+      "stationName": "샛강",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS12242",
-      "stationName": "아현",
-      "line": "2호선"
+      "stationID": "MTRSLL1S402",
+      "stationName": "대방",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS12241",
-      "stationName": "이대",
-      "line": "2호선"
+      "stationID": "MTRSLL1S403",
+      "stationName": "서울지방병무청",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS12240",
-      "stationName": "신촌",
-      "line": "2호선"
+      "stationID": "MTRSLL1S404",
+      "stationName": "보라매",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS12239",
-      "stationName": "홍대입구",
-      "line": "2호선"
+      "stationID": "MTRSLL1S405",
+      "stationName": "보라매공원",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS12238",
-      "stationName": "합정",
-      "line": "2호선"
+      "stationID": "MTRSLL1S406",
+      "stationName": "보라매병원",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS12237",
-      "stationName": "당산",
-      "line": "2호선"
+      "stationID": "MTRSLL1S407",
+      "stationName": "당곡",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS12236",
-      "stationName": "영등포구청",
-      "line": "2호선"
+      "stationID": "MTRSLL1S408",
+      "stationName": "신림",
+      "line": "신림선"
     },
     {
-      "stationID": "MTRS12235",
-      "stationName": "문래",
-      "line": "2호선"
+      "stationID": "MTRSLL1S409",
+      "stationName": "서원",
+      "line": "신림선"
+    },
+    {
+      "stationID": "MTRSLL1S410",
+      "stationName": "서울대벤처타운",
+      "line": "신림선"
+    },
+    {
+      "stationID": "MTRSLL1S411",
+      "stationName": "관악산(서울대)",
+      "line": "신림선"
     }
   ]}

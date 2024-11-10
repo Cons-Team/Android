@@ -105,10 +105,10 @@ public class Metro_map_fragment extends Fragment {
         metro_time_view = new Metro_time_view(view);
         include = (ConstraintLayout) view.findViewById(R.id.include);
 
-        preferces = requireActivity().getSharedPreferences("theme", 0);
+        preferces = requireActivity().getSharedPreferences("Setting", 0);
         mContext = requireContext().getApplicationContext();
 
-        bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.metro_map2);
+        bitmap = BitmapFactory.decodeResource(this.getResources(), preferces.getString("theme", "Day").equals("Day") ? R.drawable.metro_map2 : R.drawable.metro_map_dark);
         resized = Bitmap.createScaledBitmap(bitmap, 5000, 5000, true);
         metro_map = (SubsamplingScaleImageView) view.findViewById(R.id.metro_map);
         metro_map.setImage(ImageSource.bitmap(resized));

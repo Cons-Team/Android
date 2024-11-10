@@ -66,16 +66,16 @@ public class RealTimeAPI {
                 Vector<String> data = new Vector<>();
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                String subwayId = item.optString("subwayId", "N/A");
-                String statnld = item.optString("statnId", "N/A");
-                String statnFid = item.optString("statnFid", "N/A");
-                String statnTid = item.optString("statnTid", "N/A");
-                String statnNm = item.optString("statnNm", "N/A");
-                String btrainSttus = item.optString("btrainSttus", "N/A");
-                String trainLineNm = item.optString("trainLineNm", "N/A");
-                String updnLine = item.optString("updnLine", "N/A");
-                String arvlMsg2 = item.optString("arvlMsg2", "N/A");
-                String barvlDt = item.optString("barvlDt", "N/A");
+                String subwayId = item.optString("subwayId", "");
+                String statnld = item.optString("statnId", "");
+                String statnFid = item.optString("statnFid", "");
+                String statnTid = item.optString("statnTid", "");
+                String statnNm = item.optString("statnNm", "");
+                String btrainSttus = item.optString("btrainSttus", "");
+                String trainLineNm = item.optString("trainLineNm", "");
+                String updnLine = item.optString("updnLine", "");
+                String arvlMsg2 = item.optString("arvlMsg2", "");
+                String barvlDt = item.optString("barvlDt", "");
 
                 data.add(findStationLine(subwayId));
                 data.add(statnld);
