@@ -1,5 +1,7 @@
 package com.example.beacon_making_kotlin.MetroMap;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -7,6 +9,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -17,11 +20,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -77,6 +84,11 @@ public class Metro_map_fragment extends Fragment {
 
     MainHandler handler = new MainHandler();
 
+    //Toolbar - search
+    ImageButton search;
+    ImageButton cancel;
+    EditText searchText;
+
     //ImageView
     SubsamplingScaleImageView metro_map;
     Bitmap bitmap;
@@ -108,15 +120,64 @@ public class Metro_map_fragment extends Fragment {
         preferces = requireActivity().getSharedPreferences("Setting", 0);
         mContext = requireContext().getApplicationContext();
 
+        //search
+        search = MainActivity.toolbar.findViewById(R.id.search_btn);
+        cancel = MainActivity.toolbar.findViewById(R.id.clear_btn);
+        searchText = MainActivity.toolbar.findViewById(R.id.search_text);
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search.setVisibility(View.GONE);
+                cancel.setVisibility(View.VISIBLE);
+                searchText.setVisibility(View.VISIBLE);
+                include.setVisibility(View.GONE);
+
+                searchText.requestFocus();
+                InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                if (inputMethodManager != null) {
+                    inputMethodManager.showSoftInput(searchText, InputMethodManager.SHOW_IMPLICIT);
+                }
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchCancel();
+            }
+        });
+
+        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    BackgroundThread thread = new BackgroundThread();
+                    thread.name = String.valueOf(searchText.getText());
+                    thread.start();
+                    searchCancel();
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
         bitmap = BitmapFactory.decodeResource(this.getResources(), preferces.getString("theme", "Day").equals("Day") ? R.drawable.metro_map2 : R.drawable.metro_map_dark);
         resized = Bitmap.createScaledBitmap(bitmap, 5000, 5000, true);
         metro_map = (SubsamplingScaleImageView) view.findViewById(R.id.metro_map);
         metro_map.setImage(ImageSource.bitmap(resized));
-
-        metro_map.setMaxScale(2.0f);
         metro_map.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                searchCancel();
+                @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = preferces.edit();
+                PointF center = metro_map.getCenter();
+                editor.putInt("centerX", (int) center.x);
+                editor.putInt("centerY", (int) center.y);
+                editor.putFloat("scale", metro_map.getScale());
+                editor.apply();
+                editor.commit();
                 if(event.getAction() == MotionEvent.ACTION_DOWN && metro_map.getScale() >= 1.0f && metro_map.getScale() <= 2.0f){
                     class SelectCoordination implements Runnable{
                         int x;
@@ -139,11 +200,6 @@ public class Metro_map_fragment extends Fragment {
                     Thread t = new Thread(insertRunnable);
                     t.start();
                 }
-
-                if(event.getAction() == MotionEvent.ACTION_MOVE){
-
-                }
-
                 return false;
             }
         });
@@ -225,12 +281,25 @@ public class Metro_map_fragment extends Fragment {
         metro_map.post(new Runnable() {
             @Override
             public void run() {
-                PointF center = new PointF(2500, 2500);
+                PointF center = new PointF(preferces.getInt("centerX", 2500), preferces.getInt("centerY", 2500));
                 metro_map.setMaxScale(2.0f);
                 metro_map.setMinScale(1.0f);
-                metro_map.setScaleAndCenter(1.0f, center);
+                metro_map.setScaleAndCenter(preferces.getFloat("scale", 1.0f), center);
             }
         });
+    }
+
+    public void searchCancel(){
+        InputMethodManager manager;
+        View currentFocus = getActivity().getCurrentFocus();
+        if (currentFocus != null) {
+            manager = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+            manager.hideSoftInputFromWindow(currentFocus.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+        cancel.setVisibility(View.GONE);
+        searchText.setText("");
+        searchText.setVisibility(View.INVISIBLE);
+        search.setVisibility(View.VISIBLE);
     }
 
 

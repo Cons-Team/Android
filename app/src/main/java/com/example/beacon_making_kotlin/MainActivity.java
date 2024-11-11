@@ -32,8 +32,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -95,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //Search
     InputMethodManager manager;
 
+    static long backpressTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,11 +134,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         drawerLayout.closeDrawer(GravityCompat.START);
                     }
                     else{
-                        View currentFocus = getCurrentFocus();
-                        if (currentFocus != null) {
-                            manager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                            manager.hideSoftInputFromWindow(currentFocus.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                        }
+                        metro_map_fragment.searchCancel();
                         drawerLayout.openDrawer(GravityCompat.START);
                     }
                 }
@@ -161,6 +161,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.setCustomAnimations(R.anim.to_left, 0);
                 transaction.replace(R.id.fragment_container_view, metro_map_fragment).commitAllowingStateLoss();
+            }
+        });
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    // 두 번 누르면 종료
+                    if (System.currentTimeMillis() > backpressTime + 2000) {
+                        backpressTime = System.currentTimeMillis();
+                        Toast.makeText(MainActivity.this, "한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        finish();
+                    }
+                }
             }
         });
     }

@@ -33,7 +33,8 @@
             android:layout_weight="1"
             android:backgroundTint="@color/defaultColor"
             android:ems="10"
-            android:inputType="text" />
+            android:inputType="text"
+            android:visibility="invisible" />
 
         <ImageButton
             android:id="@+id/clear_btn"
@@ -49,6 +50,7 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:scaleType="centerCrop"
+            android:visibility="visible"
             app:srcCompat="@drawable/icon_search_btn" />
 
 
