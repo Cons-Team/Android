@@ -171,13 +171,7 @@ public class Metro_map_fragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 searchCancel();
-                @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = preferces.edit();
-                PointF center = metro_map.getCenter();
-                editor.putInt("centerX", (int) center.x);
-                editor.putInt("centerY", (int) center.y);
-                editor.putFloat("scale", metro_map.getScale());
-                editor.apply();
-                editor.commit();
+
                 if(event.getAction() == MotionEvent.ACTION_DOWN && metro_map.getScale() >= 1.0f && metro_map.getScale() <= 2.0f){
                     class SelectCoordination implements Runnable{
                         int x;
@@ -199,6 +193,25 @@ public class Metro_map_fragment extends Fragment {
                     insertRunnable.y = (int)  sCoord.y;
                     Thread t = new Thread(insertRunnable);
                     t.start();
+                }
+
+                if(event.getAction() == MotionEvent.ACTION_UP){
+                    @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = preferces.edit();
+                    PointF center = metro_map.getCenter();
+                    float scale = metro_map.getScale();
+
+                    editor.putInt("centerX", (int) center.x);
+                    editor.putInt("centerY", (int) center.y);
+
+                    if(scale < 1.0){
+                        metro_map.setScaleAndCenter(1.0f, center);
+                        editor.putFloat("scale", metro_map.getScale());
+                    }
+                    else {
+                        editor.putFloat("scale", metro_map.getScale());
+                    }
+                    editor.apply();
+                    editor.commit();
                 }
                 return false;
             }
