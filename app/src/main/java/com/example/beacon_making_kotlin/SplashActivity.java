@@ -53,14 +53,6 @@ public class SplashActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
 
-        // DB
-        DatabaseHelper.deleteDatabase(this, "cons_database");
-
-        db = ConsDatabase.getDatabase(this);
-
-        ResetData resetData = new ResetData(this);
-        resetData.populateDatabaseIfEmpty(this);
-
         // Permission Request
         Log.d("sdk_ver", "" + Build.VERSION.SDK_INT);
         ArrayList<String> requestList = new ArrayList<>();
@@ -112,7 +104,6 @@ public class SplashActivity extends AppCompatActivity {
         requestList.add(Manifest.permission.READ_CONTACTS);
 
         permissionRequest(requestList);
-
     }
 
     private class SplashHandler implements Runnable{
@@ -123,6 +114,15 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void updateProgress() {
+
+        // DB
+        DatabaseHelper.deleteDatabase(this, "cons_database");
+
+        db = ConsDatabase.getDatabase(this);
+
+        ResetData resetData = new ResetData(this);
+        resetData.populateDatabaseIfEmpty(this);
+
         SharedPreferences preferences = getSharedPreferences("Setting", 0);
         int totalDuration = preferences.getInt("DBCheck", 60000);
         int updateInterval = 30;

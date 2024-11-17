@@ -153,17 +153,18 @@ public class Metro_timeTable_fragment extends Fragment {
             int index = 0;
             for(String s : time){
                 String[] temp = s.split("-");
+                System.out.println(s);
                 if(temp[0].equals("0")){
                    continue;
                 }
                 else if(Integer.parseInt(temp[0]) < 20000){
                     String timeValue = "" + temp[0].charAt(0) + temp[0].charAt(1) + "시 " +
-                            temp[0].charAt(2) + temp[0].charAt(3) + "분\n" + temp[1];
+                            temp[0].charAt(2) + temp[0].charAt(3) + "분\n" + (temp.length != 1 ? temp[1] : "");
                     list.add(timeValue);
                 }
                 else{
                     String timeValue = "" + temp[0].charAt(0) + temp[0].charAt(1) + "시 " +
-                            temp[0].charAt(2) + temp[0].charAt(3) + "분\n" + temp[1];
+                            temp[0].charAt(2) + temp[0].charAt(3) + "분\n" + (temp.length != 1 ? temp[1] : "");
                     value[index++] = timeValue;
                 }
             }
